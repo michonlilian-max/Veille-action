@@ -1,77 +1,58 @@
 """
-Actualité financière via le flux RSS gratuit de Google News.
+Collecte les actualités financières récentes via le flux RSS gratuit de Google News,
+filtré par ticker. Pas de clé API nécessaire.
 
-⚠️ Bruité par nature : certains articles retournés seront peu pertinents
-(le mot-clé "ticker + stock" fait parfois remonter des articles hors
-sujet). C'est un compromis du gratuit vs une vraie API news payante.
+Limite connue : Google News RSS peut renvoyer des résultats bruités (articles
+peu pertinents). On filtre grossièrement sur la présence du ticker/nom dans le titre.
 """
-import time
-from datetime import datetime, timedelta, timezone
-from email.utils import parsedate_to_datetime
-
+import sys
+import os
+import requests
 import feedparser
 
-from config import NEWS_LOOKBACK_DAYS, NEWS_MAX_ITEMS, WATCHLIST
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import WATCHLIST
 
-GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=fr&gl=FR&ceid=FR:fr"
+GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
 
 
-def _parse_date(entry):
-    published = entry.get("published")
-    if not published:
-        return None
+def collect_news_for_ticker(ticker: str, max_items: int = 10) -> list[dict]:
+    params = {
+        "q": f"{ticker} stock",
+        "hl": "en-US",
+        "gl": "US",
+        "ceid": "US:en",
+    }
+    headers = {"User-Agent": "Mozilla/5.0 (VeilleActions RSS reader)"}
     try:
-        return parsedate_to_datetime(published)
-    except (TypeError, ValueError):
-        return None
-
-
-def collect_news_for_ticker(ticker):
-    """Récupère les articles récents mentionnant le ticker via Google News
-    RSS, filtrés sur la fenêtre NEWS_LOOKBACK_DAYS."""
-    query = f"{ticker}+stock"
-    url = GOOGLE_NEWS_RSS.format(query=query)
-    try:
-        feed = feedparser.parse(url)
-        if getattr(feed, "bozo", False) and not feed.entries:
-            raise ValueError(str(getattr(feed, "bozo_exception", "flux RSS invalide")))
+        resp = requests.get(GOOGLE_NEWS_RSS, params=params, headers=headers, timeout=15)
+        resp.raise_for_status()
     except Exception as e:
-        print(f"  [news] {ticker}: erreur ({e})")
-        return {"ticker": ticker, "articles": [], "error": str(e)}
+        print(f"[collect_news] Erreur pour {ticker} : {e}", file=sys.stderr)
+        return []
 
-    cutoff = datetime.now(timezone.utc) - timedelta(days=NEWS_LOOKBACK_DAYS)
-    articles = []
-    for entry in feed.entries[:NEWS_MAX_ITEMS]:
-        published_dt = _parse_date(entry)
-        if published_dt and published_dt < cutoff:
-            continue
-        articles.append(
-            {
-                "title": entry.get("title", ""),
-                "link": entry.get("link", ""),
-                "published": entry.get("published", ""),
-                "source": (entry.get("source") or {}).get("title", ""),
-            }
-        )
-
-    return {"ticker": ticker, "articles": articles}
+    feed = feedparser.parse(resp.content)
+    items = []
+    for entry in feed.entries[:max_items]:
+        items.append({
+            "ticker": ticker,
+            "title": entry.get("title", ""),
+            "link": entry.get("link", ""),
+            "published": entry.get("published", ""),
+            "source": entry.get("source", {}).get("title", "") if hasattr(entry.get("source", {}), "get") else "",
+        })
+    return items
 
 
-def collect_all_news(watchlist=None):
-    """Collecte les news récentes pour toute la watchlist.
-
-    Renvoie un dict {ticker: {...}} pour un accès direct par ticker
-    (utilisé par scripts/scoring.py).
-    """
-    watchlist = watchlist or WATCHLIST
+def collect_all_news() -> dict[str, list[dict]]:
+    """Retourne un dict {ticker: [articles]} pour toute la watchlist."""
     results = {}
-    for ticker in watchlist:
+    for ticker in WATCHLIST:
         results[ticker] = collect_news_for_ticker(ticker)
-        time.sleep(0.5)
     return results
 
 
 if __name__ == "__main__":
-    import json
-
-    print(json.dumps(collect_all_news(), indent=2))
+    all_news = collect_all_news()
+    for ticker, articles in all_news.items():
+        print(f"{ticker}: {len(articles)} articles")

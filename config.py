@@ -1,51 +1,30 @@
 """
-Configuration centrale : watchlist, pondération du score, réglages divers.
-
-Personnalise au minimum SEC_USER_AGENT et WATCHLIST avant de déployer
-(voir README.md, section "Installation").
+Configuration centrale du projet de veille boursière.
+Modifie WATCHLIST pour suivre les tickers qui t'intéressent.
 """
 
-# La SEC exige un User-Agent identifiable (nom + email) sur toutes les
-# requêtes EDGAR, sinon elle bloque l'IP qui fait la requête.
-# Remplace par tes propres informations.
-SEC_USER_AGENT = "Ton Nom ton.email@example.com"
-
-# Liste fixe des tickers suivis. Pas de découverte automatique de tickers
-# "trending" gratuitement (cf. README) — ajoute/retire ce qui t'intéresse.
+# Liste des tickers à surveiller en priorité (StockTwits n'offre plus de
+# découverte "trending" fiable en accès gratuit -> on part d'une liste
+# définie, complétée par ce qui ressort des news).
 WATCHLIST = [
-    "AAPL",
-    "MSFT",
-    "NVDA",
-    "TSLA",
-    "AMZN",
-    "GOOGL",
-    "META",
-    "AMD",
-    "PLTR",
-    "GME",
+    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "TSLA", "META",
+    "AMD", "PLTR", "MU", "INTC", "NBIS", "CRCL", "SOFI", "RKLB",
 ]
 
-# Pondération des signaux dans le score composite (doit sommer à 1.0).
+# User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").
+# Remplace par ton propre nom + email avant de déployer.
+SEC_USER_AGENT = "VeilleActions perso contact@example.com"
+
+# Nombre de filings récents à récupérer par run pour Form 4 (insiders) et 13F.
+SEC_MAX_FILINGS = 40
+
+# Fenêtre (en heures) pour considérer une actu ou un post comme "récent".
+FRESHNESS_HOURS = 48
+
+# Pondération du score composite (score final = somme pondérée, voir scoring.py)
 WEIGHTS = {
-    "sentiment_social": 0.35,
-    "news": 0.25,
-    "insider_buying": 0.25,
-    "institutional_13f": 0.15,
+    "sentiment_social": 0.35,   # StockTwits bullish/bearish
+    "news_volume": 0.25,        # nombre d'articles récents
+    "insider_buying": 0.25,     # achats/ventes d'initiés (Form 4)
+    "institutional_13f": 0.15,  # apparition dans un 13F récent
 }
-
-# Fenêtre de temps (en jours) pour considérer un Form 4 comme "récent".
-INSIDER_LOOKBACK_DAYS = 30
-
-# Fenêtre de temps (en jours) pour considérer un 13F-HR comme "récent".
-# Le 13F a 45 jours de retard légal de dépôt (cf. README) : on ajoute une
-# marge pour ne pas rater les dépôts publiés au dernier moment.
-FILING_13F_LOOKBACK_DAYS = 45 + 30
-
-# Nombre max d'articles de news conservés par ticker.
-NEWS_MAX_ITEMS = 20
-
-# Fenêtre de temps (en jours) pour compter une news comme "récente".
-NEWS_LOOKBACK_DAYS = 3
-
-# Timeout par défaut (secondes) pour les requêtes HTTP.
-REQUEST_TIMEOUT = 15

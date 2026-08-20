@@ -1,71 +1,62 @@
 """
-Sentiment social via l'API publique (non authentifiée) de StockTwits.
+Collecte le sentiment social via l'API publique de StockTwits (gratuite, sans clé,
+limitée à 200 requêtes/heure/IP). C'est notre substitut à X/Twitter : la communauté
+StockTwits est comparable (retail + traders), et l'API X payante est hors budget.
 
-⚠️ StockTwits n'est pas X/Twitter — c'est le meilleur substitut gratuit
-disponible (communauté retail/trading comparable), mais ce n'est pas la
-même donnée. Son API publique n'a pas d'inscription développeur ouverte
-actuellement : elle fonctionne en accès non authentifié, mais peut se
-fermer sans préavis. Si ce script casse, c'est le premier endroit à
-vérifier.
+Doc (non officielle, l'inscription développeur StockTwits est fermée mais les
+endpoints publics restent accessibles) : https://api.stocktwits.com/api/2/...
+
+Si cet endpoint change ou se ferme, c'est le point le plus fragile du pipeline —
+prévoir une alternative (Reddit API gratuite, ou scraping léger) en secours.
 """
+import sys
+import os
 import time
-
 import requests
 
-from config import WATCHLIST, REQUEST_TIMEOUT
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import WATCHLIST
 
-STOCKTWITS_URL = "https://api.stocktwits.com/api/2/streams/symbol/{ticker}.json"
-HEADERS = {"User-Agent": "veille-actions/1.0 (script gratuit, usage personnel)"}
+STREAM_URL = "https://api.stocktwits.com/api/2/streams/symbol/{symbol}.json"
+RATE_LIMIT_DELAY = 1.5  # secondes entre deux appels, pour rester large sous 200/h
 
 
-def collect_sentiment_for_ticker(ticker):
-    """Récupère les derniers messages StockTwits pour un ticker et compte
-    les messages taggés Bullish/Bearish (le tag de sentiment est optionnel
-    et posé par l'auteur du message, la majorité des messages n'en ont
-    pas)."""
-    url = STOCKTWITS_URL.format(ticker=ticker)
+def collect_sentiment_for_ticker(ticker: str) -> dict:
+    url = STREAM_URL.format(symbol=ticker)
+    headers = {"User-Agent": "Mozilla/5.0 (VeilleActions personal project)"}
     try:
-        resp = requests.get(url, timeout=REQUEST_TIMEOUT, headers=HEADERS)
+        resp = requests.get(url, headers=headers, timeout=15)
         resp.raise_for_status()
         data = resp.json()
-    except (requests.RequestException, ValueError) as e:
-        print(f"  [stocktwits] {ticker}: erreur ({e})")
-        return {"ticker": ticker, "bullish": 0, "bearish": 0, "volume": 0, "error": str(e)}
+    except Exception as e:
+        print(f"[collect_stocktwits] Erreur pour {ticker} : {e}", file=sys.stderr)
+        return {"ticker": ticker, "bullish": 0, "bearish": 0, "total_messages": 0, "error": str(e)}
 
-    messages = data.get("messages", []) or []
-    bullish = 0
-    bearish = 0
-    for msg in messages:
-        sentiment = (msg.get("entities") or {}).get("sentiment") or {}
-        basic = sentiment.get("basic")
-        if basic == "Bullish":
-            bullish += 1
-        elif basic == "Bearish":
-            bearish += 1
-
+    messages = data.get("messages", [])
+    bullish = sum(
+        1 for m in messages
+        if (m.get("entities", {}).get("sentiment") or {}).get("basic") == "Bullish"
+    )
+    bearish = sum(
+        1 for m in messages
+        if (m.get("entities", {}).get("sentiment") or {}).get("basic") == "Bearish"
+    )
     return {
         "ticker": ticker,
         "bullish": bullish,
         "bearish": bearish,
-        "volume": len(messages),
+        "total_messages": len(messages),
     }
 
 
-def collect_all_sentiment(watchlist=None):
-    """Collecte le sentiment StockTwits pour toute la watchlist.
-
-    Renvoie un dict {ticker: {...}} pour un accès direct par ticker
-    (utilisé par scripts/scoring.py).
-    """
-    watchlist = watchlist or WATCHLIST
-    results = {}
-    for ticker in watchlist:
-        results[ticker] = collect_sentiment_for_ticker(ticker)
-        time.sleep(1)  # évite de spammer l'API publique
+def collect_all_sentiment() -> list[dict]:
+    results = []
+    for ticker in WATCHLIST:
+        results.append(collect_sentiment_for_ticker(ticker))
+        time.sleep(RATE_LIMIT_DELAY)
     return results
 
 
 if __name__ == "__main__":
-    import json
-
-    print(json.dumps(collect_all_sentiment(), indent=2))
+    for r in collect_all_sentiment():
+        print(r)
