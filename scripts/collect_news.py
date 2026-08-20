@@ -7,6 +7,7 @@ peu pertinents). On filtre grossièrement sur la présence du ticker/nom dans le
 """
 import sys
 import os
+import time
 import requests
 import feedparser
 
@@ -49,6 +50,7 @@ def collect_all_news() -> dict[str, list[dict]]:
     results = {}
     for ticker in WATCHLIST:
         results[ticker] = collect_news_for_ticker(ticker)
+        time.sleep(0.3)  # reste raisonnable vis-à-vis de Google, watchlist large
     return results
 
 

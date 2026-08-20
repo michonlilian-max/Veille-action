@@ -3,27 +3,32 @@ Configuration centrale du projet de veille boursière.
 Modifie WATCHLIST pour suivre les tickers qui t'intéressent.
 """
 
-# Liste des tickers à surveiller en priorité (StockTwits n'offre plus de
-# découverte "trending" fiable en accès gratuit -> on part d'une liste
-# définie, complétée par ce qui ressort des news).
+# Liste des tickers à surveiller, organisée par secteur — 15 par secteur
+# (StockTwits n'offre plus de découverte "trending" fiable en accès
+# gratuit -> on part d'une liste définie).
+#
+# Note : CRCL (Circle), SOFI (SoFi) et RKLB (Rocket Lab) de l'ancienne
+# liste ne rentrent dans aucun des 6 secteurs demandés (fintech/aérospatial)
+# et ont été retirés. Dis-le si tu veux les remettre.
 WATCHLIST = [
-    # Tech / IA (déjà présents à l'origine)
-    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "PLTR", "NBIS",
-    "CRCL", "SOFI", "RKLB",
-    # Semi-conducteurs
-    "NVDA", "AMD", "MU", "INTC", "TSM", "AVGO", "ARM",
-    # Électronique
-    "TXN", "APH",
-    # Technologie (logiciel/cloud)
-    "ORCL", "CRM",
-    # Intelligence artificielle
-    "SMCI", "AI",
-    # Biotechnologie
-    "MRNA", "VRTX", "REGN",
-    # Énergie
-    "XOM", "CVX", "NEE",
-    # Automobile / mobilité (déjà présent à l'origine)
-    "TSLA",
+    # --- Biotechnologie (15) ---
+    "MRNA", "VRTX", "REGN", "AMGN", "GILD", "BIIB", "ILMN", "ALNY",
+    "BMRN", "INCY", "NVAX", "EXEL", "SRPT", "IONS", "NBIX",
+    # --- Énergie (15) ---
+    "XOM", "CVX", "NEE", "COP", "SLB", "EOG", "PSX", "MPC", "OXY",
+    "WMB", "KMI", "DVN", "HES", "FANG", "VLO",
+    # --- Semi-conducteurs (15) ---
+    "NVDA", "AMD", "MU", "INTC", "TSM", "AVGO", "ARM", "QCOM", "TXN",
+    "ASML", "LRCX", "KLAC", "MRVL", "ON", "MCHP",
+    # --- Électronique (15) ---
+    "APH", "TEL", "KEYS", "FTV", "GRMN", "LOGI", "SONY", "HON", "EMR",
+    "ROK", "ZBRA", "CIEN", "FLEX", "JBL", "VSH",
+    # --- Technologie (15) ---
+    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "TSLA", "ORCL",
+    "CRM", "ADBE", "NOW", "INTU", "SHOP", "UBER", "IBM",
+    # --- Intelligence artificielle (15) ---
+    "PLTR", "NBIS", "SMCI", "AI", "PATH", "SOUN", "BBAI", "UPST",
+    "SNOW", "DDOG", "MDB", "CFLT", "ESTC", "IOT", "TEM",
 ]
 
 # User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").

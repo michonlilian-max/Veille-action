@@ -80,7 +80,9 @@ Ouvre `config.py` et modifie :
 
 Va dans l'onglet **Actions** de ton repo GitHub → active les workflows si
 demandé. Le fichier `.github/workflows/veille.yml` est déjà configuré pour
-tourner automatiquement toutes les 4 heures en semaine.
+tourner automatiquement **une fois par nuit** (03h00 UTC, mardi à samedi —
+donc largement après la clôture des marchés US, pour capturer la clôture
+de chaque jour de bourse de lundi à vendredi).
 
 Pour un premier test immédiat sans attendre : onglet **Actions** →
 sélectionne "Mise à jour de la veille" → **Run workflow**.
@@ -143,12 +145,12 @@ permettre (cf. la section "Limites à connaître" plus haut sur StockTwits).
 **⚠️ Estimation de coût avant d'activer sur le cron automatique.** xAI
 facture le modèle *et* Live Search par source récupérée (vérifie le tarif
 à jour sur https://docs.x.ai — il peut avoir changé). Avec les réglages
-par défaut (`GROK_MAX_SEARCH_RESULTS = 8` dans `config.py`, 16 tickers, et
-le cron par défaut de 6 runs/jour en semaine) :
+par défaut (`GROK_MAX_SEARCH_RESULTS = 8` dans `config.py`, 90 tickers, et
+le cron par défaut d'un run/nuit, mardi à samedi) :
 
 ```
-30 runs/semaine × 16 tickers = 480 appels/semaine
-480 × jusqu'à 8 sources ≈ jusqu'à 3 840 sources/semaine
+5 runs/semaine × 90 tickers = 450 appels/semaine
+450 × jusqu'à 8 sources ≈ jusqu'à 3 600 sources/semaine
 ```
 
 Ça peut vite chiffrer à plusieurs dizaines voire centaines d'euros/mois

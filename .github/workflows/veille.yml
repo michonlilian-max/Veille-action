@@ -2,8 +2,13 @@ name: Mise à jour de la veille
 
 on:
   schedule:
-    # Toutes les 4 heures, du lundi au vendredi (heure UTC)
-    - cron: "0 */4 * * 1-5"
+    # Un seul run par nuit, à 03h00 UTC (~4h/5h du matin en France selon
+    # l'heure d'été/hiver — nuit toute l'année), largement après la clôture
+    # des marchés US (16h00 ET = 20h00/21h00 UTC selon la saison).
+    # Mardi à samedi UTC pour capturer la clôture de chaque jour de bourse
+    # (lundi à vendredi) : le run du mardi 03h UTC reflète la clôture de
+    # lundi, celui du samedi 03h UTC reflète la clôture de vendredi.
+    - cron: "0 3 * * 2-6"
   workflow_dispatch: {}
 
 permissions:
