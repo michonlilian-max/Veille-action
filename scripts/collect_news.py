@@ -4,17 +4,37 @@ filtré par ticker. Pas de clé API nécessaire.
 
 Limite connue : Google News RSS peut renvoyer des résultats bruités (articles
 peu pertinents). On filtre grossièrement sur la présence du ticker/nom dans le titre.
+
+Chaque article est en plus filtré sur sa date de publication : seuls ceux
+publiés dans la fenêtre FRESHNESS_HOURS (config.py, 72h/3 jours par défaut)
+sont gardés. Un article sans date exploitable est gardé par défaut plutôt
+que rejeté à tort.
 """
 import sys
 import os
 import time
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+
 import requests
 import feedparser
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import NEWS_MAX_ITEMS, WATCHLIST
+from config import FRESHNESS_HOURS, NEWS_MAX_ITEMS, WATCHLIST
 
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
+
+
+def _is_recent(published: str, cutoff: datetime) -> bool:
+    if not published:
+        return True
+    try:
+        dt = parsedate_to_datetime(published)
+    except (TypeError, ValueError):
+        return True
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt >= cutoff
 
 
 def collect_news_for_ticker(ticker: str, max_items: int = NEWS_MAX_ITEMS) -> list[dict]:
@@ -33,13 +53,17 @@ def collect_news_for_ticker(ticker: str, max_items: int = NEWS_MAX_ITEMS) -> lis
         return []
 
     feed = feedparser.parse(resp.content)
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=FRESHNESS_HOURS)
     items = []
     for entry in feed.entries[:max_items]:
+        published = entry.get("published", "")
+        if not _is_recent(published, cutoff):
+            continue
         items.append({
             "ticker": ticker,
             "title": entry.get("title", ""),
             "link": entry.get("link", ""),
-            "published": entry.get("published", ""),
+            "published": published,
             "source": entry.get("source", {}).get("title", "") if hasattr(entry.get("source", {}), "get") else "",
         })
     return items

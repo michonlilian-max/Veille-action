@@ -42,15 +42,19 @@ INSIDER_LOOKBACK_DAYS = 30
 # rater les dépôts publiés au dernier moment.
 FILING_13F_LOOKBACK_DAYS = 90
 
-# Fenêtre (en heures) pour considérer une actu ou un post comme "récent".
-FRESHNESS_HOURS = 48
+# Fenêtre (en heures) pour ne garder que les news récentes (collect_news.py
+# rejette tout article plus vieux que ça). 72h = 3 jours.
+FRESHNESS_HOURS = 72
 
-# Nombre max d'articles Google News récupérés par ticker. Google News RSS
-# renvoie rarement plus d'une centaine de résultats par requête, donc au-delà
-# de 100 tu risques de ne rien gagner. À 10 (l'ancienne valeur), quasi tous
-# les tickers plafonnaient au max et le signal "news_volume" ne différenciait
-# plus rien — monter ce nombre le rend à nouveau discriminant.
-NEWS_MAX_ITEMS = 100
+# Nombre max d'articles Google News regardés par ticker (avant filtrage par
+# fraîcheur). ⚠️ Google News RSS ne renvoie quasiment jamais plus d'une
+# centaine de résultats par requête, quel que soit ce plafond — le monter à
+# 300 ne fera donc pas nécessairement remonter plus d'articles en pratique.
+# Le vrai levier pour la pertinence, c'est FRESHNESS_HOURS ci-dessus : en
+# ne gardant que les 3 derniers jours, le compte par ticker redevient
+# variable (certains tickers ont eu beaucoup d'actu récente, d'autres non)
+# au lieu de plafonner tous au même nombre.
+NEWS_MAX_ITEMS = 300
 
 # Fenêtre (en jours) d'historique de prix/volume téléchargée (Yahoo
 # Finance). Doit être assez large pour calculer un volume moyen
