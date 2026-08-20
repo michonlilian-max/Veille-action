@@ -31,10 +31,28 @@ def _price_volume_raw(entry):
     return volume_ratio * (1 + min(change_pct, 20) / 20)
 
 
+def _x_sentiment_raw(entry):
+    """Score brut du sentiment X (Grok Live Search) : même formule que le
+    signal StockTwits (ratio bullish pondéré par le volume de posts), pour
+    rester cohérent entre les deux sources de sentiment social."""
+    if not entry:
+        return 0.0
+    bullish = entry.get("bullish", 0)
+    bearish = entry.get("bearish", 0)
+    total = bullish + bearish
+    if not total:
+        return 0.0
+    ratio = bullish / total
+    post_count = entry.get("post_count", total)
+    return ratio * (1 + min(post_count, 30) / 30)
+
+
 def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
                   insider_filings: list[dict], filings_13f: list[dict],
-                  price_data: dict[str, dict] | None = None) -> list[dict]:
+                  price_data: dict[str, dict] | None = None,
+                  x_sentiment_data: dict[str, dict] | None = None) -> list[dict]:
     price_data = price_data or {}
+    x_sentiment_data = x_sentiment_data or {}
 
     # --- signal 1 : sentiment social (ratio bullish, pondéré par le volume) ---
     sentiment_raw = {}
@@ -72,11 +90,17 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
     # --- signal 5 : volume d'échange anormal + amplitude de prix (Yahoo Finance) ---
     price_raw = {t: _price_volume_raw(price_data.get(t)) for t in WATCHLIST}
 
+    # --- signal 6 : sentiment X réel via Grok Live Search (payant, optionnel) ---
+    # x_sentiment_data est vide si GROK_API_KEY n'est pas configuré — le
+    # signal contribue alors 0 partout, comme les autres signaux absents.
+    x_raw = {t: _x_sentiment_raw(x_sentiment_data.get(t)) for t in WATCHLIST}
+
     sentiment_n = _normalize(sentiment_raw)
     news_n = _normalize(news_raw)
     insider_n = _normalize(insider_raw)
     inst_n = _normalize(inst_raw)
     price_n = _normalize(price_raw)
+    x_n = _normalize(x_raw)
 
     results = []
     for t in WATCHLIST:
@@ -86,8 +110,10 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
             + WEIGHTS["insider_buying"] * insider_n.get(t, 0)
             + WEIGHTS["institutional_13f"] * inst_n.get(t, 0)
             + WEIGHTS["volume_spike"] * price_n.get(t, 0)
+            + WEIGHTS["sentiment_x"] * x_n.get(t, 0)
         )
         p = price_data.get(t) or {}
+        x = x_sentiment_data.get(t) or {}
         results.append({
             "ticker": t,
             "score": round(score, 1),
@@ -97,11 +123,13 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
                 "insider_buying": insider_n.get(t, 0),
                 "institutional_13f": inst_n.get(t, 0),
                 "volume_spike": price_n.get(t, 0),
+                "sentiment_x": x_n.get(t, 0),
             },
             "news_count": news_raw.get(t, 0),
             "price": p.get("price"),
             "change_pct": p.get("change_pct"),
             "volume_ratio": p.get("volume_ratio"),
+            "x_summary": x.get("summary"),
         })
 
     results.sort(key=lambda r: r["score"], reverse=True)

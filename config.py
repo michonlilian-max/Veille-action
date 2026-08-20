@@ -30,12 +30,24 @@ FRESHNESS_HOURS = 48
 # significatif — 30 jours de bourse ≈ 20 jours ouvrés.
 PRICE_VOLUME_LOOKBACK_DAYS = 30
 
+# Modèle xAI utilisé pour l'analyse de sentiment X (Live Search). Vérifie
+# les modèles disponibles et leurs tarifs sur https://console.x.ai avant
+# de changer — un modèle plus gros coûte plus cher par appel.
+GROK_MODEL = "grok-4-fast"
+
+# Nombre max de posts X que Grok peut consulter par ticker (Live Search).
+# Facturé par source récupérée : plus haut = plus précis mais plus cher.
+# Reste volontairement bas par défaut — voir le README pour une estimation
+# de coût avant d'augmenter.
+GROK_MAX_SEARCH_RESULTS = 8
+
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.
 WEIGHTS = {
-    "sentiment_social": 0.25,   # StockTwits bullish/bearish
-    "news_volume": 0.20,        # nombre d'articles récents
-    "insider_buying": 0.20,     # vrais achats d'initiés en marché ouvert (Form 4, code P)
-    "institutional_13f": 0.10,  # apparition dans un 13F récent
-    "volume_spike": 0.25,       # volume anormal + amplitude de variation du prix
+    "sentiment_x": 0.25,         # sentiment X réel via Grok Live Search (payant, cf. README)
+    "volume_spike": 0.20,        # volume anormal + amplitude de variation du prix
+    "sentiment_social": 0.15,    # StockTwits bullish/bearish
+    "news_volume": 0.15,         # nombre d'articles récents
+    "insider_buying": 0.15,      # vrais achats d'initiés en marché ouvert (Form 4, code P)
+    "institutional_13f": 0.10,   # apparition dans un 13F récent
 }

@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scripts.collect_edgar import collect_insider_trades, collect_13f_filings
+from scripts.collect_grok_sentiment import collect_all_x_sentiment
 from scripts.collect_news import collect_all_news
 from scripts.collect_price import collect_all_prices
 from scripts.collect_stocktwits import collect_all_sentiment
@@ -39,8 +40,13 @@ def main():
     print("Collecte des prix et volumes (Yahoo Finance)...")
     price_data = collect_all_prices()
 
+    print("Collecte du sentiment X (Grok Live Search, si configuré)...")
+    x_sentiment_data = collect_all_x_sentiment()
+
     print("Calcul des scores...")
-    scores = build_scores(sentiment_data, news_data, insider_filings, filings_13f, price_data)
+    scores = build_scores(
+        sentiment_data, news_data, insider_filings, filings_13f, price_data, x_sentiment_data
+    )
 
     timestamp = datetime.now(timezone.utc).isoformat()
     output = {
@@ -50,11 +56,13 @@ def main():
             "insider_filings_sample": insider_filings[:15],
             "filings_13f_sample": filings_13f[:15],
             "price_data": price_data,
+            "x_sentiment_data": x_sentiment_data,
         },
         "disclaimer": (
             "Ceci n'est pas un conseil en investissement. Score d'attention relative "
-            "basé sur des signaux publics gratuits (sentiment social, news, dépôts SEC, "
-            "prix/volume). À croiser avec ta propre analyse."
+            "basé sur des signaux publics gratuits et un signal payant optionnel "
+            "(sentiment social, news, dépôts SEC, prix/volume, sentiment X). "
+            "À croiser avec ta propre analyse."
         ),
     }
 

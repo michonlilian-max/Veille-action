@@ -29,6 +29,7 @@ SIGNAL_LABELS = {
     "insider_buying": "de vrais achats d'initiés récents (Form 4)",
     "institutional_13f": "une présence dans un 13F récent",
     "volume_spike": "un volume d'échange anormal / une forte variation de prix",
+    "sentiment_x": "le sentiment réel sur X (analysé par Grok)",
 }
 
 
@@ -62,10 +63,13 @@ def build_report_text(output):
                 f"  Prix : {row['price']} $ ({sign}{row.get('change_pct', 0)}% sur 1j, "
                 f"volume x{row.get('volume_ratio', 1)} vs moyenne)"
             )
+        if row.get("x_summary"):
+            lines.append(f"  X (Grok) : {row['x_summary']}")
         lines.append(
             "  Détail : sentiment {sentiment_social} | news {news_volume} | "
             "insiders {insider_buying} | 13F {institutional_13f} | "
-            "volume {volume_spike} ({news_count} articles récents)".format(
+            "volume {volume_spike} | X {sentiment_x} "
+            "({news_count} articles récents)".format(
                 news_count=row["news_count"], **detail
             )
         )

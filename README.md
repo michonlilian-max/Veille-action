@@ -1,16 +1,24 @@
-# Veille Actions — watchlist automatisée, 100% gratuite
+# Veille Actions — watchlist automatisée, essentiellement gratuite
 
-Une petite application qui croise trois signaux publics et gratuits pour
-repérer les actions à surveiller :
+Une petite application qui croise plusieurs signaux publics pour repérer
+les actions à surveiller :
 
 1. **Sentiment social** via l'API publique gratuite de StockTwits (substitut
    à X/Twitter, dont l'API payante est hors budget)
 2. **Actualité financière** via le flux RSS gratuit de Google News
 3. **Mouvements des initiés et des grands investisseurs** via SEC EDGAR
-   (Form 4 = achats/ventes des dirigeants, 13F-HR = positions institutionnelles)
+   (Form 4 = achats/ventes réels des dirigeants, code "P" uniquement ;
+   13F-HR = positions institutionnelles)
+4. **Prix et volume d'échange** via Yahoo Finance (`yfinance`) — distingue
+   un vrai mouvement de marché d'un pic de bruit social
+5. **(Optionnel, payant)** Sentiment X réel via Grok Live Search — la
+   vraie donnée X que le point 1 ne peut pas se permettre gratuitement,
+   activable si tu es prêt à payer l'API xAI (cf. section 7 de
+   l'installation, avec estimation de coût)
 
-Le tout tourne **gratuitement** sur GitHub Actions (planification automatique)
-et s'affiche sur un dashboard statique hébergé par GitHub Pages (gratuit).
+Le tout tourne sur GitHub Actions (planification automatique) et s'affiche
+sur un dashboard statique hébergé par GitHub Pages — gratuit dans sa
+configuration de base, à l'exception du signal X optionnel (point 5).
 
 ⚠️ **Ce n'est pas un conseil en investissement.** C'est un indicateur d'attention
 relative basé sur des signaux publics — à croiser avec ta propre analyse.
@@ -124,6 +132,45 @@ New repository secret** de ton repo GitHub :
 (qui est un fichier public du repo). Une fois les 5 secrets ajoutés, le
 prochain run envoie automatiquement l'email — rien d'autre à faire.
 
+### 7. (Optionnel, **PAYANT**) Sentiment X réel via Grok
+
+Toutes les autres sources du projet sont gratuites. Celle-ci ne l'est
+**pas** : elle utilise l'API xAI (Grok) et sa fonctionnalité "Live Search"
+pour interroger X (Twitter) directement et analyser le sentiment réel des
+posts — c'est la vraie donnée X que le reste du projet ne peut pas se
+permettre (cf. la section "Limites à connaître" plus haut sur StockTwits).
+
+**⚠️ Estimation de coût avant d'activer sur le cron automatique.** xAI
+facture le modèle *et* Live Search par source récupérée (vérifie le tarif
+à jour sur https://docs.x.ai — il peut avoir changé). Avec les réglages
+par défaut (`GROK_MAX_SEARCH_RESULTS = 8` dans `config.py`, 16 tickers, et
+le cron par défaut de 6 runs/jour en semaine) :
+
+```
+30 runs/semaine × 16 tickers = 480 appels/semaine
+480 × jusqu'à 8 sources ≈ jusqu'à 3 840 sources/semaine
+```
+
+Ça peut vite chiffrer à plusieurs dizaines voire centaines d'euros/mois
+selon le tarif en vigueur. **Ne laisse pas tourner ça sur le cron sans
+avoir d'abord testé manuellement** (`workflow_dispatch`) et vérifié ta
+conso réelle sur https://console.x.ai. Pour réduire le coût : baisse
+`GROK_MAX_SEARCH_RESULTS`, réduis la taille de `WATCHLIST`, ou espace
+davantage le cron.
+
+**a) Crée une clé API** sur https://console.x.ai (nécessite une carte
+bancaire).
+
+**b) Ajoute 1 secret** dans **Settings → Secrets and variables → Actions**
+de ton repo GitHub :
+
+| Nom | Valeur |
+|---|---|
+| `GROK_API_KEY` | ta clé API xAI |
+
+Si ce secret n'est pas configuré, ce signal contribue 0 au score et le
+reste du pipeline continue normalement (comme l'email).
+
 ---
 
 ## Structure du projet
@@ -137,6 +184,7 @@ veille-actions/
 │   ├── collect_news.py          # Google News RSS (gratuit)
 │   ├── collect_price.py         # prix + volume via Yahoo Finance (gratuit)
 │   ├── collect_stocktwits.py    # sentiment social (gratuit)
+│   ├── collect_grok_sentiment.py # sentiment X réel via Grok Live Search (PAYANT, optionnel)
 │   ├── send_email.py            # rapport par email (SMTP, optionnel)
 │   ├── scoring.py               # combine les signaux en un score composite
 │   └── run_all.py               # orchestrateur, point d'entrée
@@ -153,18 +201,22 @@ veille-actions/
 Chaque signal est normalisé sur 100 (relatif au max de la watchlist du jour),
 puis combiné selon les poids définis dans `config.py` (`WEIGHTS`) :
 
-- 25% sentiment social (ratio bullish/bearish StockTwits, pondéré par le volume)
-- 20% volume de news récentes
-- 20% vrais achats d'initiés en marché ouvert (Form 4, code de transaction
+- 25% sentiment X réel (Grok Live Search, **payant**, 0 si `GROK_API_KEY`
+  non configuré — cf. section 7 de l'installation)
+- 20% volume d'échange anormal + amplitude de variation du prix (Yahoo
+  Finance, via `yfinance`) — distingue un vrai mouvement de marché d'un pic
+  de bruit social sans rien derrière
+- 15% sentiment social (ratio bullish/bearish StockTwits, pondéré par le volume)
+- 15% volume de news récentes
+- 15% vrais achats d'initiés en marché ouvert (Form 4, code de transaction
   "P" — les ventes et le bruit comme les attributions ou exercices
   d'options ne comptent plus, cf. `scripts/collect_edgar.py`)
 - 10% présence dans un 13F récent
-- 25% volume d'échange anormal + amplitude de variation du prix (Yahoo
-  Finance, via `yfinance`) — distingue un vrai mouvement de marché d'un pic
-  de bruit social sans rien derrière
 
 Ajuste ces poids librement selon ce que tu veux privilégier (ils doivent
-sommer à 1.0).
+sommer à 1.0). Si tu n'actives pas Grok (section 7), ses 25% ne rapportent
+jamais rien — pense à redistribuer ce poids vers les autres signaux dans
+`config.py` si tu ne comptes pas l'activer.
 
 ## Prochaines améliorations possibles
 

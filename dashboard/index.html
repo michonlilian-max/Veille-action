@@ -47,12 +47,12 @@
 <body>
   <h1>📊 Veille Actions</h1>
   <div class="meta" id="meta">Chargement...</div>
-  <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits, à croiser avec ta propre analyse.</div>
+  <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits (+ un signal X optionnel payant, via Grok), à croiser avec ta propre analyse.</div>
   <div id="loading">Chargement des données...</div>
   <div id="error" style="display:none;"></div>
   <table id="tbl" style="display:none;">
     <thead>
-      <tr><th>Ticker</th><th>Score</th><th>Prix</th><th>Volume</th><th>Sentiment social</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
+      <tr><th>Ticker</th><th>Score</th><th>Prix</th><th>Volume</th><th>Sentiment social</th><th>Sentiment X</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
     </thead>
     <tbody id="tbody"></tbody>
   </table>
@@ -83,6 +83,10 @@ async function load() {
         ? `${row.price} $ <span style="color:${changeColor};">(${changeSign}${row.change_pct}%)</span>`
         : '—';
       const volumeCell = hasPrice ? `×${row.volume_ratio}` : '—';
+      const xTitle = row.x_summary ? row.x_summary.replace(/"/g, '&quot;') : '';
+      const xCell = row.x_summary
+        ? `<span title="${xTitle}">${row.detail.sentiment_x}</span>`
+        : `<span style="color:var(--muted);">${row.detail.sentiment_x}</span>`;
       tr.innerHTML = `
         <td class="ticker">${row.ticker}</td>
         <td>
@@ -94,6 +98,7 @@ async function load() {
         <td>${priceCell}</td>
         <td>${volumeCell}</td>
         <td>${row.detail.sentiment_social}</td>
+        <td>${xCell}</td>
         <td>${row.news_count}</td>
         <td>${row.detail.insider_buying}</td>
         <td>${row.detail.institutional_13f}</td>

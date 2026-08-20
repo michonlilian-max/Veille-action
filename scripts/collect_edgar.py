@@ -88,6 +88,15 @@ def _get_company(ticker):
     return _load_company_table().get(ticker.upper())
 
 
+def get_company_title(ticker):
+    """Nom légal de la société pour un ticker (aide les recherches externes
+    — ex: X/Grok — à être plus précises qu'avec le seul symbole). Chaîne
+    vide si le CIK est introuvable. Réutilise le cache déjà chargé par les
+    autres fonctions de ce module."""
+    company = _get_company(ticker)
+    return company["title"] if company else ""
+
+
 def _local_name(tag):
     """Nom de balise sans préfixe d'espace de noms XML (ex:
     '{http://.../ns}transactionCode' -> 'transactionCode'). Les documents
