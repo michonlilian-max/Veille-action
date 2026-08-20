@@ -1,0 +1,10 @@
+{
+  "generated_at": null,
+  "watchlist": [],
+  "raw": {
+    "insider_filings_sample": [],
+    "filings_13f_sample": []
+  },
+  "disclaimer": "Ceci n'est pas un conseil en investissement. Score d'attention relative basé sur des signaux publics gratuits (sentiment social, news, dépôts SEC). À croiser avec ta propre analyse.",
+  "note": "Placeholder avant le premier run du pipeline (scripts/run_all.py ou le workflow GitHub Actions)."
+}

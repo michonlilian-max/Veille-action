@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille Actions</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #1a1d24;
+    --border: #2a2e37;
+    --text: #e6e8eb;
+    --muted: #8a8f98;
+    --accent: #4ade80;
+    --accent-low: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .disclaimer {
+    background: #2a1f1a;
+    border: 1px solid #4a3324;
+    color: #f0c98a;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    margin-bottom: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; }
+  tr:hover { background: var(--card); }
+  .ticker { font-weight: 600; }
+  .score-bar-wrap { background: var(--border); border-radius: 4px; height: 8px; width: 100px; overflow: hidden; }
+  .score-bar { height: 100%; background: var(--accent); }
+  .score-num { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.8rem; margin-left: 8px; }
+  #loading, #error { color: var(--muted); padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+  <h1>📊 Veille Actions</h1>
+  <div class="meta" id="meta">Chargement...</div>
+  <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits, à croiser avec ta propre analyse.</div>
+  <div id="loading">Chargement des données...</div>
+  <div id="error" style="display:none;"></div>
+  <table id="tbl" style="display:none;">
+    <thead>
+      <tr><th>Ticker</th><th>Score</th><th>Sentiment social</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+<script>
+async function load() {
+  try {
+    // Essaie d'abord le chemin "déployé" (data/ à côté d'index.html sur Pages),
+    // puis le chemin "repo local" (data/ au niveau parent de dashboard/).
+    let res = await fetch('data/output.json?_=' + Date.now());
+    if (!res.ok) res = await fetch('../data/output.json?_=' + Date.now());
+    if (!res.ok) throw new Error('output.json introuvable — le pipeline a-t-il déjà tourné ?');
+    const data = await res.json();
+
+    document.getElementById('meta').textContent =
+      'Dernière mise à jour : ' + new Date(data.generated_at).toLocaleString('fr-FR');
+
+    const tbody = document.getElementById('tbody');
+    const maxScore = Math.max(...data.watchlist.map(r => r.score), 1);
+
+    data.watchlist.forEach(row => {
+      const tr = document.createElement('tr');
+      const pct = (row.score / maxScore) * 100;
+      tr.innerHTML = `
+        <td class="ticker">${row.ticker}</td>
+        <td>
+          <div style="display:flex; align-items:center;">
+            <div class="score-bar-wrap"><div class="score-bar" style="width:${pct}%"></div></div>
+            <span class="score-num">${row.score}</span>
+          </div>
+        </td>
+        <td>${row.detail.sentiment_social}</td>
+        <td>${row.news_count}</td>
+        <td>${row.detail.insider_buying}</td>
+        <td>${row.detail.institutional_13f}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('tbl').style.display = 'table';
+  } catch (e) {
+    document.getElementById('loading').style.display = 'none';
+    const err = document.getElementById('error');
+    err.style.display = 'block';
+    err.textContent = 'Erreur : ' + e.message;
+  }
+}
+load();
+</script>
+</body>
+</html>
