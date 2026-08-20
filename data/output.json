@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-20T12:31:34.149376+00:00",
+  "generated_at": "2026-08-20T12:36:20.648340+00:00",
   "watchlist": [
     {
       "ticker": "CRCL",
-      "score": 75.0,
+      "score": 76.1,
       "detail": {
-        "sentiment_social": 90.0,
+        "sentiment_social": 94.7,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -18,9 +18,9 @@
     },
     {
       "ticker": "NBIS",
-      "score": 66.2,
+      "score": 65.5,
       "detail": {
-        "sentiment_social": 45.0,
+        "sentiment_social": 42.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -48,9 +48,9 @@
     },
     {
       "ticker": "RKLB",
-      "score": 58.4,
+      "score": 59.4,
       "detail": {
-        "sentiment_social": 80.0,
+        "sentiment_social": 84.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -63,9 +63,9 @@
     },
     {
       "ticker": "INTC",
-      "score": 56.9,
+      "score": 55.2,
       "detail": {
-        "sentiment_social": 70.0,
+        "sentiment_social": 63.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -78,9 +78,9 @@
     },
     {
       "ticker": "AMZN",
-      "score": 53.5,
+      "score": 54.3,
       "detail": {
-        "sentiment_social": 65.0,
+        "sentiment_social": 68.4,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -93,9 +93,9 @@
     },
     {
       "ticker": "TSLA",
-      "score": 52.2,
+      "score": 52.9,
       "detail": {
-        "sentiment_social": 50.0,
+        "sentiment_social": 52.6,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -108,9 +108,9 @@
     },
     {
       "ticker": "AMD",
-      "score": 50.5,
+      "score": 51.2,
       "detail": {
-        "sentiment_social": 55.0,
+        "sentiment_social": 57.9,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -123,9 +123,9 @@
     },
     {
       "ticker": "AAPL",
-      "score": 50.1,
+      "score": 50.7,
       "detail": {
-        "sentiment_social": 45.0,
+        "sentiment_social": 47.4,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -138,9 +138,9 @@
     },
     {
       "ticker": "MU",
-      "score": 49.0,
+      "score": 49.8,
       "detail": {
-        "sentiment_social": 55.0,
+        "sentiment_social": 57.9,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -153,9 +153,9 @@
     },
     {
       "ticker": "NVDA",
-      "score": 48.0,
+      "score": 48.6,
       "detail": {
-        "sentiment_social": 45.0,
+        "sentiment_social": 47.4,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -167,25 +167,10 @@
       "volume_ratio": 0.79
     },
     {
-      "ticker": "MSFT",
-      "score": 47.2,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 18.7
-      },
-      "news_count": 10,
-      "price": 484.31,
-      "change_pct": 0.56,
-      "volume_ratio": 0.56
-    },
-    {
       "ticker": "PLTR",
-      "score": 46.4,
+      "score": 48.2,
       "detail": {
-        "sentiment_social": 35.0,
+        "sentiment_social": 42.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -197,10 +182,25 @@
       "volume_ratio": 0.85
     },
     {
-      "ticker": "GOOG",
-      "score": 44.4,
+      "ticker": "MSFT",
+      "score": 47.8,
       "detail": {
-        "sentiment_social": 35.0,
+        "sentiment_social": 52.6,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 18.7
+      },
+      "news_count": 10,
+      "price": 484.31,
+      "change_pct": 0.56,
+      "volume_ratio": 0.56
+    },
+    {
+      "ticker": "GOOG",
+      "score": 43.5,
+      "detail": {
+        "sentiment_social": 31.6,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -213,9 +213,9 @@
     },
     {
       "ticker": "META",
-      "score": 42.8,
+      "score": 43.1,
       "detail": {
-        "sentiment_social": 20.0,
+        "sentiment_social": 21.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -228,9 +228,9 @@
     },
     {
       "ticker": "GOOGL",
-      "score": 38.1,
+      "score": 38.2,
       "detail": {
-        "sentiment_social": 10.0,
+        "sentiment_social": 10.5,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
