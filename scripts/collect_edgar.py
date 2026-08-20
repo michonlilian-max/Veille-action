@@ -88,11 +88,21 @@ def _get_company(ticker):
     return _load_company_table().get(ticker.upper())
 
 
+def _local_name(tag):
+    """Nom de balise sans préfixe d'espace de noms XML (ex:
+    '{http://.../ns}transactionCode' -> 'transactionCode'). Les documents
+    XML Form 4 n'en déclarent normalement pas, mais mieux vaut ne pas
+    dépendre de l'absence de namespace pour un match de balise."""
+    return tag.split("}")[-1] if "}" in tag else tag
+
+
 def _classify_transaction(cik, accession_number, primary_document):
     """Télécharge le XML d'un Form 4 individuel et détermine s'il contient
     un achat ("buy", code P) ou une vente ("sell", code S) en marché
     ouvert. "other" pour tout le reste (attributions, options, impôts...)
-    ou si le document n'a pas pu être récupéré/parsé."""
+    ou si le document n'a pas pu être récupéré/parsé (avec log de
+    l'erreur, pour distinguer un vrai échec réseau/parsing d'un filing qui
+    ne contient légitimement aucun code P/S)."""
     if not primary_document:
         return "other"
     accn_nodash = accession_number.replace("-", "")
@@ -101,14 +111,20 @@ def _classify_transaction(cik, accession_number, primary_document):
         resp = requests.get(url, headers=HEADERS, timeout=15)
         resp.raise_for_status()
         root = ET.fromstring(resp.content)
-    except Exception:
+    except Exception as e:
+        print(f"[collect_edgar] Form 4 XML {url} : erreur ({e})")
         return "other"
 
-    codes = set()
-    for tx in root.iter("nonDerivativeTransaction"):
-        code_el = tx.find("transactionCoding/transactionCode")
-        if code_el is not None and code_el.text:
-            codes.add(code_el.text.strip())
+    # Recherche par nom local (sans namespace), et pas par chemin
+    # nonDerivativeTransaction/transactionCoding/transactionCode : un find()
+    # par chemin échoue silencieusement (aucune exception) si la structure
+    # ou un namespace diffère de ce qu'on suppose, ce qui masquerait un vrai
+    # bug de parsing derrière un innocent "other".
+    codes = {
+        el.text.strip()
+        for el in root.iter()
+        if _local_name(el.tag) == "transactionCode" and el.text
+    }
 
     if codes & BUY_CODES:
         return "buy"
