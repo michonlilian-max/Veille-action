@@ -12,8 +12,7 @@ WATCHLIST = [
 ]
 
 # User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").
-# Remplace par ton propre nom + email avant de déployer.
-SEC_USER_AGENT = "VeilleActions perso contact@example.com"
+SEC_USER_AGENT = "Veille Actions (contact: michonlilian@yahoo.fr)"
 
 # Nombre de filings récents à récupérer par run pour Form 4 (insiders) et 13F.
 SEC_MAX_FILINGS = 40
