@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T12:08:27.613496+00:00",
+  "generated_at": "2026-08-20T12:13:02.595535+00:00",
   "watchlist": [
     {
       "ticker": "CRCL",
@@ -36,9 +36,9 @@
     },
     {
       "ticker": "AMZN",
-      "score": 52.2,
+      "score": 50.3,
       "detail": {
-        "sentiment_social": 77.8,
+        "sentiment_social": 72.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -47,9 +47,9 @@
     },
     {
       "ticker": "TSLA",
-      "score": 52.2,
+      "score": 50.3,
       "detail": {
-        "sentiment_social": 77.8,
+        "sentiment_social": 72.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -58,9 +58,9 @@
     },
     {
       "ticker": "INTC",
-      "score": 52.2,
+      "score": 50.3,
       "detail": {
-        "sentiment_social": 77.8,
+        "sentiment_social": 72.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -69,6 +69,17 @@
     },
     {
       "ticker": "MSFT",
+      "score": 44.5,
+      "detail": {
+        "sentiment_social": 55.6,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 0.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "AMD",
       "score": 44.5,
       "detail": {
         "sentiment_social": 55.6,
@@ -101,17 +112,6 @@
       "news_count": 10
     },
     {
-      "ticker": "AMD",
-      "score": 42.5,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
       "ticker": "NBIS",
       "score": 42.5,
       "detail": {
@@ -134,7 +134,7 @@
       "news_count": 10
     },
     {
-      "ticker": "GOOGL",
+      "ticker": "MU",
       "score": 38.6,
       "detail": {
         "sentiment_social": 38.9,
@@ -156,7 +156,7 @@
       "news_count": 10
     },
     {
-      "ticker": "PLTR",
+      "ticker": "GOOGL",
       "score": 34.7,
       "detail": {
         "sentiment_social": 27.8,
@@ -167,7 +167,7 @@
       "news_count": 10
     },
     {
-      "ticker": "MU",
+      "ticker": "PLTR",
       "score": 34.7,
       "detail": {
         "sentiment_social": 27.8,
@@ -180,6 +180,27 @@
   ],
   "raw": {
     "insider_filings_sample": [
+      {
+        "title": "425 - ASP Isotopes Inc. (0001921865) (Filed by)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1921865/000119312526358082/0001193125-26-358082-index.htm",
+        "updated": "2026-08-20T08:10:03-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001193125-26-358082 <b>Size:</b> 114 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "425 - ENDRA Life Sciences Inc. (0001681682) (Subject)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1681682/000119312526358082/0001193125-26-358082-index.htm",
+        "updated": "2026-08-20T08:10:03-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001193125-26-358082 <b>Size:</b> 114 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "425 - Bleichroeder Acquisition Corp. II (0002088295) (Subject)",
+        "link": "https://www.sec.gov/Archives/edgar/data/2088295/000121390026091899/0001213900-26-091899-index.htm",
+        "updated": "2026-08-20T08:09:45-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001213900-26-091899 <b>Size:</b> 55 KB\n",
+        "form_type": "4"
+      },
       {
         "title": "424B3 - 1st FRANKLIN FINANCIAL CORP (0000038723) (Filer)",
         "link": "https://www.sec.gov/Archives/edgar/data/38723/000162828026058133/0001628280-26-058133-index.htm",
@@ -262,27 +283,6 @@
         "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000371/0001081400-26-000371-index.htm",
         "updated": "2026-08-20T07:41:34-04:00",
         "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000371 <b>Size:</b> 7 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000369/0001081400-26-000369-index.htm",
-        "updated": "2026-08-20T07:39:53-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000369 <b>Size:</b> 177 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000367/0001081400-26-000367-index.htm",
-        "updated": "2026-08-20T07:38:03-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000367 <b>Size:</b> 174 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - Hollar Jason M. (0001687858) (Reporting)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1687858/000168785826000003/0001687858-26-000003-index.htm",
-        "updated": "2026-08-20T07:33:33-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001687858-26-000003 <b>Size:</b> 19 KB\n",
         "form_type": "4"
       }
     ],
