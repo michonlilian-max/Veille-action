@@ -14,8 +14,13 @@ WATCHLIST = [
 # User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").
 SEC_USER_AGENT = "Veille Actions (contact: michonlilian@yahoo.fr)"
 
-# Nombre de filings récents à récupérer par run pour Form 4 (insiders) et 13F.
-SEC_MAX_FILINGS = 40
+# Fenêtre (en jours) pour considérer un Form 4 comme "récent".
+INSIDER_LOOKBACK_DAYS = 30
+
+# Fenêtre (en jours) pour la recherche de 13F-HR récents. Le 13F a 45 jours
+# de retard légal de dépôt (cf. README) : on ajoute une marge pour ne pas
+# rater les dépôts publiés au dernier moment.
+FILING_13F_LOOKBACK_DAYS = 90
 
 # Fenêtre (en heures) pour considérer une actu ou un post comme "récent".
 FRESHNESS_HOURS = 48

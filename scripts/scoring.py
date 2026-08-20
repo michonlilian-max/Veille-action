@@ -35,21 +35,23 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
     # --- signal 2 : volume de news récentes ---
     news_raw = {t: len(articles) for t, articles in news_data.items()}
 
-    # --- signal 3 : mentions du ticker dans les Form 4 récents (titre du filing) ---
+    # --- signal 3 : Form 4 récents (achats/ventes d'initiés), par ticker ---
+    # collect_edgar.py résout le CIK de chaque société et attribue déjà
+    # chaque dépôt à son ticker (champ "ticker") — plus de recherche de
+    # texte ici, qui donnait de faux positifs sur les tickers courts
+    # (ex: "MU" matchait n'importe quel mot contenant "MU").
     insider_raw = {t: 0 for t in WATCHLIST}
     for filing in insider_filings:
-        title = filing.get("title", "")
-        for t in WATCHLIST:
-            if t in title.upper():
-                insider_raw[t] += 1
+        t = filing.get("ticker")
+        if t in insider_raw:
+            insider_raw[t] += 1
 
-    # --- signal 4 : présence dans un 13F récent (approximatif, basé sur le titre du filing) ---
+    # --- signal 4 : 13F-HR récents mentionnant la société, par ticker ---
     inst_raw = {t: 0 for t in WATCHLIST}
     for filing in filings_13f:
-        title = filing.get("title", "")
-        for t in WATCHLIST:
-            if t in title.upper():
-                inst_raw[t] += 1
+        t = filing.get("ticker")
+        if t in inst_raw:
+            inst_raw[t] += 1
 
     sentiment_n = _normalize(sentiment_raw)
     news_n = _normalize(news_raw)
