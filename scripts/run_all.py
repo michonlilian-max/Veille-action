@@ -17,6 +17,7 @@ from scripts.collect_edgar import collect_insider_trades, collect_13f_filings
 from scripts.collect_news import collect_all_news
 from scripts.collect_stocktwits import collect_all_sentiment
 from scripts.scoring import build_scores
+from scripts.send_email import send_report
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(ROOT, "data", "output.json")
@@ -66,6 +67,9 @@ def main():
     print("Top 5 :")
     for row in scores[:5]:
         print(f"  {row['ticker']}: {row['score']}")
+
+    print("Envoi de l'email récapitulatif (si configuré)...")
+    send_report(output)
 
 
 if __name__ == "__main__":

@@ -65,7 +65,7 @@ Ouvre `config.py` et modifie :
 ### 3. Activer GitHub Actions
 
 Va dans l'onglet **Actions** de ton repo GitHub → active les workflows si
-demandé. Le fichier `.github/workflows/update.yml` est déjà configuré pour
+demandé. Le fichier `.github/workflows/veille.yml` est déjà configuré pour
 tourner automatiquement toutes les 4 heures en semaine.
 
 Pour un premier test immédiat sans attendre : onglet **Actions** →
@@ -89,6 +89,34 @@ python scripts/run_all.py
 Puis ouvre `dashboard/index.html` dans un navigateur (ou lance
 `python -m http.server` depuis la racine du projet et va sur
 `http://localhost:8000/dashboard/`).
+
+### 6. (Optionnel) Recevoir le rapport par email
+
+À chaque run, `scripts/send_email.py` peut envoyer un email récapitulatif
+(score + explication en clair de ce qui pousse chaque ticker) via ta propre
+boîte mail — gratuit, pas de service tiers. Si ce n'est pas configuré, cette
+étape est silencieusement ignorée et le reste du pipeline continue.
+
+**a) Génère un "mot de passe d'application"** (jamais ton mot de passe
+normal) sur ta boîte mail :
+- **Yahoo Mail** : Compte → Sécurité → active la double authentification si
+  besoin, puis "Générer un mot de passe d'application"
+- **Gmail** : myaccount.google.com/apppasswords (nécessite la 2FA activée)
+
+**b) Ajoute 5 secrets** dans **Settings → Secrets and variables → Actions →
+New repository secret** de ton repo GitHub :
+
+| Nom | Exemple |
+|---|---|
+| `SMTP_SERVER` | `smtp.mail.yahoo.com` (Gmail : `smtp.gmail.com`) |
+| `SMTP_PORT` | `465` |
+| `SMTP_USER` | ton adresse email complète |
+| `SMTP_PASSWORD` | le mot de passe d'application généré à l'étape (a) |
+| `EMAIL_TO` | adresse(s) destinataire(s), séparées par des virgules |
+
+⚠️ Ces valeurs vont dans les **secrets GitHub**, jamais dans `config.py`
+(qui est un fichier public du repo). Une fois les 5 secrets ajoutés, le
+prochain run envoie automatiquement l'email — rien d'autre à faire.
 
 ---
 
@@ -126,8 +154,9 @@ Ajuste ces poids librement selon ce que tu veux privilégier.
 
 ## Prochaines améliorations possibles
 
-- Alertes email/Telegram quand un ticker dépasse un seuil de score (gratuit
-  avec GitHub Actions + un webhook)
+- Alertes Telegram en plus de l'email (gratuit avec un webhook)
+- N'envoyer l'email que si un ticker dépasse un seuil de score, plutôt que
+  la watchlist complète à chaque run
 - Distinguer achat vs vente dans les Form 4 (actuellement on compte juste
   les mentions — le détail acheteur/vendeur demande de parser le XML du
   filing individuel, pas juste le flux "getcurrent")
