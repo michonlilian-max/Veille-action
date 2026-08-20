@@ -1,179 +1,179 @@
 {
-  "generated_at": "2026-08-20T12:13:02.595535+00:00",
+  "generated_at": "2026-08-20T12:19:56.523120+00:00",
   "watchlist": [
     {
-      "ticker": "CRCL",
-      "score": 60.0,
-      "detail": {
-        "sentiment_social": 100.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
       "ticker": "SOFI",
-      "score": 60.0,
+      "score": 89.5,
       "detail": {
         "sentiment_social": 100.0,
         "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "insider_buying": 57.9,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     },
     {
-      "ticker": "RKLB",
-      "score": 58.0,
+      "ticker": "CRCL",
+      "score": 87.6,
       "detail": {
-        "sentiment_social": 94.4,
+        "sentiment_social": 94.7,
         "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "AMZN",
-      "score": 50.3,
-      "detail": {
-        "sentiment_social": 72.2,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "TSLA",
-      "score": 50.3,
-      "detail": {
-        "sentiment_social": 72.2,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "INTC",
-      "score": 50.3,
-      "detail": {
-        "sentiment_social": 72.2,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "MSFT",
-      "score": 44.5,
-      "detail": {
-        "sentiment_social": 55.6,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "insider_buying": 57.9,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     },
     {
       "ticker": "AMD",
-      "score": 44.5,
+      "score": 85.3,
       "detail": {
-        "sentiment_social": 55.6,
+        "sentiment_social": 57.9,
         "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "AAPL",
-      "score": 42.5,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "NVDA",
-      "score": 42.5,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "NBIS",
-      "score": 42.5,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "GOOG",
-      "score": 40.5,
-      "detail": {
-        "sentiment_social": 44.4,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
-      },
-      "news_count": 10
-    },
-    {
-      "ticker": "MU",
-      "score": 38.6,
-      "detail": {
-        "sentiment_social": 38.9,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "insider_buying": 100.0,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     },
     {
       "ticker": "META",
-      "score": 36.7,
+      "score": 74.2,
       "detail": {
-        "sentiment_social": 33.3,
+        "sentiment_social": 26.3,
         "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "insider_buying": 100.0,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "GOOG",
+      "score": 71.8,
+      "detail": {
+        "sentiment_social": 42.1,
+        "news_volume": 100.0,
+        "insider_buying": 68.4,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "RKLB",
+      "score": 70.8,
+      "detail": {
+        "sentiment_social": 84.2,
+        "news_volume": 100.0,
+        "insider_buying": 5.3,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "INTC",
+      "score": 69.7,
+      "detail": {
+        "sentiment_social": 73.7,
+        "news_volume": 100.0,
+        "insider_buying": 15.8,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "AMZN",
+      "score": 69.2,
+      "detail": {
+        "sentiment_social": 68.4,
+        "news_volume": 100.0,
+        "insider_buying": 21.1,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "NBIS",
+      "score": 63.7,
+      "detail": {
+        "sentiment_social": 52.6,
+        "news_volume": 100.0,
+        "insider_buying": 21.1,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     },
     {
       "ticker": "GOOGL",
-      "score": 34.7,
+      "score": 62.6,
       "detail": {
-        "sentiment_social": 27.8,
+        "sentiment_social": 15.8,
+        "news_volume": 100.0,
+        "insider_buying": 68.4,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "TSLA",
+      "score": 62.1,
+      "detail": {
+        "sentiment_social": 63.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "MSFT",
+      "score": 60.5,
+      "detail": {
+        "sentiment_social": 47.4,
+        "news_volume": 100.0,
+        "insider_buying": 15.8,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "MU",
+      "score": 60.5,
+      "detail": {
+        "sentiment_social": 47.4,
+        "news_volume": 100.0,
+        "insider_buying": 15.8,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "AAPL",
+      "score": 57.9,
+      "detail": {
+        "sentiment_social": 47.4,
+        "news_volume": 100.0,
+        "insider_buying": 5.3,
+        "institutional_13f": 100.0
+      },
+      "news_count": 10
+    },
+    {
+      "ticker": "NVDA",
+      "score": 57.4,
+      "detail": {
+        "sentiment_social": 42.1,
+        "news_volume": 100.0,
+        "insider_buying": 10.5,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     },
     {
       "ticker": "PLTR",
-      "score": 34.7,
+      "score": 55.8,
       "detail": {
-        "sentiment_social": 27.8,
+        "sentiment_social": 26.3,
         "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 0.0
+        "insider_buying": 26.3,
+        "institutional_13f": 100.0
       },
       "news_count": 10
     }
@@ -181,216 +181,186 @@
   "raw": {
     "insider_filings_sample": [
       {
-        "title": "425 - ASP Isotopes Inc. (0001921865) (Filed by)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1921865/000119312526358082/0001193125-26-358082-index.htm",
-        "updated": "2026-08-20T08:10:03-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001193125-26-358082 <b>Size:</b> 114 KB\n",
-        "form_type": "4"
+        "ticker": "AAPL",
+        "title": "Form 4 — Apple Inc.",
+        "form": "4",
+        "filing_date": "2026-08-13",
+        "accession_number": "0001140361-26-032884"
       },
       {
-        "title": "425 - ENDRA Life Sciences Inc. (0001681682) (Subject)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1681682/000119312526358082/0001193125-26-358082-index.htm",
-        "updated": "2026-08-20T08:10:03-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001193125-26-358082 <b>Size:</b> 114 KB\n",
-        "form_type": "4"
+        "ticker": "MSFT",
+        "title": "Form 4 — MICROSOFT CORP",
+        "form": "4",
+        "filing_date": "2026-08-17",
+        "accession_number": "0000789019-26-000145"
       },
       {
-        "title": "425 - Bleichroeder Acquisition Corp. II (0002088295) (Subject)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2088295/000121390026091899/0001213900-26-091899-index.htm",
-        "updated": "2026-08-20T08:09:45-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001213900-26-091899 <b>Size:</b> 55 KB\n",
-        "form_type": "4"
+        "ticker": "MSFT",
+        "title": "Form 4 — MICROSOFT CORP",
+        "form": "4",
+        "filing_date": "2026-08-06",
+        "accession_number": "0000789019-26-000143"
       },
       {
-        "title": "424B3 - 1st FRANKLIN FINANCIAL CORP (0000038723) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/38723/000162828026058133/0001628280-26-058133-index.htm",
-        "updated": "2026-08-20T08:06:37-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001628280-26-058133 <b>Size:</b> 29 KB\n",
-        "form_type": "4"
+        "ticker": "MSFT",
+        "title": "Form 4 — MICROSOFT CORP",
+        "form": "4",
+        "filing_date": "2026-08-05",
+        "accession_number": "0000789019-26-000141"
       },
       {
-        "title": "424B2 - BANK OF NOVA SCOTIA (0000009631) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/9631/000183988226040726/0001839882-26-040726-index.htm",
-        "updated": "2026-08-20T08:03:48-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001839882-26-040726 <b>Size:</b> 709 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-08-11",
+        "accession_number": "0001193125-26-345383"
       },
       {
-        "title": "424B5 - WF International Ltd. (0001979610) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1979610/000173112226001111/0001731122-26-001111-index.htm",
-        "updated": "2026-08-20T08:01:10-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001731122-26-001111 <b>Size:</b> 623 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-08-06",
+        "accession_number": "0001193125-26-338824"
       },
       {
-        "title": "485APOS - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000375/0001081400-26-000375-index.htm",
-        "updated": "2026-08-20T07:50:22-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000375 <b>Size:</b> 2 MB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-30",
+        "accession_number": "0001193125-26-326284"
       },
       {
-        "title": "485APOS - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000375/0001081400-26-000375-index.htm",
-        "updated": "2026-08-20T07:50:22-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000375 <b>Size:</b> 2 MB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-29",
+        "accession_number": "0001168404-26-000041"
       },
       {
-        "title": "485APOS - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000374/0001081400-26-000374-index.htm",
-        "updated": "2026-08-20T07:47:28-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000374 <b>Size:</b> 1 MB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-29",
+        "accession_number": "0001193125-26-324312"
       },
       {
-        "title": "485APOS - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000374/0001081400-26-000374-index.htm",
-        "updated": "2026-08-20T07:47:28-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000374 <b>Size:</b> 1 MB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321684"
       },
       {
-        "title": "497K - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000373/0001081400-26-000373-index.htm",
-        "updated": "2026-08-20T07:45:28-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000373 <b>Size:</b> 7 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321683"
       },
       {
-        "title": "497K - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000372/0001081400-26-000372-index.htm",
-        "updated": "2026-08-20T07:44:26-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000372 <b>Size:</b> 5 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321678"
       },
       {
-        "title": "4 - Yuan Lipen (0002114024) (Reporting)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2114024/000104617926000543/0001046179-26-000543-index.htm",
-        "updated": "2026-08-20T07:41:41-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001046179-26-000543 <b>Size:</b> 9 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321676"
       },
       {
-        "title": "4 - TAIWAN SEMICONDUCTOR MANUFACTURING CO LTD (0001046179) (Issuer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000543/0001046179-26-000543-index.htm",
-        "updated": "2026-08-20T07:41:41-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001046179-26-000543 <b>Size:</b> 9 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321674"
       },
       {
-        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000371/0001081400-26-000371-index.htm",
-        "updated": "2026-08-20T07:41:34-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000371 <b>Size:</b> 7 KB\n",
-        "form_type": "4"
+        "ticker": "GOOGL",
+        "title": "Form 4 — Alphabet Inc.",
+        "form": "4",
+        "filing_date": "2026-07-28",
+        "accession_number": "0001193125-26-321672"
       }
     ],
     "filings_13f_sample": [
       {
-        "title": "13F-HR - Harvest Fund Management Co., Ltd (0001694126) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1694126/000169412626000007/0001694126-26-000007-index.htm",
-        "updated": "2026-08-19T21:06:11-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001694126-26-000007 <b>Size:</b> 241 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — BERKSHIRE HATHAWAY INC  (BRK-A, BRK-B)  (CIK 0001067983)",
+        "filing_date": "2026-08-14"
       },
       {
-        "title": "13F-HR/A - Pandowealth. LLC (0002143045) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2143045/000175496026000777/0001754960-26-000777-index.htm",
-        "updated": "2026-08-19T19:40:54-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001754960-26-000777 <b>Size:</b> 13 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Capital CS Group, LLC  (CIK 0001830008)",
+        "filing_date": "2026-08-12"
       },
       {
-        "title": "13F-HR/A - CANTOR FITZGERALD, L. P. (0001024896) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1024896/000092963826003170/0000929638-26-003170-index.htm",
-        "updated": "2026-08-19T17:28:04-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000929638-26-003170 <b>Size:</b> 198 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Philadelphia Investment Partners, LLC  (CIK 0002131511)",
+        "filing_date": "2026-08-14"
       },
       {
-        "title": "13F-HR - First Nebraska Trust Co (0002134841) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2134841/000213484126000123/0002134841-26-000123-index.htm",
-        "updated": "2026-08-19T17:21:09-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0002134841-26-000123 <b>Size:</b> 45 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Sagace Wealth Management LLC  (CIK 0002027449)",
+        "filing_date": "2026-08-03"
       },
       {
-        "title": "13F-HR - First Nebraska Trust Co (0002134841) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2134841/000213484126000122/0002134841-26-000122-index.htm",
-        "updated": "2026-08-19T17:02:20-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0002134841-26-000122 <b>Size:</b> 45 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — ZEGA Investments, LLC  (CIK 0002045703)",
+        "filing_date": "2026-07-31"
       },
       {
-        "title": "13F-HR - RESOLUTE WEALTH ADVISOR, INC. (0002005292) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2005292/000142050626001876/0001420506-26-001876-index.htm",
-        "updated": "2026-08-19T16:55:18-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0001420506-26-001876 <b>Size:</b> 44 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — BNP PARIBAS FINANCIAL MARKETS  (CIK 0001166588)",
+        "filing_date": "2026-08-13"
       },
       {
-        "title": "13F-HR - CALIFORNIA FIRST LEASING CORP (0000803016) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/803016/000080301626000008/0000803016-26-000008-index.htm",
-        "updated": "2026-08-19T16:34:49-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000803016-26-000008 <b>Size:</b> 21 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — BSN Capital Partners Ltd  (CIK 0001911876)",
+        "filing_date": "2026-06-30"
       },
       {
-        "title": "13F-HR - Bullish (0001872195) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1872195/000092963826003155/0000929638-26-003155-index.htm",
-        "updated": "2026-08-19T16:17:39-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000929638-26-003155 <b>Size:</b> 5 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — HAZLETT, BURT & WATSON, INC.  (CIK 0000046392)",
+        "filing_date": "2026-07-30"
       },
       {
-        "title": "13F-HR - Bullish (0001872195) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1872195/000092963826003154/0000929638-26-003154-index.htm",
-        "updated": "2026-08-19T16:15:19-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000929638-26-003154 <b>Size:</b> 6 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Granite FO LLC  (CIK 0002034090)",
+        "filing_date": "2026-07-15"
       },
       {
-        "title": "13F-HR - Bullish (0001872195) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1872195/000092963826003153/0000929638-26-003153-index.htm",
-        "updated": "2026-08-19T16:14:08-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000929638-26-003153 <b>Size:</b> 5 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Ascentis Wealth Management, LLC  (CIK 0002032602)",
+        "filing_date": "2026-07-28"
       },
       {
-        "title": "13F-HR - Sustainable Insight Capital Management, LLC (0001580677) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1580677/000158067726000006/0001580677-26-000006-index.htm",
-        "updated": "2026-08-19T15:45:13-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0001580677-26-000006 <b>Size:</b> 50 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Soltis Investment Advisors LLC  (CIK 0001802530)",
+        "filing_date": "2026-07-31"
       },
       {
-        "title": "13F-HR/A - MERCER GLOBAL ADVISORS INC /ADV (0000853758) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/853758/000085375826000016/0000853758-26-000016-index.htm",
-        "updated": "2026-08-19T14:58:09-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000853758-26-000016 <b>Size:</b> 2 MB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — Axiom Investment Management LLC  (CIK 0001513703)",
+        "filing_date": "2026-05-26"
       },
       {
-        "title": "13F-HR/A - Pangea Capital Gestao de Recursos Ltda. (0002119167) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2119167/000139834426014921/0001398344-26-014921-index.htm",
-        "updated": "2026-08-19T14:07:18-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0001398344-26-014921 <b>Size:</b> 8 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — COGENT STRATEGIC WEALTH LLC  (CIK 0002106852)",
+        "filing_date": "2026-08-11"
       },
       {
-        "title": "13F-HR/A - Palo Alto Investors LP (0001306923) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1306923/000207367926000102/0002073679-26-000102-index.htm",
-        "updated": "2026-08-19T14:05:59-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0002073679-26-000102 <b>Size:</b> 31 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — GENDELL JEFFREY L  (CIK 0001056581)",
+        "filing_date": "2026-08-14"
       },
       {
-        "title": "13F-HR/A - STOCK YARDS BANK & TRUST CO (0000741073) (Filer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/741073/000089230326000010/0000892303-26-000010-index.htm",
-        "updated": "2026-08-19T13:29:42-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-19 <b>AccNo:</b> 0000892303-26-000010 <b>Size:</b> 471 KB\n",
-        "form_type": "13F-HR"
+        "ticker": "AAPL",
+        "title": "13F-HR — PING CAPITAL MANAGEMENT, INC.  (CIK 0001804352)",
+        "filing_date": "2026-07-20"
       }
     ]
   },
