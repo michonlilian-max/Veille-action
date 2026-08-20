@@ -26,8 +26,9 @@ from email.mime.text import MIMEText
 SIGNAL_LABELS = {
     "sentiment_social": "le sentiment social (StockTwits)",
     "news_volume": "le volume de news récentes",
-    "insider_buying": "des achats/ventes d'initiés récents (Form 4)",
+    "insider_buying": "de vrais achats d'initiés récents (Form 4)",
     "institutional_13f": "une présence dans un 13F récent",
+    "volume_spike": "un volume d'échange anormal / une forte variation de prix",
 }
 
 
@@ -55,10 +56,18 @@ def build_report_text(output):
         detail = row["detail"]
         lines.append(f"\n{row['ticker']} — score {row['score']}/100")
         lines.append(f"  {_explain(row)}")
+        if row.get("price") is not None:
+            sign = "+" if (row.get("change_pct") or 0) >= 0 else ""
+            lines.append(
+                f"  Prix : {row['price']} $ ({sign}{row.get('change_pct', 0)}% sur 1j, "
+                f"volume x{row.get('volume_ratio', 1)} vs moyenne)"
+            )
         lines.append(
             "  Détail : sentiment {sentiment_social} | news {news_volume} | "
-            "insiders {insider_buying} | 13F {institutional_13f} "
-            "({news_count} articles récents)".format(news_count=row["news_count"], **detail)
+            "insiders {insider_buying} | 13F {institutional_13f} | "
+            "volume {volume_spike} ({news_count} articles récents)".format(
+                news_count=row["news_count"], **detail
+            )
         )
     return "\n".join(lines)
 

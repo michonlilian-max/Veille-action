@@ -52,7 +52,7 @@
   <div id="error" style="display:none;"></div>
   <table id="tbl" style="display:none;">
     <thead>
-      <tr><th>Ticker</th><th>Score</th><th>Sentiment social</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
+      <tr><th>Ticker</th><th>Score</th><th>Prix</th><th>Volume</th><th>Sentiment social</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
     </thead>
     <tbody id="tbody"></tbody>
   </table>
@@ -76,6 +76,13 @@ async function load() {
     data.watchlist.forEach(row => {
       const tr = document.createElement('tr');
       const pct = (row.score / maxScore) * 100;
+      const hasPrice = row.price !== null && row.price !== undefined;
+      const changeColor = (row.change_pct || 0) >= 0 ? 'var(--accent)' : 'var(--accent-low)';
+      const changeSign = (row.change_pct || 0) >= 0 ? '+' : '';
+      const priceCell = hasPrice
+        ? `${row.price} $ <span style="color:${changeColor};">(${changeSign}${row.change_pct}%)</span>`
+        : '—';
+      const volumeCell = hasPrice ? `×${row.volume_ratio}` : '—';
       tr.innerHTML = `
         <td class="ticker">${row.ticker}</td>
         <td>
@@ -84,6 +91,8 @@ async function load() {
             <span class="score-num">${row.score}</span>
           </div>
         </td>
+        <td>${priceCell}</td>
+        <td>${volumeCell}</td>
         <td>${row.detail.sentiment_social}</td>
         <td>${row.news_count}</td>
         <td>${row.detail.insider_buying}</td>

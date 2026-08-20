@@ -33,6 +33,12 @@ relative basé sur des signaux publics — à croiser avec ta propre analyse.
   Ajoute/retire des tickers selon ce qui t'intéresse.
 - **Google News RSS est bruité.** Certains articles retournés seront peu
   pertinents — c'est un compromis du gratuit vs une vraie API news payante.
+- **Yahoo Finance (`yfinance`) est aussi un accès non officiel.** Comme
+  StockTwits, ce n'est pas une API documentée avec garantie de service —
+  c'est un accès gratuit à l'API interne de Yahoo Finance, largement
+  utilisé par la communauté mais qui peut casser sans préavis. Si
+  `collect_price.py` casse, c'est le deuxième endroit à vérifier après
+  `collect_stocktwits.py`.
 
 ---
 
@@ -127,9 +133,11 @@ veille-actions/
 ├── config.py                    # watchlist, pondérations du score, réglages
 ├── requirements.txt
 ├── scripts/
-│   ├── collect_edgar.py         # Form 4 + 13F via SEC EDGAR (gratuit)
+│   ├── collect_edgar.py         # Form 4 (achat/vente réel) + 13F via SEC EDGAR (gratuit)
 │   ├── collect_news.py          # Google News RSS (gratuit)
+│   ├── collect_price.py         # prix + volume via Yahoo Finance (gratuit)
 │   ├── collect_stocktwits.py    # sentiment social (gratuit)
+│   ├── send_email.py            # rapport par email (SMTP, optionnel)
 │   ├── scoring.py               # combine les signaux en un score composite
 │   └── run_all.py               # orchestrateur, point d'entrée
 ├── dashboard/
@@ -145,20 +153,32 @@ veille-actions/
 Chaque signal est normalisé sur 100 (relatif au max de la watchlist du jour),
 puis combiné selon les poids définis dans `config.py` (`WEIGHTS`) :
 
-- 35% sentiment social (ratio bullish/bearish StockTwits, pondéré par le volume)
-- 25% volume de news récentes
-- 25% présence dans des Form 4 récents (achats/ventes d'initiés)
-- 15% présence dans un 13F récent
+- 25% sentiment social (ratio bullish/bearish StockTwits, pondéré par le volume)
+- 20% volume de news récentes
+- 20% vrais achats d'initiés en marché ouvert (Form 4, code de transaction
+  "P" — les ventes et le bruit comme les attributions ou exercices
+  d'options ne comptent plus, cf. `scripts/collect_edgar.py`)
+- 10% présence dans un 13F récent
+- 25% volume d'échange anormal + amplitude de variation du prix (Yahoo
+  Finance, via `yfinance`) — distingue un vrai mouvement de marché d'un pic
+  de bruit social sans rien derrière
 
-Ajuste ces poids librement selon ce que tu veux privilégier.
+Ajuste ces poids librement selon ce que tu veux privilégier (ils doivent
+sommer à 1.0).
 
 ## Prochaines améliorations possibles
 
 - Alertes Telegram en plus de l'email (gratuit avec un webhook)
 - N'envoyer l'email que si un ticker dépasse un seuil de score, plutôt que
   la watchlist complète à chaque run
-- Distinguer achat vs vente dans les Form 4 (actuellement on compte juste
-  les mentions — le détail acheteur/vendeur demande de parser le XML du
-  filing individuel, pas juste le flux "getcurrent")
 - Ajouter Reddit (r/wallstreetbets, r/stocks) comme 2e source de sentiment
   social gratuite, en complément de StockTwits
+- Short interest FINRA (gratuit, officiel, bi-mensuel) comme signal
+  institutionnel supplémentaire
+- Form 8-K (événements matériels) — l'infra CIK est déjà en place dans
+  `collect_edgar.py`, il suffirait d'ajouter un type de formulaire
+- Pondération temporelle (un Form 4 vieux de 29 jours pèse aujourd'hui
+  pareil qu'un d'hier)
+- Backtester le score : croiser `data/history/` avec le cours réel des
+  jours suivants pour vérifier empiriquement que le score précède de vrais
+  mouvements, plutôt que de le supposer

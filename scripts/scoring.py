@@ -20,8 +20,21 @@ def _normalize(values: dict[str, float]) -> dict[str, float]:
     return {k: round((v / max_v) * 100, 1) for k, v in values.items()}
 
 
+def _price_volume_raw(entry):
+    """Score brut basé sur le ratio volume du jour / volume moyen, avec un
+    bonus si le prix bouge fort (dans un sens ou dans l'autre — c'est un
+    signal d'attention, pas un signal directionnel achat/vente)."""
+    if not entry:
+        return 0.0
+    volume_ratio = entry.get("volume_ratio", 1.0)
+    change_pct = abs(entry.get("change_pct", 0.0))
+    return volume_ratio * (1 + min(change_pct, 20) / 20)
+
+
 def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
-                  insider_filings: list[dict], filings_13f: list[dict]) -> list[dict]:
+                  insider_filings: list[dict], filings_13f: list[dict],
+                  price_data: dict[str, dict] | None = None) -> list[dict]:
+    price_data = price_data or {}
 
     # --- signal 1 : sentiment social (ratio bullish, pondéré par le volume) ---
     sentiment_raw = {}
@@ -35,15 +48,18 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
     # --- signal 2 : volume de news récentes ---
     news_raw = {t: len(articles) for t, articles in news_data.items()}
 
-    # --- signal 3 : Form 4 récents (achats/ventes d'initiés), par ticker ---
-    # collect_edgar.py résout le CIK de chaque société et attribue déjà
-    # chaque dépôt à son ticker (champ "ticker") — plus de recherche de
-    # texte ici, qui donnait de faux positifs sur les tickers courts
-    # (ex: "MU" matchait n'importe quel mot contenant "MU").
+    # --- signal 3 : vrais achats d'initiés en marché ouvert (Form 4, code P) ---
+    # collect_edgar.py résout le CIK de chaque société, attribue chaque
+    # dépôt à son ticker (champ "ticker") et classe achat/vente/autre en
+    # parsant le XML individuel (champ "transaction_type"). On ne compte
+    # ici que les vrais achats — les ventes et le bruit (attributions,
+    # exercices d'options, retenues fiscales) ne comptent plus comme un
+    # signal positif, ce qui corrige le mislabeling de l'ancienne version
+    # (qui comptait tout Form 4 confondu sous "insider_buying").
     insider_raw = {t: 0 for t in WATCHLIST}
     for filing in insider_filings:
         t = filing.get("ticker")
-        if t in insider_raw:
+        if t in insider_raw and filing.get("transaction_type") == "buy":
             insider_raw[t] += 1
 
     # --- signal 4 : 13F-HR récents mentionnant la société, par ticker ---
@@ -53,10 +69,14 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
         if t in inst_raw:
             inst_raw[t] += 1
 
+    # --- signal 5 : volume d'échange anormal + amplitude de prix (Yahoo Finance) ---
+    price_raw = {t: _price_volume_raw(price_data.get(t)) for t in WATCHLIST}
+
     sentiment_n = _normalize(sentiment_raw)
     news_n = _normalize(news_raw)
     insider_n = _normalize(insider_raw)
     inst_n = _normalize(inst_raw)
+    price_n = _normalize(price_raw)
 
     results = []
     for t in WATCHLIST:
@@ -65,7 +85,9 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
             + WEIGHTS["news_volume"] * news_n.get(t, 0)
             + WEIGHTS["insider_buying"] * insider_n.get(t, 0)
             + WEIGHTS["institutional_13f"] * inst_n.get(t, 0)
+            + WEIGHTS["volume_spike"] * price_n.get(t, 0)
         )
+        p = price_data.get(t) or {}
         results.append({
             "ticker": t,
             "score": round(score, 1),
@@ -74,8 +96,12 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
                 "news_volume": news_n.get(t, 0),
                 "insider_buying": insider_n.get(t, 0),
                 "institutional_13f": inst_n.get(t, 0),
+                "volume_spike": price_n.get(t, 0),
             },
             "news_count": news_raw.get(t, 0),
+            "price": p.get("price"),
+            "change_pct": p.get("change_pct"),
+            "volume_ratio": p.get("volume_ratio"),
         })
 
     results.sort(key=lambda r: r["score"], reverse=True)

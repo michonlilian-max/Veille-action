@@ -26,12 +26,20 @@ le fichier officiel company_tickers.json, puis :
   la table de positions d'un 13F peut différer légèrement du nom légal
   complet, donc ça peut sous-compter).
 
-Limite connue restante : on compte ici uniquement le nombre de dépôts
-récents, pas le détail achat/vente. Ce détail demanderait de parser le XML
-de chaque Form 4 individuel.
+Chaque Form 4 est en plus classé achat / vente / autre (champ
+"transaction_type") en téléchargeant et parsant son XML individuel :
+le code "P" (achat en marché ouvert) ou "S" (vente en marché ouvert) est
+lu dans <transactionCoding><transactionCode>. Les attributions gratuites,
+exercices d'options et retenues fiscales ("A", "M", "F", "G"...) sont
+classées "other" — ce ne sont pas de vrais signaux d'achat/vente
+volontaire. Le score ne retient ensuite que les vrais achats (cf.
+scoring.py), ce qui corrige un mislabeling : la colonne s'appelle
+"insider_buying" mais comptait avant tout Form 4 confondu, ventes
+comprises.
 """
 import time
 from datetime import datetime, timedelta, timezone
+from xml.etree import ElementTree as ET
 
 import requests
 
@@ -45,8 +53,14 @@ from config import (
 TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
 FULL_TEXT_SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
+FILING_DOC_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accn_nodash}/{doc}"
 
 HEADERS = {"User-Agent": SEC_USER_AGENT}
+
+# Codes de transaction SEC qui comptent comme un vrai achat/vente
+# volontaire en marché ouvert (cf. formulaire officiel Form 4, case 3) :
+BUY_CODES = {"P"}
+SELL_CODES = {"S"}
 
 _company_cache = None
 
@@ -74,11 +88,43 @@ def _get_company(ticker):
     return _load_company_table().get(ticker.upper())
 
 
+def _classify_transaction(cik, accession_number, primary_document):
+    """Télécharge le XML d'un Form 4 individuel et détermine s'il contient
+    un achat ("buy", code P) ou une vente ("sell", code S) en marché
+    ouvert. "other" pour tout le reste (attributions, options, impôts...)
+    ou si le document n'a pas pu être récupéré/parsé."""
+    if not primary_document:
+        return "other"
+    accn_nodash = accession_number.replace("-", "")
+    url = FILING_DOC_URL.format(cik=cik, accn_nodash=accn_nodash, doc=primary_document)
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        root = ET.fromstring(resp.content)
+    except Exception:
+        return "other"
+
+    codes = set()
+    for tx in root.iter("nonDerivativeTransaction"):
+        code_el = tx.find("transactionCoding/transactionCode")
+        if code_el is not None and code_el.text:
+            codes.add(code_el.text.strip())
+
+    if codes & BUY_CODES:
+        return "buy"
+    if codes & SELL_CODES:
+        return "sell"
+    return "other"
+
+
 def collect_insider_trades(watchlist=None):
-    """Form 4 récents (achats/ventes de dirigeants), résolus par CIK.
+    """Form 4 récents (achats/ventes de dirigeants), résolus par CIK, avec
+    classification achat/vente réelle sur chaque dépôt.
 
     Renvoie une liste à plat de dicts, chacun déjà attribué à son ticker
-    (champ "ticker") — pas besoin de re-matcher du texte côté scoring.
+    (champ "ticker") et à un type de transaction (champ "transaction_type" :
+    "buy", "sell" ou "other") — pas besoin de re-matcher du texte côté
+    scoring.
     """
     watchlist = watchlist or WATCHLIST
     cutoff = datetime.now(timezone.utc) - timedelta(days=INSIDER_LOOKBACK_DAYS)
@@ -104,8 +150,9 @@ def collect_insider_trades(watchlist=None):
         forms = recent.get("form", [])
         dates = recent.get("filingDate", [])
         accession_numbers = recent.get("accessionNumber", [])
+        primary_docs = recent.get("primaryDocument", [])
 
-        for form, date_str, accn in zip(forms, dates, accession_numbers):
+        for form, date_str, accn, primary_doc in zip(forms, dates, accession_numbers, primary_docs):
             if form not in ("4", "4/A"):
                 continue
             try:
@@ -114,6 +161,10 @@ def collect_insider_trades(watchlist=None):
                 continue
             if filing_date < cutoff:
                 continue
+
+            transaction_type = _classify_transaction(company["cik"], accn, primary_doc)
+            time.sleep(0.15)  # un fetch par filing individuel, reste raisonnable
+
             results.append(
                 {
                     "ticker": ticker,
@@ -121,6 +172,7 @@ def collect_insider_trades(watchlist=None):
                     "form": form,
                     "filing_date": date_str,
                     "accession_number": accn,
+                    "transaction_type": transaction_type,
                 }
             )
         time.sleep(0.2)  # reste raisonnable vis-à-vis de la SEC
