@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T11:39:08.168442+00:00",
+  "generated_at": "2026-08-20T11:43:28.018464+00:00",
   "watchlist": [
     {
       "ticker": "SOFI",
@@ -13,10 +13,10 @@
       "news_count": 10
     },
     {
-      "ticker": "CRCL",
-      "score": 56.5,
+      "ticker": "RKLB",
+      "score": 58.2,
       "detail": {
-        "sentiment_social": 90.0,
+        "sentiment_social": 95.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -24,7 +24,7 @@
       "news_count": 10
     },
     {
-      "ticker": "RKLB",
+      "ticker": "CRCL",
       "score": 56.5,
       "detail": {
         "sentiment_social": 90.0,
@@ -80,9 +80,9 @@
     },
     {
       "ticker": "TSLA",
-      "score": 46.0,
+      "score": 44.2,
       "detail": {
-        "sentiment_social": 60.0,
+        "sentiment_social": 55.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -102,9 +102,9 @@
     },
     {
       "ticker": "AAPL",
-      "score": 39.0,
+      "score": 40.8,
       "detail": {
-        "sentiment_social": 40.0,
+        "sentiment_social": 45.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -146,9 +146,9 @@
     },
     {
       "ticker": "NBIS",
-      "score": 39.0,
+      "score": 37.2,
       "detail": {
-        "sentiment_social": 40.0,
+        "sentiment_social": 35.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 0.0
@@ -180,6 +180,41 @@
   ],
   "raw": {
     "insider_filings_sample": [
+      {
+        "title": "4 - Yuan Lipen (0002114024) (Reporting)",
+        "link": "https://www.sec.gov/Archives/edgar/data/2114024/000104617926000543/0001046179-26-000543-index.htm",
+        "updated": "2026-08-20T07:41:41-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001046179-26-000543 <b>Size:</b> 9 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "4 - TAIWAN SEMICONDUCTOR MANUFACTURING CO LTD (0001046179) (Issuer)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000543/0001046179-26-000543-index.htm",
+        "updated": "2026-08-20T07:41:41-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001046179-26-000543 <b>Size:</b> 9 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000371/0001081400-26-000371-index.htm",
+        "updated": "2026-08-20T07:41:34-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000371 <b>Size:</b> 7 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000369/0001081400-26-000369-index.htm",
+        "updated": "2026-08-20T07:39:53-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000369 <b>Size:</b> 177 KB\n",
+        "form_type": "4"
+      },
+      {
+        "title": "497 - ALLSPRING FUNDS TRUST (0001081400) (Filer)",
+        "link": "https://www.sec.gov/Archives/edgar/data/1081400/000108140026000367/0001081400-26-000367-index.htm",
+        "updated": "2026-08-20T07:38:03-04:00",
+        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001081400-26-000367 <b>Size:</b> 174 KB\n",
+        "form_type": "4"
+      },
       {
         "title": "4 - Hollar Jason M. (0001687858) (Reporting)",
         "link": "https://www.sec.gov/Archives/edgar/data/1687858/000168785826000003/0001687858-26-000003-index.htm",
@@ -248,41 +283,6 @@
         "link": "https://www.sec.gov/Archives/edgar/data/1084147/000108414726000170/0001084147-26-000170-index.htm",
         "updated": "2026-08-20T07:31:33-04:00",
         "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001084147-26-000170 <b>Size:</b> 9 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - Mason Stephen M (0001786065) (Reporting)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1786065/000178606526000003/0001786065-26-000003-index.htm",
-        "updated": "2026-08-20T07:30:36-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001786065-26-000003 <b>Size:</b> 10 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - CARDINAL HEALTH INC (0000721371) (Issuer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/721371/000178606526000003/0001786065-26-000003-index.htm",
-        "updated": "2026-08-20T07:30:36-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001786065-26-000003 <b>Size:</b> 10 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - WEITZMAN DEBORAH (0001942639) (Reporting)",
-        "link": "https://www.sec.gov/Archives/edgar/data/1942639/000194263926000003/0001942639-26-000003-index.htm",
-        "updated": "2026-08-20T07:30:12-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001942639-26-000003 <b>Size:</b> 8 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - CARDINAL HEALTH INC (0000721371) (Issuer)",
-        "link": "https://www.sec.gov/Archives/edgar/data/721371/000194263926000003/0001942639-26-000003-index.htm",
-        "updated": "2026-08-20T07:30:12-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001942639-26-000003 <b>Size:</b> 8 KB\n",
-        "form_type": "4"
-      },
-      {
-        "title": "4 - Enhanced Holdings LP (0002132854) (Reporting)",
-        "link": "https://www.sec.gov/Archives/edgar/data/2132854/000119312526357979/0001193125-26-357979-index.htm",
-        "updated": "2026-08-20T07:30:04-04:00",
-        "summary": "\n <b>Filed:</b> 2026-08-20 <b>AccNo:</b> 0001193125-26-357979 <b>Size:</b> 17 KB\n",
         "form_type": "4"
       }
     ],
