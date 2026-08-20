@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-20T13:14:58.350503+00:00",
+  "generated_at": "2026-08-20T13:22:21.895959+00:00",
   "watchlist": [
     {
       "ticker": "INTC",
-      "score": 55.8,
+      "score": 56.7,
       "detail": {
-        "sentiment_social": 55.6,
+        "sentiment_social": 61.1,
         "news_volume": 100.0,
         "insider_buying": 100.0,
         "institutional_13f": 100.0,
@@ -20,9 +20,9 @@
     },
     {
       "ticker": "CRCL",
-      "score": 55.5,
+      "score": 54.6,
       "detail": {
-        "sentiment_social": 83.3,
+        "sentiment_social": 77.8,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -37,16 +37,16 @@
     },
     {
       "ticker": "NBIS",
-      "score": 50.0,
+      "score": 48.0,
       "detail": {
-        "sentiment_social": 33.3,
-        "news_volume": 100.0,
+        "sentiment_social": 27.8,
+        "news_volume": 92.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
         "volume_spike": 100.0,
         "sentiment_x": 0.0
       },
-      "news_count": 100,
+      "news_count": 92,
       "price": 223.9,
       "change_pct": -9.87,
       "volume_ratio": 2.06,
@@ -71,9 +71,9 @@
     },
     {
       "ticker": "NVDA",
-      "score": 44.2,
+      "score": 41.7,
       "detail": {
-        "sentiment_social": 100.0,
+        "sentiment_social": 83.3,
         "news_volume": 92.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -87,10 +87,27 @@
       "x_summary": null
     },
     {
-      "ticker": "SOFI",
-      "score": 41.6,
+      "ticker": "AMZN",
+      "score": 40.8,
       "detail": {
-        "sentiment_social": 83.3,
+        "sentiment_social": 66.7,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 28.8,
+        "sentiment_x": 0.0
+      },
+      "news_count": 100,
+      "price": 265.84,
+      "change_pct": 2.46,
+      "volume_ratio": 0.79,
+      "x_summary": null
+    },
+    {
+      "ticker": "SOFI",
+      "score": 40.7,
+      "detail": {
+        "sentiment_social": 77.8,
         "news_volume": 96.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -104,20 +121,37 @@
       "x_summary": null
     },
     {
-      "ticker": "AMZN",
-      "score": 39.9,
+      "ticker": "TSLA",
+      "score": 40.3,
       "detail": {
-        "sentiment_social": 61.1,
+        "sentiment_social": 50.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
-        "volume_spike": 28.8,
+        "volume_spike": 39.0,
         "sentiment_x": 0.0
       },
       "news_count": 100,
-      "price": 265.84,
-      "change_pct": 2.46,
-      "volume_ratio": 0.79,
+      "price": 351.12,
+      "change_pct": 4.23,
+      "volume_ratio": 0.99,
+      "x_summary": null
+    },
+    {
+      "ticker": "PLTR",
+      "score": 39.5,
+      "detail": {
+        "sentiment_social": 55.6,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 30.6,
+        "sentiment_x": 0.0
+      },
+      "news_count": 100,
+      "price": 175.19,
+      "change_pct": 2.13,
+      "volume_ratio": 0.85,
       "x_summary": null
     },
     {
@@ -135,40 +169,6 @@
       "price": 466.42,
       "change_pct": -3.71,
       "volume_ratio": 0.7,
-      "x_summary": null
-    },
-    {
-      "ticker": "TSLA",
-      "score": 38.6,
-      "detail": {
-        "sentiment_social": 38.9,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 39.0,
-        "sentiment_x": 0.0
-      },
-      "news_count": 100,
-      "price": 351.12,
-      "change_pct": 4.23,
-      "volume_ratio": 0.99,
-      "x_summary": null
-    },
-    {
-      "ticker": "PLTR",
-      "score": 38.6,
-      "detail": {
-        "sentiment_social": 50.0,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 30.6,
-        "sentiment_x": 0.0
-      },
-      "news_count": 100,
-      "price": 175.19,
-      "change_pct": 2.13,
-      "volume_ratio": 0.85,
       "x_summary": null
     },
     {
@@ -206,27 +206,27 @@
       "x_summary": null
     },
     {
-      "ticker": "MU",
-      "score": 35.9,
+      "ticker": "GOOG",
+      "score": 35.4,
       "detail": {
-        "sentiment_social": 44.4,
+        "sentiment_social": 38.9,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
-        "volume_spike": 21.2,
+        "volume_spike": 22.6,
         "sentiment_x": 0.0
       },
       "news_count": 100,
-      "price": 937.11,
-      "change_pct": -0.39,
-      "volume_ratio": 0.64,
+      "price": 341.7,
+      "change_pct": 0.12,
+      "volume_ratio": 0.69,
       "x_summary": null
     },
     {
       "ticker": "META",
-      "score": 35.4,
+      "score": 34.6,
       "detail": {
-        "sentiment_social": 27.8,
+        "sentiment_social": 22.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -240,20 +240,20 @@
       "x_summary": null
     },
     {
-      "ticker": "GOOG",
-      "score": 34.5,
+      "ticker": "MU",
+      "score": 34.2,
       "detail": {
         "sentiment_social": 33.3,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
-        "volume_spike": 22.6,
+        "volume_spike": 21.2,
         "sentiment_x": 0.0
       },
       "news_count": 100,
-      "price": 341.7,
-      "change_pct": 0.12,
-      "volume_ratio": 0.69,
+      "price": 937.11,
+      "change_pct": -0.39,
+      "volume_ratio": 0.64,
       "x_summary": null
     },
     {
@@ -474,6 +474,250 @@
         "filing_date": "2026-07-20"
       }
     ],
+    "news_sample": [
+      {
+        "ticker": "AAPL",
+        "title": "What BofA and Morgan Stanley Are Saying About Apple (AAPL) Stock in August - 24/7 Wall St.",
+        "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOOXBiNHhnd0pNdTBWM2xkX0hqY2szbkRjYzNjQlRtYnFGc0dpV3B1UXZQU1RRMlRqOVdKRkhUOE1lZ29pR01NMXZjeVhELU5FbHcxMHctTXAwXzNKalhPVFBQZmx6RVE4bjBqTVBZd0xHWFFVT1dSMzJMa1VBYzJweWNyMm5lM0NqTUUzZFpNell4YnpqdDJod0tKX3RmVEZnNXhTMHc1bm14a2dyRUpvNjloQ1IwRkE?oc=5",
+        "published": "Tue, 18 Aug 2026 13:00:11 GMT",
+        "source": "24/7 Wall St."
+      },
+      {
+        "ticker": "AAPL",
+        "title": "Apple Stock: iPhone's Winning Strategy Could Outlast The AI Wars (NASDAQ:AAPL) - Seeking Alpha",
+        "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPNnpmSU9MbW5aTkRVRlFIdDlSaG9JLTRFZXZ1MDc2X2FyQ2hyUWJUNU96dFZOZ2VsbWlTUFNsYUE3emc2cXdVdDBnS0FXSmdpOFF3QWt1SzEwajdIamhHVDV1ZWVhVVJheHNHeHNYc0o2c0owbHEyZTZITE96OWtFaTdaYTNodURNOXhJNEhFdTZDQ2x4WF9RZUlnVHpMdw?oc=5",
+        "published": "Thu, 20 Aug 2026 13:00:00 GMT",
+        "source": "Seeking Alpha"
+      },
+      {
+        "ticker": "MSFT",
+        "title": "Microsoft AI Chips Mean Big Efficiency Gains; Microsoft Stock (NASDAQ:MSFT) Also Gains - TipRanks",
+        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOY1hRQnI3Qm9ad3JoaWs3ZF9LRkVoWFdrOTI5V3JCckt4b0k3d3pRMk9rS0hrbE1hWS1NWmgxOE5GTzFBQlN2bHVQTE1nUXhJblZHUGZzb1NPYlB4U3J4TnBTOHNaN3kwTlFXYXdiaVdWNjZBT3MySVVmSTUybzF1QUhzNG90OGxoV25xTTdJRHV2WUstZTljSEJlOGNQZnVmaHRXajZ5MGxXZG5hTlBtMkR3?oc=5",
+        "published": "Wed, 19 Aug 2026 16:39:59 GMT",
+        "source": "TipRanks"
+      },
+      {
+        "ticker": "MSFT",
+        "title": "Microsoft Corporation $MSFT Stock Position Boosted by Hamilton Wealth LLC - MarketBeat",
+        "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSm8wVUY0Y1ZwcEh6ZmxOcktGbW9WSFYzVlFTVHpOaGQ5WWZfbXdQb0NpeXRCTWRYZjlRc3JBNDhpOENzM0tFZTB6ZVJlNjkxTzl1UDBNT0Q2T1YwRklZVXZaUEdMemNCNnRvN3JGelZOTm1DSE1EanlrLVBHb1VsNjlLS3REcnM2R1p3NWt3V0QzRnJNN0dEYk0yc1FqXy1rRkRDNTBDYm9Tak5IZkVaUVlFS0Vub2tMNDlPZmtEN1VRaHRFZW92QWtFUml6QQ?oc=5",
+        "published": "Wed, 19 Aug 2026 09:17:37 GMT",
+        "source": "MarketBeat"
+      },
+      {
+        "ticker": "GOOGL",
+        "title": "Alphabet Stock Surged When Its AI Spending Found Customers - Trefis",
+        "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOdnp1aWNFWG44aVVkazJPR1JJY2lBcTJrTmFENWxFSWxCNWRULTRteFdfcDhOM1YySjdQVGhMMExobHVVa21yRUo3enFBLVJMUVRiVXV0TFVJM3o3S00yNDFhNXp0eXRzRmJDb1I2YW1LdFpOWXNuQzN3c2lvYXlTSWZidVlCNmR0QjBkT1lnV0xXdjdiRjdObzRXNGFhWnNHMzRKbWVuTnlKVlVJb0N3VV82MHVwZlltc1pONg?oc=5",
+        "published": "Wed, 19 Aug 2026 15:24:43 GMT",
+        "source": "Trefis"
+      },
+      {
+        "ticker": "GOOGL",
+        "title": "Zacks Investment Ideas feature highlights: NVDA, GOOGL, AMZN, INTC and others - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOTnBhc0RBRzlIakZLUDlBZXZObUg4X0RsazJvYmxYd0hrM01wVFZoQzZRaFdoYUtNamNPU29BOU5RVnZwMi1EaUxFWEgwWF9UVWVicDQ3SURZX1NocFpGT29YR1RHMko1ZVM4bDJLQmNqbDNaUzBPTjV3Qk01Q2M2VUVla1diS1FLTFhrYzNmVmh5bzY0Q3JYY3FHRGdpa2hIN045LVJhUmwydw?oc=5",
+        "published": "Tue, 18 Aug 2026 06:47:00 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "GOOG",
+        "title": "Alphabet Stock: A Berkshire Hathaway-Style Compounder Hiding In Plain Sight (NASDAQ:GOOG) - Seeking Alpha",
+        "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOT2NpRFZ4V251OHEwT1ZKNHljSG56VzhRa3N5UEt5bS01ZHhKUXZ0WlZ4bW1uMU5teUpQNFpPdktuZDdQOHBHVGVDaVBUb0dWME9BUXlFc3dLcy03NEVhbDZMUHlBcHNyNjBxOXZMdFo1NUJkS2ltODMxSmlicmJLbVdHbFZtZVpoSmRvaHpuZVU2Mi02cC1yUWd5NHZlSUt1WVBxd0lrcW5QNHFqRWNMQ043QkFNQQ?oc=5",
+        "published": "Wed, 19 Aug 2026 20:58:21 GMT",
+        "source": "Seeking Alpha"
+      },
+      {
+        "ticker": "GOOG",
+        "title": "Marvell Gives Client Google Right to Buy $12.2 Billion Stock - Bloomberg.com",
+        "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNWUthaHBDWVRmVFNLMTQwS1RyYnlmelc4T3hNSWp0cnVKemhpd19UcklodEIyMXA1ZjRlLXlnZ3cybzJleVJYU2NSMUFzTDloc0Fkc0NSRjVSZ0g3X2ZxLUdkU0FaRVVEU3luRENwSGhjc0dqZEF0VlZZTkpvRGhIaXVxdDJYR0NOVUNpYk5MMjhTOWRRV0otbHd4OEticDI5c2hCb2FGalNCWHhFSzkwMlZBNA?oc=5",
+        "published": "Wed, 19 Aug 2026 19:56:34 GMT",
+        "source": "Bloomberg.com"
+      },
+      {
+        "ticker": "AMZN",
+        "title": "Prediction: This Will Be Amazon's Stock Price by the End of 2026 - The Motley Fool",
+        "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSE9VNW5jU0Y1M1FlbWdTNW1pM2hUc3lrT0lmdzl1LTRnczZkWUg0RWhLNDFDWnBPdFdrYTgyVWI0aFlBb2ZlMmxtZTA1ODhDYllvaWk2bVlob0FNZ2hETDNSdVRuRkowM09kMjdEdTd0YldDUjRfSlZPRnJaZnhzd19wTEVhU1p1TklBWHNR?oc=5",
+        "published": "Wed, 19 Aug 2026 19:33:00 GMT",
+        "source": "The Motley Fool"
+      },
+      {
+        "ticker": "AMZN",
+        "title": "Amazon Stock Rises as AWS Growth Reclaims Attention - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxONDNrQkRBaS03aHo3blF2MGVPR2IyY18zUXVFb0xhZzRRWlB0UWxiYUdqc0FMeXNzWG9ETnA4Mnd2RjZZQU0wdUc4Ukg2djc4OE5NZkduQmJISVUxQkFLY19SWDNjZldfVDdxTllNRG5nMDdiVG1zQklMcGZ3dHFia3VlV19nZzg3MXAyMjZndWV5SExjeGxNaFpn?oc=5",
+        "published": "Wed, 19 Aug 2026 17:46:24 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "NVDA",
+        "title": "Is Nvidia stock too cheap right now? - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBpei1WTHRMaEJkR2NyQkdJUXYydzZ4SklzSUNnZUh3Nl9KVGtkbXFwTUwzNnZrQVE3RFlkdDA2RWdXNGZwN0YxLVlEQXA4eGRqdnA5RDVfWk41YU9vc09RVWxxR0psaVZVVl9lTW5CcTV0OHNEejNWeXRLUUF5UQ?oc=5",
+        "published": "Wed, 19 Aug 2026 14:40:36 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "NVDA",
+        "title": "Down 50% in 2026, This Cryptocurrency Stock Has a Better Shot Than Nvidia to 10x in 10 Years - The Globe and Mail",
+        "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxNb1N2NHhRcTJ0U0pIclZmeXFaU1MyVExGd3FIUVRPMUNiRXN2cVFLQTRrc2lOc3ROUjNHMUFBRmEzNDd3QjVNS3VQVkIxSGxMblJfSFVBbG9rdkFLemxqSjVZYUFFeHR4bkxPRWlzQ0RtaHBPRUgzNkp1NzlfbnkzTGR2aVluQ3lMNFRhd1lEV0VsQjVFZWE0VmJFQURzVk5JZ2dxM3FVT002Ny0wNUtlNjg0M3pwb0lMaDMwY0ltZHFZa3pLbThxQnVZYzl2aW04ajJZUFQ5Z2FQb1lHVmdoeDQ4Zi1YZ1NFUWFCT0lLMlk3WmhIRUdIdHB4VERYa2xoLU9yejJn?oc=5",
+        "published": "Thu, 20 Aug 2026 11:03:59 GMT",
+        "source": "The Globe and Mail"
+      },
+      {
+        "ticker": "TSLA",
+        "title": "Tesla Stock Revs Up On Cybercab Buzz: Analyst Sees ‘Good Entry Point’ As Robotaxis Drive 30% Of Bull Case - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPcGc3NXg4T3hydWNUVjNaVVJ4Y2ljcHVMRzVRVGpLWDlHekZhUTNQeXd4a0NtQlJZVklhWnZTYnNpS1NFOUFYeEJLUkxDTndkcnplNXlCNFdqYks1VlpoRDVtMzFKN3NLdi1vNVZ2Q3FhV3ZlSndqYnBHOUJuVzBrRTJOMFpQZkhqbEQ1Ql93T2tFWHRnMW81cDBiSQ?oc=5",
+        "published": "Thu, 20 Aug 2026 05:16:00 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "TSLA",
+        "title": "U.S. Stock Market Moves | Tesla (TSLA.US) Rises Nearly 3%, May Launch CyberCab to the Public by Late August - Moomoo",
+        "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNQ19wRUIwcVdHMUhQOFV0Z3RiQ1ZidGowQlZCU0RWZ29rZ2w5YWZMY21rcVF3eXVBRzl1cmpSQ0tHWVpFUm1JWUtBeEk5bVAyS1ZzNzFQYnA5NFhtb055a1dSZ215U3dhbGx1OHF3dTV3WEg1bTNLd05yZXNFbDZmMmF6cC1jSHpBSTZ0SjYwNUJBVU5femU0a0hnUQ?oc=5",
+        "published": "Wed, 19 Aug 2026 15:28:50 GMT",
+        "source": "Moomoo"
+      },
+      {
+        "ticker": "META",
+        "title": "Meta Platforms (META) Heads To Trial, Is The Stock 44% Undervalued? - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaDcwTG8xV2czdTMyMzQ1OTJ4M185LXpPYlFvQkdxSlNsS1NBVHdsMVM1VE94NDdoN3NPb1h0NUNTZEJBdXBZdFNJcGw0QTdrZHBYcjBZU1FQeVMtSmZMajhrRkNTNEQ0djdUa2V2MVJ1a1NxRHg3ZExhY0Viemgwekh2Smw5MV9aTGZ0R0xJR0RER3kzd1I3Y2JadGY?oc=5",
+        "published": "Tue, 18 Aug 2026 18:16:43 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "META",
+        "title": "Tech stocks today: OpenAI's growth disappoints, chip stock slide continues - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPQm1BZzQyQVQxY0puR3FWZTFhRko3Rmk3Zk5KYkIta2g4SGVfUHRlSXpHSzNwc0tES1lSYm5DOWJ4NkQ2RUdaNDcya2F4TGIwR3BBLU1DaXJIZ1V1ekx5SDEwbU4xd2J1VG9ZWU5Wa1JSam1SeVhGVjlVTm5SWDM3TUxIWk9fWDltTGhCajhibkdFQXByV2tONUZhMzJiaFZVWFBvTlM3TFRJd1hkdVY2Mmc5enNYNElJdUxXc2pPZXAyRFJCMzlR?oc=5",
+        "published": "Wed, 19 Aug 2026 20:13:34 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "AMD",
+        "title": "Where Will AMD Stock Be in 5 Years? - The Motley Fool",
+        "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNdkJGNHdza2VlbzdVdmJqZEVPSVJNTS1HWVkxRDlfSy1neEpLT1RGMzRFS01qbk5FZ2MwRG0tNVhuOHgxSmI4NXdwWVA4aTd5SzVBQjlCRTVLd2ZSLTZFemdWbmJQaUFkcExQWVhsUlJJSlNWQzFlakdCNzZYTzJMQjU4cw?oc=5",
+        "published": "Wed, 19 Aug 2026 14:46:00 GMT",
+        "source": "The Motley Fool"
+      },
+      {
+        "ticker": "AMD",
+        "title": "Earn 17% On AMD Stock Now, For Capping Your Upside At 24% - Trefis",
+        "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNcHgwYS1yc2tFZnVmNHM2TUJmT2REUUVscExJOEx3UUtScHV5MVoyQkFkQ1RYS3Q1c2VxQVVmV2lzd1RjX3FpZ1lHVEVrUi1SRW1DU09yS21jdWI3RGg1anpnWDRLNWV6azVFUHlVS0ZiV3JXczNBOGhRUENpS3VJRkYyWlR0YzlXU0NIclo1MVZ6VzRHYzVkeUNpRGhDSHBleGNXYTQtZ1VUWWk3bEVaWU9QRzg0bEtlTk5pbVFGU2Z3UQ?oc=5",
+        "published": "Thu, 20 Aug 2026 11:41:42 GMT",
+        "source": "Trefis"
+      },
+      {
+        "ticker": "PLTR",
+        "title": "SA analyst upgrades/downgrades: GOOG, CRWD, PLTR, PYPL - Seeking Alpha",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQM1Q5MFFCN2hPRm1YdGZ2d0VWSUtGcDFkTExWaWlXamRVLVIyUmEzb1NFbGlOaTBya3pDM1pDT2htVnFGS0l2UjF2cFRnZksxSWVFQ3lmWU9KQXA3OWdhaEdKSG15b2ExMDAzY012OUhmSFNmNTk0WXNxNnN2SWQ5cU4xOGtvcnF0MVdCVlVMcHE1Zw?oc=5",
+        "published": "Tue, 18 Aug 2026 14:51:18 GMT",
+        "source": "Seeking Alpha"
+      },
+      {
+        "ticker": "PLTR",
+        "title": "Is Palantir Technologies (PLTR) Overvalued As Revenue Growth And 2026 Outlook Jump? - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPeHR1OVhsdmN6N0h5ZDctNG1zUVBDOWIwY3pSTWl2ZWpMR0xuSWJaODB2SEhwNjlTS25lbkxkaGxybUdCSUhYMFJ6NkptVXlSU0VIeV9sQk1XSXQ3RndIczJkeFdQOUp1c1FPQ3JxQVVPSG5GSTVQR2drZmdfVU1WcWlxdDVOS2lTd202eFZuaWY0NTZrMVNiaGx6M2w0Snlad3J4ZC0xd3BCZFNMdUxn?oc=5",
+        "published": "Wed, 19 Aug 2026 18:12:18 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "MU",
+        "title": "Micron, Other Chip Stocks Drop During Dog Days Of Summer - Investor's Business Daily",
+        "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQZDktb3NyLXhUYmdxRUJyNkxTVlVsOFFpaTdaeUNfYWNJeXlGUUxUclFlcjRib2JVbnk4c3cybVBTbnY1cUdQYnNWMEFidjZZM0pYNWlrRUJZRk8yd2FFMVVPMW5rQnRua0wyNXZXblFFbnFMODNLYk0tZlVvekVIOFN2MmR1UGcyTjY2TjlmY3p1aDQ?oc=5",
+        "published": "Tue, 18 Aug 2026 21:11:00 GMT",
+        "source": "Investor's Business Daily"
+      },
+      {
+        "ticker": "MU",
+        "title": "AI chip stocks were riding high. Here’s why Micron and others are now pulling back. - MarketWatch",
+        "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNUUtRZHpzYWlLVlMycEUyWEdtQ3ZiQ3RpbldFUjRYa25lTm5raVhIczhNWGVxVm5UazlsLXhjM1lXRjVqV3lzREdpVkpUb3hzZHJYMW1tUk96SU5IMlcxaUVPamd1VlVJdEcxVjl3UkxRMC1DdUxCNkRXWWlyZi1ob1NjQTNiRV9Ga0Q0SHppYU9PQXB5ODM1SjJSaDIxOG83T0lPcnFvT1JzZDV5ZHpKcG9RU1JiT0JrRmhoOEZVY0g?oc=5",
+        "published": "Tue, 18 Aug 2026 21:08:00 GMT",
+        "source": "MarketWatch"
+      },
+      {
+        "ticker": "INTC",
+        "title": "Billionaire Masayoshi Son Put 66% of His $18 Billion US Portfolio Into 1 Stock - 24/7 Wall St.",
+        "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPZzRZYVZmUVdWMzIzbEU3UUt6bU9tekNSRUtFV25nQ3pKU295VHF4RTBiOVJWRTNNSVM2X09xYi1fME1OOHZwRzVlblhzSTIzRFFqWjA3R1h0UkF1VFJHMVRRTm1uUXl2Vm9zYzZ3RnJZUDZPUEswcHEzeTlSMmhCeEgxQ1RfQmdyZUNkY3VUQVVvV3I2aFlCOGF3d1g1c0RHVENEQWdTd1plTloyaTZ0UHp1cm5Hc3VLdnhkNA?oc=5",
+        "published": "Mon, 17 Aug 2026 19:54:24 GMT",
+        "source": "24/7 Wall St."
+      },
+      {
+        "ticker": "INTC",
+        "title": "Intel (NASDAQ:INTC) Stock Drops Below Its $95 Offering Price: Why INTC Is Falling Again - Stocks Down Under",
+        "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5NRmY2bDFPVnFqemxqWEV2bFVVYm5qUTNFcW5xWGJIY0VpUGtPSUl5ODVwZ0NmdGZDczZ0cFp3N1p5UlUwUGtpUUhwLW1NVmstV0lpclh6Q0tteHI4LWNMRnlKLWNwcGotbTJjS2VBamxjZw?oc=5",
+        "published": "Wed, 19 Aug 2026 19:30:03 GMT",
+        "source": "Stocks Down Under"
+      },
+      {
+        "ticker": "NBIS",
+        "title": "Nebius (NASDAQ:NBIS) Stock Crashes 10% After $4.5 Billion Debt Raise: Is AI’s Debt Problem Catching Up? - Stocks Down Under",
+        "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1mN2FNWkJrSmE4eEtpNW16Q2wwWGRoVWRmREVxdFVDbnlkcUZpM3IyNmNwV3dTb0NWelJJTlRVekhKalpBcF9mc3pwaU51YlhLWFhZRmpTMGhGZDFWMHdfclhUSE9EOWZNbWtB?oc=5",
+        "published": "Wed, 19 Aug 2026 20:29:44 GMT",
+        "source": "Stocks Down Under"
+      },
+      {
+        "ticker": "NBIS",
+        "title": "Nebius: Strong Buy As AI Cloud Growth Explodes (NASDAQ:NBIS) - Seeking Alpha",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOQjlhQy03WU0xUTJsNE16V0dEazJRbExZOFlPcXhYTmM4Y01MQWlyZlB6ZkRnSGZpSTVTWnczdTdWLTJKaDVjXy04Nm0wTHVHa0ZMWE1IYjVXUFo5SXk0MGl4ZzlaYlM5dFBwRzBERGRNaGJSem5OMnBRUGFLVkxocHNZcXY2Z25NZnNoN0dXRQ?oc=5",
+        "published": "Tue, 18 Aug 2026 19:54:19 GMT",
+        "source": "Seeking Alpha"
+      },
+      {
+        "ticker": "CRCL",
+        "title": "COIN, CRCL Stocks Have ‘Outsized’ Bitcoin Recovery Leverage, Says William Blair - Stocktwits",
+        "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOUlQ1aXRpbTdNcEtuQnFydlp5S3JHZmc3b1RmWEktd1IzcERtTnZZdkpFMHlONzhsMjBXRXA2UmZCSURsLS1jWFpDVVFIalhLcW8wbzljdGRteHhfc1BGTHJPTWlsRHE3MjdUaGdUdkFqdlFjT3llV1RyU2tqTTVpbkR1NFAyczV3aXZ3Rm1ndFh0OWE1Z1RpdFdTaTdRSHFsU3dTRXlvX3huU3Z3ZWs0a2pKSi1OdUpTMnJNN2ttYks2RFRlUkVUVVdHQi1hZVU?oc=5",
+        "published": "Thu, 20 Aug 2026 01:07:57 GMT",
+        "source": "Stocktwits"
+      },
+      {
+        "ticker": "CRCL",
+        "title": "Why Is Circle Stock Surging Thursday? - Benzinga",
+        "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQc3Z5b1MzRklWd3ZoTmFzSjdlMWJMeDRWLTNaNnpSaGVRdjlsdU1acl9UZWZvMENlckNqbncydWtJM244NE5vUmRfTHRobjlfc2l2cGI4WEJuZkRUSjUxSU5wVmlRODNWQnREMGtHNkhQVndVZWZFQkp5eGloN3JsUEZyMHJVdVVyMWdtVjUtUmpRamFwWFdpdDM2WFZ4QQ?oc=5",
+        "published": "Thu, 20 Aug 2026 10:56:55 GMT",
+        "source": "Benzinga"
+      },
+      {
+        "ticker": "SOFI",
+        "title": "Why Is SoFi Stock Surging on Wednesday? - Benzinga",
+        "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQcU83WWw2NVhEVndnZWFOUWZ6bHJNb3RjbUdPb1VhOUtfUzhOSmJjaHZ5S0lmSHMzcUd4OHVNSFA3NkRyQ0ZYSEtjb2pLY1NZUkJwZGJvYXo4MTcxTTNTSE53LTg5d0Z4bXVnUlU1N2hpck80VnRSU2pXbXo2TGhaakVHX2FpS2QzaXlKY3QtcVRqMjZCWVNXbDRSdFJZdlRf?oc=5",
+        "published": "Wed, 19 Aug 2026 15:43:00 GMT",
+        "source": "Benzinga"
+      },
+      {
+        "ticker": "SOFI",
+        "title": "SoFi Stock Took Its Lumps; Play a Rebound With This ETF - ETF Database",
+        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNZ0M1amlBZ2NoRjJCWkpITlVyZFFOZHpsTGstekZTdjd4SjF6THAwTnBVNHhpYThkamRjWmF0XzhGMVY5clV6TkVJRHZKOGdpMG9fM3M2ZHR2QUpZY25Yd3gtUUhNU2JNenliclRfSDB6YXVjR282b09IZnllNmo5WUNvbklucjRKS3c?oc=5",
+        "published": "Wed, 19 Aug 2026 14:49:13 GMT",
+        "source": "ETF Database"
+      },
+      {
+        "ticker": "RKLB",
+        "title": "RKLB Stock Rises Overnight After Cathie Wood’s ARK Loads Up — CFO Discloses $2.5M Share Gift Amid Space Force Wins - Yahoo Finance",
+        "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQT3dudlhlRngtcWplSzJZdThkQktVRVRtMXNxN09TSXRiRUs2SlEwVVowT2NkV25lczAyd1BSYl9TWU9ON0lLcnMzaGRzcC1Lc3lQcWExREhSdTFhZWhYYWkxSjE5blVIVFZfNjN1N2FnaER3a3dZUWVIMkc2LVdWUGdSR0huSW9kNzlHT3hEakFtMlVVMER4bUg5cGF3QXM?oc=5",
+        "published": "Wed, 19 Aug 2026 01:48:00 GMT",
+        "source": "Yahoo Finance"
+      },
+      {
+        "ticker": "RKLB",
+        "title": "Rocket Lab: The Math Doesn't Work - Seeking Alpha",
+        "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE05RXNXRTR2cXNSUlZ6Mjk5aGFSVzBGVFoyNHpZajN6Q2VmcmUwcEdLckJnQV9lN1pXWEUyWkM1enh1dkJlR0xJenBtblcxTkJOTW52S2hyOXRNQTBOMlRSVG9jVHd1N3pKNnU5dGpQN3dGb0Q0UnpTYTBLamc?oc=5",
+        "published": "Wed, 19 Aug 2026 13:52:19 GMT",
+        "source": "Seeking Alpha"
+      }
+    ],
+    "news_count_by_ticker": {
+      "AAPL": 100,
+      "MSFT": 100,
+      "GOOGL": 100,
+      "GOOG": 100,
+      "AMZN": 100,
+      "NVDA": 92,
+      "TSLA": 100,
+      "META": 100,
+      "AMD": 100,
+      "PLTR": 100,
+      "MU": 100,
+      "INTC": 100,
+      "NBIS": 92,
+      "CRCL": 100,
+      "SOFI": 96,
+      "RKLB": 100
+    },
     "price_data": {
       "AAPL": {
         "ticker": "AAPL",
