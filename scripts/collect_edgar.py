@@ -102,11 +102,20 @@ def _classify_transaction(cik, accession_number, primary_document):
     ouvert. "other" pour tout le reste (attributions, options, impôts...)
     ou si le document n'a pas pu être récupéré/parsé (avec log de
     l'erreur, pour distinguer un vrai échec réseau/parsing d'un filing qui
-    ne contient légitimement aucun code P/S)."""
+    ne contient légitimement aucun code P/S).
+
+    Le champ "primaryDocument" de submissions.json référence parfois le
+    document sous un sous-dossier "xslF345X06/" — c'est la version HTML
+    rendue par la SEC pour affichage navigateur (XSLT appliqué), pas le
+    XML brut, même si le nom de fichier finit en .xml. Le vrai XML existe
+    à la racine du dossier de dépôt sous le même nom de fichier — on ne
+    garde donc que le nom de fichier, sans le sous-dossier.
+    """
     if not primary_document:
         return "other"
     accn_nodash = accession_number.replace("-", "")
-    url = FILING_DOC_URL.format(cik=cik, accn_nodash=accn_nodash, doc=primary_document)
+    doc_filename = primary_document.rsplit("/", 1)[-1]
+    url = FILING_DOC_URL.format(cik=cik, accn_nodash=accn_nodash, doc=doc_filename)
     resp = None
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
