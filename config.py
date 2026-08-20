@@ -7,8 +7,23 @@ Modifie WATCHLIST pour suivre les tickers qui t'intéressent.
 # découverte "trending" fiable en accès gratuit -> on part d'une liste
 # définie, complétée par ce qui ressort des news).
 WATCHLIST = [
-    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "TSLA", "META",
-    "AMD", "PLTR", "MU", "INTC", "NBIS", "CRCL", "SOFI", "RKLB",
+    # Tech / IA (déjà présents à l'origine)
+    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "PLTR", "NBIS",
+    "CRCL", "SOFI", "RKLB",
+    # Semi-conducteurs
+    "NVDA", "AMD", "MU", "INTC", "TSM", "AVGO", "ARM",
+    # Électronique
+    "TXN", "APH",
+    # Technologie (logiciel/cloud)
+    "ORCL", "CRM",
+    # Intelligence artificielle
+    "SMCI", "AI",
+    # Biotechnologie
+    "MRNA", "VRTX", "REGN",
+    # Énergie
+    "XOM", "CVX", "NEE",
+    # Automobile / mobilité (déjà présent à l'origine)
+    "TSLA",
 ]
 
 # User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").
