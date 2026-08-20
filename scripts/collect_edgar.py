@@ -107,12 +107,19 @@ def _classify_transaction(cik, accession_number, primary_document):
         return "other"
     accn_nodash = accession_number.replace("-", "")
     url = FILING_DOC_URL.format(cik=cik, accn_nodash=accn_nodash, doc=primary_document)
+    resp = None
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
         resp.raise_for_status()
         root = ET.fromstring(resp.content)
     except Exception as e:
-        print(f"[collect_edgar] Form 4 XML {url} : erreur ({e})")
+        # Si resp existe, on logue le tout début du corps de la réponse :
+        # une erreur de parsing identique (même ligne/colonne) sur des
+        # dizaines de filings différents sent la page d'erreur générique
+        # (limite de débit SEC) plutôt qu'un vrai XML mal formé filing par
+        # filing — cet extrait permet de confirmer sans deviner.
+        snippet = resp.text[:200].replace("\n", " ") if resp is not None else "(pas de réponse HTTP)"
+        print(f"[collect_edgar] Form 4 XML {url} : erreur ({e}) — début réponse : {snippet!r}")
         return "other"
 
     # Recherche par nom local (sans namespace), et pas par chemin
@@ -179,7 +186,7 @@ def collect_insider_trades(watchlist=None):
                 continue
 
             transaction_type = _classify_transaction(company["cik"], accn, primary_doc)
-            time.sleep(0.15)  # un fetch par filing individuel, reste raisonnable
+            time.sleep(0.4)  # un fetch par filing individuel — plus espacé pour rester large
 
             results.append(
                 {
