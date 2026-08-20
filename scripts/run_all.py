@@ -48,6 +48,13 @@ def main():
         sentiment_data, news_data, insider_filings, filings_13f, price_data, x_sentiment_data
     )
 
+    # Échantillon de vrais articles, 2 par ticker sur toute la watchlist (pas
+    # juste les 15 premiers d'un seul ticker) : sert de preuve vérifiable que
+    # la collecte a bien ramené du contenu réel, pas juste un compteur.
+    news_sample = []
+    for ticker, articles in news_data.items():
+        news_sample.extend(articles[:2])
+
     timestamp = datetime.now(timezone.utc).isoformat()
     output = {
         "generated_at": timestamp,
@@ -55,6 +62,8 @@ def main():
         "raw": {
             "insider_filings_sample": insider_filings[:15],
             "filings_13f_sample": filings_13f[:15],
+            "news_sample": news_sample,
+            "news_count_by_ticker": {t: len(a) for t, a in news_data.items()},
             "price_data": price_data,
             "x_sentiment_data": x_sentiment_data,
         },
