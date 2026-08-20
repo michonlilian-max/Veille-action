@@ -11,12 +11,12 @@ import requests
 import feedparser
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import WATCHLIST
+from config import NEWS_MAX_ITEMS, WATCHLIST
 
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
 
 
-def collect_news_for_ticker(ticker: str, max_items: int = 10) -> list[dict]:
+def collect_news_for_ticker(ticker: str, max_items: int = NEWS_MAX_ITEMS) -> list[dict]:
     params = {
         "q": f"{ticker} stock",
         "hl": "en-US",
