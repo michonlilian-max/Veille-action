@@ -1,0 +1,64 @@
+name: Mise à jour de la veille
+
+on:
+  schedule:
+    # Toutes les 4 heures, du lundi au vendredi (heure UTC)
+    - cron: "0 */4 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancer la collecte et le calcul des scores
+        run: python scripts/run_all.py
+
+      - name: Committer les nouvelles données
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "Mise à jour automatique de la veille [skip ci]"
+          git push
+
+      - name: Préparer le dossier à publier sur Pages
+        run: |
+          mkdir -p _site/data
+          cp -r dashboard/. _site/
+          cp data/output.json _site/data/output.json
+
+      - name: Uploader l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
