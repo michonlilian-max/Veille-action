@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T12:36:20.648340+00:00",
+  "generated_at": "2026-08-20T12:42:10.506672+00:00",
   "watchlist": [
     {
       "ticker": "CRCL",
@@ -18,9 +18,9 @@
     },
     {
       "ticker": "NBIS",
-      "score": 65.5,
+      "score": 66.8,
       "detail": {
-        "sentiment_social": 42.1,
+        "sentiment_social": 47.4,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -63,9 +63,9 @@
     },
     {
       "ticker": "INTC",
-      "score": 55.2,
+      "score": 53.9,
       "detail": {
-        "sentiment_social": 63.2,
+        "sentiment_social": 57.9,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -78,9 +78,9 @@
     },
     {
       "ticker": "AMZN",
-      "score": 54.3,
+      "score": 53.0,
       "detail": {
-        "sentiment_social": 68.4,
+        "sentiment_social": 63.2,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -137,25 +137,10 @@
       "volume_ratio": 0.98
     },
     {
-      "ticker": "MU",
-      "score": 49.8,
-      "detail": {
-        "sentiment_social": 57.9,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 21.2
-      },
-      "news_count": 10,
-      "price": 937.11,
-      "change_pct": -0.39,
-      "volume_ratio": 0.64
-    },
-    {
       "ticker": "NVDA",
-      "score": 48.6,
+      "score": 49.9,
       "detail": {
-        "sentiment_social": 47.4,
+        "sentiment_social": 52.6,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -165,6 +150,21 @@
       "price": 217.56,
       "change_pct": -0.99,
       "volume_ratio": 0.79
+    },
+    {
+      "ticker": "MU",
+      "score": 48.4,
+      "detail": {
+        "sentiment_social": 52.6,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 21.2
+      },
+      "news_count": 10,
+      "price": 937.11,
+      "change_pct": -0.39,
+      "volume_ratio": 0.64
     },
     {
       "ticker": "PLTR",
