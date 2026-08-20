@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-20T12:42:10.506672+00:00",
+  "generated_at": "2026-08-20T12:49:14.223118+00:00",
   "watchlist": [
     {
       "ticker": "CRCL",
-      "score": 76.1,
+      "score": 76.0,
       "detail": {
-        "sentiment_social": 94.7,
+        "sentiment_social": 94.4,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -17,10 +17,25 @@
       "volume_ratio": 1.87
     },
     {
-      "ticker": "NBIS",
-      "score": 66.8,
+      "ticker": "INTC",
+      "score": 73.3,
       "detail": {
-        "sentiment_social": 47.4,
+        "sentiment_social": 55.6,
+        "news_volume": 100.0,
+        "insider_buying": 100.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 37.5
+      },
+      "news_count": 10,
+      "price": 92.8,
+      "change_pct": -4.02,
+      "volume_ratio": 0.96
+    },
+    {
+      "ticker": "NBIS",
+      "score": 70.3,
+      "detail": {
+        "sentiment_social": 61.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -30,6 +45,21 @@
       "price": 223.9,
       "change_pct": -9.87,
       "volume_ratio": 2.06
+    },
+    {
+      "ticker": "RKLB",
+      "score": 63.4,
+      "detail": {
+        "sentiment_social": 100.0,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 33.4
+      },
+      "news_count": 10,
+      "price": 75.84,
+      "change_pct": -4.19,
+      "volume_ratio": 0.85
     },
     {
       "ticker": "SOFI",
@@ -47,40 +77,10 @@
       "volume_ratio": 0.59
     },
     {
-      "ticker": "RKLB",
-      "score": 59.4,
-      "detail": {
-        "sentiment_social": 84.2,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 33.4
-      },
-      "news_count": 10,
-      "price": 75.84,
-      "change_pct": -4.19,
-      "volume_ratio": 0.85
-    },
-    {
-      "ticker": "INTC",
+      "ticker": "AMZN",
       "score": 53.9,
       "detail": {
-        "sentiment_social": 57.9,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 37.5
-      },
-      "news_count": 10,
-      "price": 92.8,
-      "change_pct": -4.02,
-      "volume_ratio": 0.96
-    },
-    {
-      "ticker": "AMZN",
-      "score": 53.0,
-      "detail": {
-        "sentiment_social": 63.2,
+        "sentiment_social": 66.7,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -93,9 +93,9 @@
     },
     {
       "ticker": "TSLA",
-      "score": 52.9,
+      "score": 53.6,
       "detail": {
-        "sentiment_social": 52.6,
+        "sentiment_social": 55.6,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -107,40 +107,10 @@
       "volume_ratio": 0.99
     },
     {
-      "ticker": "AMD",
-      "score": 51.2,
-      "detail": {
-        "sentiment_social": 57.9,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 27.0
-      },
-      "news_count": 10,
-      "price": 466.42,
-      "change_pct": -3.71,
-      "volume_ratio": 0.7
-    },
-    {
-      "ticker": "AAPL",
-      "score": 50.7,
-      "detail": {
-        "sentiment_social": 47.4,
-        "news_volume": 100.0,
-        "insider_buying": 0.0,
-        "institutional_13f": 100.0,
-        "volume_spike": 35.3
-      },
-      "news_count": 10,
-      "price": 316.83,
-      "change_pct": 2.19,
-      "volume_ratio": 0.98
-    },
-    {
       "ticker": "NVDA",
-      "score": 49.9,
+      "score": 53.4,
       "detail": {
-        "sentiment_social": 52.6,
+        "sentiment_social": 66.7,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -152,25 +122,25 @@
       "volume_ratio": 0.79
     },
     {
-      "ticker": "MU",
-      "score": 48.4,
+      "ticker": "AMD",
+      "score": 53.4,
       "detail": {
-        "sentiment_social": 52.6,
+        "sentiment_social": 66.7,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
-        "volume_spike": 21.2
+        "volume_spike": 27.0
       },
       "news_count": 10,
-      "price": 937.11,
-      "change_pct": -0.39,
-      "volume_ratio": 0.64
+      "price": 466.42,
+      "change_pct": -3.71,
+      "volume_ratio": 0.7
     },
     {
       "ticker": "PLTR",
-      "score": 48.2,
+      "score": 50.1,
       "detail": {
-        "sentiment_social": 42.1,
+        "sentiment_social": 50.0,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -183,9 +153,9 @@
     },
     {
       "ticker": "MSFT",
-      "score": 47.8,
+      "score": 49.9,
       "detail": {
-        "sentiment_social": 52.6,
+        "sentiment_social": 61.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -197,25 +167,40 @@
       "volume_ratio": 0.56
     },
     {
-      "ticker": "GOOG",
-      "score": 43.5,
+      "ticker": "AAPL",
+      "score": 48.5,
       "detail": {
-        "sentiment_social": 31.6,
+        "sentiment_social": 38.9,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
-        "volume_spike": 22.6
+        "volume_spike": 35.3
       },
       "news_count": 10,
-      "price": 341.7,
-      "change_pct": 0.12,
-      "volume_ratio": 0.69
+      "price": 316.83,
+      "change_pct": 2.19,
+      "volume_ratio": 0.98
+    },
+    {
+      "ticker": "MU",
+      "score": 47.8,
+      "detail": {
+        "sentiment_social": 50.0,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 21.2
+      },
+      "news_count": 10,
+      "price": 937.11,
+      "change_pct": -0.39,
+      "volume_ratio": 0.64
     },
     {
       "ticker": "META",
-      "score": 43.1,
+      "score": 44.8,
       "detail": {
-        "sentiment_social": 21.1,
+        "sentiment_social": 27.8,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -227,10 +212,25 @@
       "volume_ratio": 0.94
     },
     {
-      "ticker": "GOOGL",
-      "score": 38.2,
+      "ticker": "GOOG",
+      "score": 44.0,
       "detail": {
-        "sentiment_social": 10.5,
+        "sentiment_social": 33.3,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 22.6
+      },
+      "news_count": 10,
+      "price": 341.7,
+      "change_pct": 0.12,
+      "volume_ratio": 0.69
+    },
+    {
+      "ticker": "GOOGL",
+      "score": 38.4,
+      "detail": {
+        "sentiment_social": 11.1,
         "news_volume": 100.0,
         "insider_buying": 0.0,
         "institutional_13f": 100.0,
@@ -250,7 +250,7 @@
         "form": "4",
         "filing_date": "2026-08-13",
         "accession_number": "0001140361-26-032884",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "MSFT",
@@ -266,7 +266,7 @@
         "form": "4",
         "filing_date": "2026-08-06",
         "accession_number": "0000789019-26-000143",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "MSFT",
@@ -274,7 +274,7 @@
         "form": "4",
         "filing_date": "2026-08-05",
         "accession_number": "0000789019-26-000141",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "GOOGL",
@@ -298,7 +298,7 @@
         "form": "4",
         "filing_date": "2026-07-30",
         "accession_number": "0001193125-26-326284",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "GOOGL",
@@ -306,7 +306,7 @@
         "form": "4",
         "filing_date": "2026-07-29",
         "accession_number": "0001168404-26-000041",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "GOOGL",
@@ -314,7 +314,7 @@
         "form": "4",
         "filing_date": "2026-07-29",
         "accession_number": "0001193125-26-324312",
-        "transaction_type": "other"
+        "transaction_type": "sell"
       },
       {
         "ticker": "GOOGL",
