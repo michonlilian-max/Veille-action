@@ -2,3 +2,4 @@ requests>=2.31.0
 feedparser>=6.0.10
 yfinance>=0.2.40
 alpaca-py>=0.33.0
+beautifulsoup4>=4.11.1

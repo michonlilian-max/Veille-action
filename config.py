@@ -141,6 +141,31 @@ PAPER_TRADING_RETENTION_DAYS = 365
 PAPER_TRADING_TAKE_PROFIT_PCT = 8.0
 PAPER_TRADING_STOP_LOSS_PCT = 5.0
 
+# --- Module S&P MidCap 400 : candidats à l'inclusion au S&P 500 ---
+# (cf. scripts/midcap_candidates.py — pas la watchlist principale, un
+# univers et un rapport séparés)
+
+# Nombre de candidats retenus dans le rapport final.
+MIDCAP_TOP_N = 20
+
+# Nombre des plus petites capitalisations du S&P 500 actuel utilisées
+# pour calculer le "plancher" de l'indice (moyenne, plus robuste qu'un
+# simple minimum qui pourrait être une anomalie de données ponctuelle).
+SP500_FLOOR_SAMPLE_SIZE = 20
+
+# Pondération du score de candidature à l'inclusion — différent de
+# WEIGHTS ci-dessous, qui note l'attention sur des valeurs déjà dans le
+# S&P 500. cap_proximity domine largement : c'est le seul critère
+# réellement mécanique de l'éligibilité S&P 500 (avec la rentabilité,
+# déjà appliquée comme filtre en amont) ; les autres signaux ne captent
+# que l'attention récente sur le candidat, pas une preuve d'inclusion.
+MIDCAP_WEIGHTS = {
+    "cap_proximity": 0.50,
+    "news_volume": 0.20,
+    "insider_buying": 0.20,
+    "volume_spike": 0.10,
+}
+
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.
 WEIGHTS = {

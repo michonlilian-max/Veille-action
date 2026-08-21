@@ -94,6 +94,18 @@
     letter-spacing: 0.03em;
     margin-left: 8px;
   }
+  #midcap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+  }
+  #midcap h2 { font-size: 0.9rem; margin: 0 0 4px; }
+  #midcap .mc-note { color: var(--muted); font-size: 0.78rem; margin-bottom: 10px; }
+  #midcap table { font-size: 0.82rem; }
+  #midcap th, #midcap td { padding: 6px 10px; }
 </style>
 </head>
 <body>
@@ -102,6 +114,7 @@
   <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits (+ un signal X optionnel payant, via Grok), à croiser avec ta propre analyse.</div>
   <div id="papertrade" style="display:none;"></div>
   <div id="backtest" style="display:none;"></div>
+  <div id="midcap" style="display:none;"></div>
   <div id="loading">Chargement des données...</div>
   <div id="error" style="display:none;"></div>
   <input id="filter" type="text" placeholder="🔍 Filtrer par ticker..." style="display:none;">
@@ -114,6 +127,52 @@
   </table>
 
 <script>
+async function loadMidcap() {
+  // Optionnel : n'existe qu'une fois que scripts/midcap_candidates.py a
+  // tourné au moins une fois (hebdomadaire, cf. midcap_candidates.yml).
+  try {
+    let res = await fetch('data/midcap_candidates.json?_=' + Date.now());
+    if (!res.ok) res = await fetch('../data/midcap_candidates.json?_=' + Date.now());
+    if (!res.ok) return;
+    const m = await res.json();
+
+    const rows = (m.candidates || []).map(c => {
+      const changeColor = (c.change_pct || 0) >= 0 ? 'var(--accent)' : 'var(--accent-low)';
+      const changeSign = (c.change_pct || 0) >= 0 ? '+' : '';
+      const priceCell = c.price !== null && c.price !== undefined
+        ? `${c.price} $ <span style="color:${changeColor};">(${changeSign}${c.change_pct}%)</span>`
+        : '—';
+      return `<tr>
+        <td class="ticker">${c.ticker}</td>
+        <td>${c.score}</td>
+        <td>${(c.market_cap / 1e9).toFixed(1)} Md$</td>
+        <td>${c.market_cap_vs_sp500_floor_pct}%</td>
+        <td>${priceCell}</td>
+        <td>${c.news_count}</td>
+        <td>${c.insider_buys}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('midcap').innerHTML = `
+      <h2>🔍 Candidats S&P MidCap 400 à l'inclusion S&P 500</h2>
+      <div class="mc-note">
+        Top ${m.candidates ? m.candidates.length : 0} sur ${m.eligible_count}/${m.total_midcap_count} candidats éligibles
+        (BPA 12 mois positif), classés par proximité de leur capitalisation avec le plancher actuel
+        du S&P 500 (${(m.sp500_floor_market_cap / 1e9).toFixed(1)} Md\$, moyenne des ${m.sp500_floor_sample_size}
+        plus petites capitalisations de l'indice). Estimation, pas une prédiction — cf. le disclaimer
+        dans data/midcap_candidates.json pour le détail des limites (comité S&P, filtre approximatif).
+      </div>
+      <table>
+        <thead><tr><th>Ticker</th><th>Score</th><th>Capitalisation</th><th>% du plancher</th><th>Prix</th><th>News</th><th>Achats initiés</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+    document.getElementById('midcap').style.display = 'block';
+  } catch (e) {
+    // silencieux : ce panneau est un bonus, jamais bloquant pour le reste du dashboard
+  }
+}
+
 async function loadPaperTrade() {
   // Optionnel : n'existe qu'une fois que le bot de paper trading a tourné
   // au moins une fois (cf. scripts/paper_trade.py). Absent = ALPACA_API_KEY
@@ -301,6 +360,7 @@ async function load() {
 load();
 loadBacktest();
 loadPaperTrade();
+loadMidcap();
 </script>
 </body>
 </html>

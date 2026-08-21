@@ -69,6 +69,7 @@ jobs:
           cp data/output.json _site/data/output.json
           if [ -f data/backtest_summary.json ]; then cp data/backtest_summary.json _site/data/backtest_summary.json; fi
           if [ -f data/paper_trades_summary.json ]; then cp data/paper_trades_summary.json _site/data/paper_trades_summary.json; fi
+          if [ -f data/midcap_candidates.json ]; then cp data/midcap_candidates.json _site/data/midcap_candidates.json; fi
 
       - name: Uploader l'artefact Pages
         uses: actions/upload-pages-artifact@v3

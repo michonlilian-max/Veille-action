@@ -26,6 +26,13 @@ les actions à surveiller :
    perte, garde le reste — jamais indéfiniment), email récapitulatif
    quotidien — vrai mécanisme d'exécution d'ordres, zéro risque
    financier (cf. section 8 de l'installation)
+8. **Candidats S&P MidCap 400 à l'inclusion S&P 500** : une fois par
+   semaine, repère parmi les ~400 sociétés du MidCap 400 celles qui
+   ressemblent le plus à de bons candidats à une future entrée au S&P
+   500 (proximité de capitalisation avec le plancher de l'indice +
+   filtre de rentabilité) — l'entrée d'une société dans l'indice force
+   les fonds indiciels à en acheter, un effet documenté (cf. section
+   "Candidats MidCap 400" plus bas)
 
 **Univers suivi : le S&P 500 (~500 sociétés), récupéré automatiquement à
 chaque run** (cf. `scripts/fetch_sp500.py`) — plus une recomposition
@@ -287,6 +294,40 @@ la durée si la stratégie aurait été rentable, sans rien risquer. Ce n'est
 qu'une étape parmi d'autres avant d'envisager du réel un jour, pas une
 recommandation d'y aller.
 
+### 9. Candidats S&P MidCap 400 à l'inclusion S&P 500
+
+Fonctionnalité gratuite, activée par défaut (pas de secret à configurer).
+Tourne une fois par semaine (`.github/workflows/midcap_candidates.yml`,
+dimanche 08h00 UTC) — le run est lourd (~900 appels individuels
+`yfinance` pour récupérer capitalisation + bénéfices, plusieurs minutes),
+pas la peine de le faire tourner chaque nuit vu que la composition de
+l'indice ne change pas d'un jour à l'autre.
+
+**Ce que fait `scripts/midcap_candidates.py`** :
+1. Récupère la capitalisation boursière actuelle du S&P 500 **et** du
+   S&P MidCap 400 (`scripts/fetch_midcap400.py` — scrape la page
+   Wikipédia "List of S&P 400 companies", parsing défensif ; pas de CSV
+   communautaire actif équivalent à celui du S&P 500 trouvé)
+2. Calcule le "plancher" S&P 500 : moyenne des `SP500_FLOOR_SAMPLE_SIZE`
+   (20 par défaut) plus petites capitalisations actuelles de l'indice
+3. Exclut les candidats MidCap 400 dont le bénéfice par action (12 mois
+   glissants) n'est pas positif — pas éligibles, peu importe leur taille
+4. Score les candidats restants par proximité de capitalisation avec le
+   plancher (dominant) + signaux d'attention déjà utilisés ailleurs dans
+   le pipeline (news récentes, achats d'initiés, volume anormal)
+5. Écrit le top `MIDCAP_TOP_N` (20 par défaut) dans
+   `data/midcap_candidates.json`, affiché sur le dashboard
+
+⚠️ **Ce que ça n'est pas** : une prédiction fiable. L'inclusion au S&P
+500 est décidée par un comité (S&P Dow Jones Indices) qui regarde aussi
+l'équilibre sectoriel et la liquidité, pas seulement la capitalisation —
+et l'annonce officielle n'arrive en général que quelques jours avant
+l'effet réel. Le filtre de rentabilité (BPA 12 mois glissants) est une
+approximation du vrai critère S&P (bénéfice GAAP positif sur les 4
+derniers trimestres ET le dernier trimestre), plus lourd à calculer
+précisément pour ~400 sociétés. C'est un candidat plausible à surveiller,
+pas une certitude.
+
 ---
 
 ## Structure du projet
@@ -308,21 +349,26 @@ veille-actions/
 │   ├── backtest.py              # autocritique quotidienne : score du matin vs mouvement réel du jour
 │   ├── paper_trade.py           # bot de trading, ENTRÉE — PAPER TRADING UNIQUEMENT (API Alpaca, optionnel)
 │   ├── check_paper_trade_exits.py # bot de trading, SORTIE (take-profit/stop-loss) + email récap
+│   ├── fetch_midcap400.py       # récupère la composition actuelle du S&P MidCap 400 (gratuit)
+│   ├── collect_market_cap.py    # capitalisation boursière + BPA par ticker (yfinance, gratuit)
+│   ├── midcap_candidates.py     # candidats MidCap 400 à l'inclusion S&P 500 (hebdomadaire)
 │   └── run_all.py               # orchestrateur, point d'entrée
 ├── dashboard/
-│   └── index.html               # dashboard statique (filtre par ticker + panneaux backtest et paper trading)
+│   └── index.html               # dashboard statique (filtre par ticker + panneaux backtest, paper trading, MidCap 400)
 ├── data/
 │   ├── output.json              # dernier résultat (lu par le dashboard)
 │   ├── history/                 # archive des runs précédents (purgée après HISTORY_RETENTION_DAYS)
 │   ├── backtest/                # journal quotidien du backtest (purgé après BACKTEST_RETENTION_DAYS)
 │   ├── backtest_summary.json    # résumé par signal, une fois MIN_BACKTEST_SAMPLES atteint
 │   ├── paper_trades/            # journal quotidien du bot paper trading (purgé après PAPER_TRADING_RETENTION_DAYS)
-│   └── paper_trades_summary.json # équité + performance actuelles du portefeuille simulé
+│   ├── paper_trades_summary.json # équité + performance actuelles du portefeuille simulé
+│   └── midcap_candidates.json   # top candidats MidCap 400 de la semaine
 └── .github/workflows/
     ├── veille.yml                     # collecte + score, planification + déploiement automatiques
     ├── backtest.yml                   # autocritique quotidienne après clôture des marchés
     ├── paper_trade.yml                # bot de trading : entrée, une fois par jour à l'ouverture
-    └── check_paper_trade_exits.yml    # bot de trading : sorties, 5x/jour + email récap au dernier passage
+    ├── check_paper_trade_exits.yml    # bot de trading : sorties, 5x/jour + email récap au dernier passage
+    └── midcap_candidates.yml          # candidats MidCap 400, une fois par semaine
 ```
 
 ## Comment le score est calculé
