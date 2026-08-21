@@ -1,55 +1,55 @@
 {
-  "computed_at": "2026-08-21T13:48:27.787289+00:00",
-  "starting_equity": 100000.0,
-  "current_equity": 100214.24,
-  "total_return_pct": 0.21,
+  "computed_at": "2026-08-21T15:06:46.779802+00:00",
+  "starting_equity": 101963.48,
+  "current_equity": 101963.22,
+  "total_return_pct": -0.0,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": 0.29,
-      "market_value": 39312.52
+      "unrealized_plpc": -0.24,
+      "market_value": 39106.2
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -0.32,
-      "market_value": 39076.07
+      "unrealized_plpc": -1.87,
+      "market_value": 38466.38
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -0.29,
-      "market_value": 39085.61
+      "unrealized_plpc": -2.0,
+      "market_value": 38415.68
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": 1.21,
-      "market_value": 39676.4
+      "unrealized_plpc": 5.67,
+      "market_value": 41423.99
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -0.14,
-      "market_value": 39144.08
+      "unrealized_plpc": -1.01,
+      "market_value": 38805.03
     },
     {
       "ticker": "SMCI",
-      "unrealized_plpc": -0.21,
-      "market_value": 39115.87
+      "unrealized_plpc": -0.58,
+      "market_value": 38973.92
     },
     {
       "ticker": "TEM",
-      "unrealized_plpc": -0.14,
-      "market_value": 39146.93
+      "unrealized_plpc": 5.82,
+      "market_value": 41481.6
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 0.12,
-      "market_value": 39246.16
+      "unrealized_plpc": -0.71,
+      "market_value": 38920.66
     }
   ],
   "days_tracked": 1,
   "history": [
     {
       "date": "2026-08-21",
-      "equity_at_open": 100000.0,
+      "equity_at_open": 101963.48,
       "equity_at_close": null,
       "entries": [
         "MRNA",
@@ -60,6 +60,8 @@
         "INTC",
         "NVDA",
         "SMCI",
+        "MRVL",
+        "CVX",
         "MRVL",
         "CVX"
       ],
