@@ -55,8 +55,28 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --staged --quiet || git commit -m "Mise à jour automatique de la veille [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "Rien à committer."
+            exit 0
+          fi
+          git commit -m "Mise à jour automatique de la veille [skip ci]"
+          # Ce run peut prendre plusieurs heures (S&P 500) : la branche a pu
+          # bouger entre-temps (un autre workflow, ou un push manuel) et un
+          # simple "git push" serait rejeté (non-fast-forward) — vécu en
+          # pratique sur le run de test S&P 500 (échec après ~3h19 de calcul
+          # valide, données perdues faute de retry). On rebase et on
+          # réessaie plutôt que d'abandonner tout le travail de collecte.
+          n=0
+          until git push; do
+            n=$((n + 1))
+            if [ "$n" -ge 5 ]; then
+              echo "Échec du push après 5 tentatives."
+              exit 1
+            fi
+            echo "Push rejeté (tentative $n/5) — rebase sur le dernier commit distant..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            sleep 3
+          done
 
       - name: Préparer le dossier à publier sur Pages
         run: |

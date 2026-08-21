@@ -42,8 +42,25 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/backtest/ 2>/dev/null || true
           if [ -f data/backtest_summary.json ]; then git add data/backtest_summary.json; fi
-          git diff --staged --quiet || git commit -m "Journal de backtest quotidien [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "Rien à committer."
+            exit 0
+          fi
+          git commit -m "Journal de backtest quotidien [skip ci]"
+          # cf. veille.yml : la branche peut avoir bougé pendant ce run
+          # (autre workflow, push manuel) — on rebase et on réessaie plutôt
+          # que de perdre le journal du jour sur un simple rejet.
+          n=0
+          until git push; do
+            n=$((n + 1))
+            if [ "$n" -ge 5 ]; then
+              echo "Échec du push après 5 tentatives."
+              exit 1
+            fi
+            echo "Push rejeté (tentative $n/5) — rebase sur le dernier commit distant..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            sleep 3
+          done
 
       - name: Préparer le dossier à publier sur Pages
         run: |
