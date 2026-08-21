@@ -16,9 +16,16 @@ les actions à surveiller :
    activable si tu es prêt à payer l'API xAI (cf. section 7 de
    l'installation, avec estimation de coût)
 
-Le tout tourne sur GitHub Actions (planification automatique) et s'affiche
-sur un dashboard statique hébergé par GitHub Pages — gratuit dans sa
-configuration de base, à l'exception du signal X optionnel (point 5).
+**Univers suivi : le S&P 500 (~500 sociétés), récupéré automatiquement à
+chaque run** (cf. `scripts/fetch_sp500.py`) — plus une recomposition
+manuelle de `config.py` à faire quand l'indice change. Si cette
+récupération échoue, le pipeline retombe sur une liste de repli de 90
+tickers curée à la main (`FALLBACK_WATCHLIST` dans `config.py`).
+
+Le tout tourne sur GitHub Actions (planification automatique, un run par
+nuit d'environ 3h à cette échelle) et s'affiche sur un dashboard statique
+hébergé par GitHub Pages — gratuit dans sa configuration de base, à
+l'exception du signal X optionnel (point 5).
 
 ⚠️ **Ce n'est pas un conseil en investissement.** C'est un indicateur d'attention
 relative basé sur des signaux publics — à croiser avec ta propre analyse.
@@ -47,6 +54,16 @@ relative basé sur des signaux publics — à croiser avec ta propre analyse.
   utilisé par la communauté mais qui peut casser sans préavis. Si
   `collect_price.py` casse, c'est le deuxième endroit à vérifier après
   `collect_stocktwits.py`.
+- **La liste S&P 500 dépend aussi d'une source externe non garantie**
+  (`scripts/fetch_sp500.py`, jeu de données communautaire hébergé sur
+  GitHub). Si elle devient indisponible ou change de format, le pipeline
+  retombe automatiquement sur `FALLBACK_WATCHLIST` (90 tickers) plutôt que
+  de planter — regarde les logs du run (`[fetch_sp500]` / `[config]`) pour
+  savoir lequel des deux univers a réellement tourné.
+- **StockTwits est maintenant le poste le plus long du run (~2h45 sur
+  ~500 tickers)**, à cause de la limite de 200 requêtes/heure/IP de son
+  API — impossible à contourner sans casser cette limite. Le run complet
+  tient tout de même largement dans la fenêtre nocturne (voir section 3).
 
 ---
 
@@ -74,7 +91,9 @@ git push -u origin main
 Ouvre `config.py` et modifie :
 - `SEC_USER_AGENT` → remplace par ton nom + ton email (la SEC exige un
   User-Agent identifiable, sinon elle bloque l'IP)
-- `WATCHLIST` → la liste des tickers que tu veux suivre
+- `FALLBACK_WATCHLIST` → la liste de repli utilisée si la récupération
+  automatique du S&P 500 échoue (`WATCHLIST` lui-même n'est pas à éditer :
+  il est calculé dynamiquement, cf. `scripts/fetch_sp500.py`)
 
 ### 3. Activer GitHub Actions
 
@@ -83,6 +102,13 @@ demandé. Le fichier `.github/workflows/veille.yml` est déjà configuré pour
 tourner automatiquement **une fois par nuit** (03h00 UTC, mardi à samedi —
 donc largement après la clôture des marchés US, pour capturer la clôture
 de chaque jour de bourse de lundi à vendredi).
+
+⏱️ **Sur l'univers S&P 500 (~500 tickers), un run complet prend environ
+3 heures** (le principal poste étant StockTwits, contraint par sa limite
+de 200 requêtes/heure/IP — voir "Limites à connaître"). Ça tient
+largement dans la fenêtre nocturne avant la réouverture des marchés US et
+dans la limite GitHub Actions de 6h par job — rien à faire de particulier,
+juste ne pas s'étonner que le run ne soit pas terminé au bout de 10 minutes.
 
 Pour un premier test immédiat sans attendre : onglet **Actions** →
 sélectionne "Mise à jour de la veille" → **Run workflow**.
@@ -144,20 +170,28 @@ permettre (cf. la section "Limites à connaître" plus haut sur StockTwits).
 
 **⚠️ Estimation de coût avant d'activer sur le cron automatique.** xAI
 facture le modèle *et* Live Search par source récupérée (vérifie le tarif
-à jour sur https://docs.x.ai — il peut avoir changé). Avec les réglages
-par défaut (`GROK_MAX_SEARCH_RESULTS = 8` dans `config.py`, 90 tickers, et
-le cron par défaut d'un run/nuit, mardi à samedi) :
+à jour sur https://docs.x.ai — il peut avoir changé).
+
+Le coût est **borné par `GROK_TOP_N` (30 par défaut), pas par la taille de
+`WATCHLIST`** : Grok n'est interrogé que sur les 30 tickers les mieux
+classés sur les signaux gratuits à chaque run (cf. `run_all.py`), jamais
+sur les ~500 du S&P 500 en entier — sinon le coût exploserait avec la
+taille de l'univers suivi. Avec les réglages par défaut
+(`GROK_MAX_SEARCH_RESULTS = 8`, `GROK_TOP_N = 30`, cron d'un run/nuit,
+mardi à samedi) :
 
 ```
-5 runs/semaine × 90 tickers = 450 appels/semaine
-450 × jusqu'à 8 sources ≈ jusqu'à 3 600 sources/semaine
+5 runs/semaine × 30 tickers ciblés = 150 appels/semaine
+150 × jusqu'à 8 sources ≈ jusqu'à 1 200 sources/semaine
 ```
 
-Ça peut vite chiffrer à plusieurs dizaines voire centaines d'euros/mois
-selon le tarif en vigueur. **Ne laisse pas tourner ça sur le cron sans
-avoir d'abord testé manuellement** (`workflow_dispatch`) et vérifié ta
-conso réelle sur https://console.x.ai. Pour réduire le coût : baisse
-`GROK_MAX_SEARCH_RESULTS`, réduis la taille de `WATCHLIST`, ou espace
+Ça reste largement plus contenu que si Grok tournait sur tout l'univers
+(qui donnerait ≈ jusqu'à 20 000 sources/semaine sur 500 tickers), mais
+peut quand même chiffrer à plusieurs dizaines d'euros/mois selon le tarif
+en vigueur. **Ne laisse pas tourner ça sur le cron sans avoir d'abord
+testé manuellement** (`workflow_dispatch`) et vérifié ta conso réelle sur
+https://console.x.ai. Pour réduire le coût : baisse
+`GROK_MAX_SEARCH_RESULTS` et/ou `GROK_TOP_N` dans `config.py`, ou espace
 davantage le cron.
 
 **a) Crée une clé API** sur https://console.x.ai (nécessite une carte
@@ -179,23 +213,24 @@ reste du pipeline continue normalement (comme l'email).
 
 ```
 veille-actions/
-├── config.py                    # watchlist, pondérations du score, réglages
+├── config.py                    # univers suivi, pondérations du score, réglages
 ├── requirements.txt
 ├── scripts/
+│   ├── fetch_sp500.py           # récupère la composition actuelle du S&P 500 (gratuit)
 │   ├── collect_edgar.py         # Form 4 (achat/vente réel) + 13F via SEC EDGAR (gratuit)
 │   ├── collect_news.py          # Google News RSS (gratuit)
 │   ├── collect_price.py         # prix + volume via Yahoo Finance (gratuit)
 │   ├── collect_stocktwits.py    # sentiment social (gratuit)
-│   ├── collect_grok_sentiment.py # sentiment X réel via Grok Live Search (PAYANT, optionnel)
+│   ├── collect_grok_sentiment.py # sentiment X réel via Grok Live Search (PAYANT, optionnel, ciblé sur GROK_TOP_N tickers)
 │   ├── send_email.py            # rapport par email (SMTP, optionnel)
 │   ├── scoring.py               # combine les signaux en un score composite
 │   └── run_all.py               # orchestrateur, point d'entrée
 ├── dashboard/
-│   └── index.html               # dashboard statique
+│   └── index.html               # dashboard statique (avec filtre par ticker)
 ├── data/
 │   ├── output.json              # dernier résultat (lu par le dashboard)
-│   └── history/                 # archive des runs précédents
-└── .github/workflows/update.yml # planification + déploiement automatiques
+│   └── history/                 # archive des runs précédents (purgée après HISTORY_RETENTION_DAYS)
+└── .github/workflows/veille.yml # planification + déploiement automatiques
 ```
 
 ## Comment le score est calculé
@@ -204,7 +239,8 @@ Chaque signal est normalisé sur 100 (relatif au max de la watchlist du jour),
 puis combiné selon les poids définis dans `config.py` (`WEIGHTS`) :
 
 - 25% sentiment X réel (Grok Live Search, **payant**, 0 si `GROK_API_KEY`
-  non configuré — cf. section 7 de l'installation)
+  non configuré, et 0 aussi pour tout ticker hors du top `GROK_TOP_N` sur
+  les signaux gratuits — cf. section 7 de l'installation)
 - 20% volume d'échange anormal + amplitude de variation du prix (Yahoo
   Finance, via `yfinance`) — distingue un vrai mouvement de marché d'un pic
   de bruit social sans rien derrière

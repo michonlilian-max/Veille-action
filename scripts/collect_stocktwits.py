@@ -18,7 +18,16 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import WATCHLIST
 
 STREAM_URL = "https://api.stocktwits.com/api/2/streams/symbol/{symbol}.json"
-RATE_LIMIT_DELAY = 1.5  # secondes entre deux appels, pour rester large sous 200/h
+# 3600s / 200 requêtes = 18s pour être pile à la limite ; on prend 20s pour
+# rester à 180/h avec une marge de sécurité. À 90 tickers (ancienne
+# watchlist), un délai de 1.5s suffisait car le total restait sous 200
+# quelle que soit la cadence. Depuis le passage au S&P 500 (~500 tickers,
+# cf. config.py), ce n'est plus vrai : 500 appels à 1.5s d'intervalle
+# tiennent en 12 minutes, largement plus de 200/h — d'où ce délai qui
+# respecte la limite quelle que soit la taille de la watchlist, au prix
+# d'une collecte StockTwits qui prend ~2h45 pour 500 tickers (acceptable
+# sur un run de nuit, cf. README).
+RATE_LIMIT_DELAY = 20
 
 
 def collect_sentiment_for_ticker(ticker: str) -> dict:

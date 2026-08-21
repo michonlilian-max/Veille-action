@@ -1,16 +1,20 @@
 """
 Configuration centrale du projet de veille boursière.
-Modifie WATCHLIST pour suivre les tickers qui t'intéressent.
 """
+import sys
 
-# Liste des tickers à surveiller, organisée par secteur — 15 par secteur
-# (StockTwits n'offre plus de découverte "trending" fiable en accès
-# gratuit -> on part d'une liste définie).
+from scripts.fetch_sp500 import fetch_sp500_tickers
+
+# --- Univers de repli (90 tickers, 15 par secteur) ---
+# Utilisé UNIQUEMENT si la récupération dynamique du S&P 500 ci-dessous
+# échoue (source indisponible, format changé, réponse tronquée...) —
+# mieux vaut un univers réduit mais garanti correct qu'un univers large
+# et potentiellement faux. cf. scripts/fetch_sp500.py.
 #
 # Note : CRCL (Circle), SOFI (SoFi) et RKLB (Rocket Lab) de l'ancienne
 # liste ne rentrent dans aucun des 6 secteurs demandés (fintech/aérospatial)
 # et ont été retirés. Dis-le si tu veux les remettre.
-WATCHLIST = [
+FALLBACK_WATCHLIST = [
     # --- Biotechnologie (15) ---
     "MRNA", "VRTX", "REGN", "AMGN", "GILD", "BIIB", "ILMN", "ALNY",
     "BMRN", "INCY", "NVAX", "EXEL", "SRPT", "IONS", "NBIX",
@@ -31,6 +35,23 @@ WATCHLIST = [
     "SNOW", "DDOG", "MDB", "CFLT", "ESTC", "IOT", "TEM",
 ]
 
+# --- Univers réel suivi par le pipeline : S&P 500, récupéré dynamiquement ---
+# Remplace l'ancienne liste figée à la main (91 -> ~500 tickers). Le S&P
+# 500 est recomposé plusieurs fois par an : une liste statique deviendrait
+# obsolète en quelques mois. cf. scripts/fetch_sp500.py pour la source et
+# la logique de repli.
+_sp500 = fetch_sp500_tickers()
+if _sp500:
+    WATCHLIST = _sp500
+    print(f"[config] Univers suivi : S&P 500 ({len(WATCHLIST)} tickers).", file=sys.stderr)
+else:
+    WATCHLIST = FALLBACK_WATCHLIST
+    print(
+        f"[config] Récupération S&P 500 échouée — repli sur la liste "
+        f"manuelle ({len(WATCHLIST)} tickers).",
+        file=sys.stderr,
+    )
+
 # User-Agent obligatoire pour interroger SEC EDGAR (politique SEC "fair access").
 SEC_USER_AGENT = "Veille Actions (contact: michonlilian@yahoo.fr)"
 
@@ -50,10 +71,7 @@ FRESHNESS_HOURS = 72
 # fraîcheur). ⚠️ Google News RSS ne renvoie quasiment jamais plus d'une
 # centaine de résultats par requête, quel que soit ce plafond — le monter à
 # 300 ne fera donc pas nécessairement remonter plus d'articles en pratique.
-# Le vrai levier pour la pertinence, c'est FRESHNESS_HOURS ci-dessus : en
-# ne gardant que les 3 derniers jours, le compte par ticker redevient
-# variable (certains tickers ont eu beaucoup d'actu récente, d'autres non)
-# au lieu de plafonner tous au même nombre.
+# Le vrai levier pour la pertinence, c'est FRESHNESS_HOURS ci-dessus.
 NEWS_MAX_ITEMS = 300
 
 # Fenêtre (en jours) d'historique de prix/volume téléchargée (Yahoo
@@ -68,9 +86,23 @@ GROK_MODEL = "grok-4-fast"
 
 # Nombre max de posts X que Grok peut consulter par ticker (Live Search).
 # Facturé par source récupérée : plus haut = plus précis mais plus cher.
-# Reste volontairement bas par défaut — voir le README pour une estimation
-# de coût avant d'augmenter.
 GROK_MAX_SEARCH_RESULTS = 8
+
+# Nombre de tickers effectivement envoyés à Grok (signal X, payant) à
+# chaque run : uniquement les GROK_TOP_N mieux classés sur les signaux
+# GRATUITS (un pré-score est calculé sans le signal X, cf. run_all.py).
+# Ça borne le coût du seul signal payant du pipeline à une valeur fixe,
+# indépendante de la taille de WATCHLIST — indispensable maintenant que
+# celle-ci peut valoir ~500 (S&P 500) plutôt que 90. Voir le README
+# (section 7) pour l'estimation de coût correspondante.
+GROK_TOP_N = 30
+
+# Nombre de jours de conservation des instantanés dans data/history/ avant
+# suppression automatique par run_all.py. Un instantané S&P 500 pèse ~5x
+# plus qu'un instantané à 90 tickers (plus de tickers = plus de données
+# brutes) — sans purge, le dépôt grossirait de plusieurs centaines de Mo
+# par an rien qu'avec ces archives.
+HISTORY_RETENTION_DAYS = 30
 
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.

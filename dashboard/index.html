@@ -42,6 +42,19 @@
   .score-bar { height: 100%; background: var(--accent); }
   .score-num { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.8rem; margin-left: 8px; }
   #loading, #error { color: var(--muted); padding: 40px 0; text-align: center; }
+  #filter {
+    width: 100%;
+    max-width: 280px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+  #filter:focus { outline: none; border-color: var(--accent); }
+  #count { color: var(--muted); font-size: 0.8rem; margin-bottom: 8px; }
 </style>
 </head>
 <body>
@@ -50,6 +63,8 @@
   <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits (+ un signal X optionnel payant, via Grok), à croiser avec ta propre analyse.</div>
   <div id="loading">Chargement des données...</div>
   <div id="error" style="display:none;"></div>
+  <input id="filter" type="text" placeholder="🔍 Filtrer par ticker..." style="display:none;">
+  <div id="count" style="display:none;"></div>
   <table id="tbl" style="display:none;">
     <thead>
       <tr><th>Ticker</th><th>Score</th><th>Prix</th><th>Volume</th><th>Sentiment social</th><th>Sentiment X</th><th>News</th><th>Achats initiés</th><th>13F récent</th></tr>
@@ -72,9 +87,11 @@ async function load() {
 
     const tbody = document.getElementById('tbody');
     const maxScore = Math.max(...data.watchlist.map(r => r.score), 1);
+    const total = data.watchlist.length;
 
     data.watchlist.forEach(row => {
       const tr = document.createElement('tr');
+      tr.dataset.ticker = row.ticker.toLowerCase();
       const pct = (row.score / maxScore) * 100;
       const hasPrice = row.price !== null && row.price !== undefined;
       const changeColor = (row.change_pct || 0) >= 0 ? 'var(--accent)' : 'var(--accent-low)';
@@ -106,7 +123,25 @@ async function load() {
       tbody.appendChild(tr);
     });
 
+    const countEl = document.getElementById('count');
+    const updateCount = (visible) => { countEl.textContent = `${visible} / ${total} tickers affichés`; };
+    updateCount(total);
+
+    const filterInput = document.getElementById('filter');
+    filterInput.addEventListener('input', () => {
+      const q = filterInput.value.trim().toLowerCase();
+      let visible = 0;
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const match = !q || tr.dataset.ticker.includes(q);
+        tr.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      updateCount(visible);
+    });
+
     document.getElementById('loading').style.display = 'none';
+    filterInput.style.display = 'block';
+    countEl.style.display = 'block';
     document.getElementById('tbl').style.display = 'table';
   } catch (e) {
     document.getElementById('loading').style.display = 'none';
