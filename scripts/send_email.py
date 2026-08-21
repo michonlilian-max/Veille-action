@@ -76,7 +76,10 @@ def build_report_text(output):
     return "\n".join(lines)
 
 
-def send_report(output):
+def _send_email(subject, body):
+    """Envoi SMTP générique, partagé par tous les rapports email du projet
+    (veille + paper trading). Dégradation gracieuse si les variables SMTP
+    ne sont pas configurées — même logique dans tous les cas d'usage."""
     server = os.environ.get("SMTP_SERVER")
     port = os.environ.get("SMTP_PORT")
     user = os.environ.get("SMTP_USER")
@@ -88,12 +91,11 @@ def send_report(output):
         return
 
     recipients = [addr.strip() for addr in to_addrs.split(",") if addr.strip()]
-    body = build_report_text(output)
 
     msg = MIMEMultipart()
     msg["From"] = user
     msg["To"] = ", ".join(recipients)
-    msg["Subject"] = f"Veille Actions — rapport du {output['generated_at'][:10]}"
+    msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain", "utf-8"))
 
     try:
@@ -101,9 +103,59 @@ def send_report(output):
         with smtplib.SMTP_SSL(server, int(port), context=context) as smtp:
             smtp.login(user, password)
             smtp.sendmail(user, recipients, msg.as_string())
-        print(f"[send_email] Email envoyé à {', '.join(recipients)}")
+        print(f"[send_email] Email envoyé à {', '.join(recipients)} — {subject}")
     except Exception as e:
         print(f"[send_email] Erreur d'envoi : {e}")
+
+
+def send_report(output):
+    body = build_report_text(output)
+    subject = f"Veille Actions — rapport du {output['generated_at'][:10]}"
+    _send_email(subject, body)
+
+
+def build_paper_trade_report_text(day_record, summary):
+    """Construit le corps de l'email récapitulatif quotidien du bot de
+    paper trading, à partir du journal du jour (complété par
+    close_paper_trades.py) et du résumé cumulé."""
+    date = day_record["date"]
+    equity_open = day_record.get("equity_after")
+    equity_close = day_record.get("equity_before_close")
+    equity_final = day_record.get("equity_after_close")
+    intraday_pct = day_record.get("intraday_return_pct")
+    sign = "+" if (intraday_pct or 0) >= 0 else ""
+
+    lines = [
+        "VEILLE ACTIONS — Bot de trading (PAPER TRADING — aucun argent réel)",
+        f"Récapitulatif du {date}",
+        "",
+        "⚠️ Portefeuille simulé. Aucune de ces valeurs ne représente de l'argent réel.",
+        "",
+        "=" * 60,
+        "",
+        f"Performance du jour : {sign}{intraday_pct}%",
+        f"  Équité à l'ouverture (après achat) : {equity_open:.2f} $" if equity_open is not None else "  Équité à l'ouverture : n/a",
+        f"  Équité juste avant clôture (avant revente) : {equity_close:.2f} $" if equity_close is not None else "  Équité avant clôture : n/a",
+        f"  Équité après revente complète : {equity_final:.2f} $" if equity_final is not None else "  Équité après revente : n/a",
+        "",
+        f"Positions tenues aujourd'hui ({len(day_record.get('target_tickers', []))}) : "
+        + ", ".join(day_record.get("target_tickers", [])),
+        "",
+        "-" * 60,
+        "",
+        f"Performance cumulée depuis le début : "
+        f"{'+' if (summary.get('total_return_pct') or 0) >= 0 else ''}{summary.get('total_return_pct')}% "
+        f"({summary.get('days_tracked')} jours suivis)",
+        f"Équité actuelle : {summary.get('current_equity'):.2f} $" if summary.get("current_equity") is not None else "",
+        f"Équité de départ : {summary.get('starting_equity'):.2f} $" if summary.get("starting_equity") is not None else "",
+    ]
+    return "\n".join(lines)
+
+
+def send_paper_trade_report(day_record, summary):
+    body = build_paper_trade_report_text(day_record, summary)
+    subject = f"Veille Actions — bot paper trading, récap du {day_record['date']}"
+    _send_email(subject, body)
 
 
 if __name__ == "__main__":

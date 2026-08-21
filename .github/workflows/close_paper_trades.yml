@@ -1,13 +1,15 @@
-name: Bot de trading — ouverture (paper trading uniquement)
+name: Bot de trading — clôture + email récap (paper trading uniquement)
 
 on:
   schedule:
-    # Après l'ouverture des marchés US (9h30 ET), du lundi au vendredi.
-    # 14h35 UTC reste après l'ouverture aussi bien en heure d'été US
-    # (9h30 ET = 13h30 UTC) qu'en heure d'hiver (9h30 ET = 14h30 UTC).
-    # Pendant de la clôture, cf. close_paper_trades.yml — aucune position
-    # n'est jamais gardée d'un jour de bourse à l'autre.
-    - cron: "35 14 * * 1-5"
+    # Juste avant la clôture des marchés US (16h00 ET), du lundi au
+    # vendredi. 19h50 UTC reste avant la clôture aussi bien en heure d'été
+    # US (16h00 ET = 20h00 UTC, marge ~10 min) qu'en heure d'hiver (16h00
+    # ET = 21h00 UTC, marge ~1h10) — mieux vaut clôturer un peu tôt que
+    # tenter un ordre après la fermeture du marché (qui ne s'exécuterait
+    # pas avant la prochaine ouverture, contraire au but "aucune position
+    # gardée la nuit").
+    - cron: "50 19 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
@@ -20,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  paper_trade:
+  close_paper_trade:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,16 +36,19 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
-      # ⚠️ ALPACA_API_KEY / ALPACA_SECRET_KEY doivent être des clés PAPER
-      # TRADING (générées sur https://app.alpaca.markets en mode Paper).
-      # scripts/paper_trade.py force paper=True en dur de toute façon,
-      # mais utilise bien des clés paper ici par principe — jamais de clé
-      # de trading réel dans ce workflow.
-      - name: Acheter le portefeuille paper à l'ouverture (si ALPACA_API_KEY configuré)
+      # ⚠️ Mêmes clés PAPER TRADING que le workflow d'ouverture — jamais
+      # de clé de trading réel ici. scripts/close_paper_trades.py force
+      # paper=True en dur de toute façon (via scripts/paper_trade.py).
+      - name: Revendre le portefeuille paper et envoyer le récap (si ALPACA_API_KEY configuré)
         env:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-        run: python scripts/paper_trade.py
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python scripts/close_paper_trades.py
 
       - name: Committer le journal de paper trading
         run: |
@@ -55,7 +60,7 @@ jobs:
             echo "Rien à committer."
             exit 0
           fi
-          git commit -m "Journal de paper trading quotidien [skip ci]"
+          git commit -m "Clôture + récap du bot de paper trading [skip ci]"
           # cf. veille.yml : la branche peut avoir bougé pendant ce run
           # (autre workflow, push manuel) — on rebase et on réessaie plutôt
           # que de perdre le journal du jour sur un simple rejet.
@@ -85,7 +90,7 @@ jobs:
           path: _site
 
   deploy:
-    needs: paper_trade
+    needs: close_paper_trade
     runs-on: ubuntu-latest
     environment:
       name: github-pages

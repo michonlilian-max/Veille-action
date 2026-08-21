@@ -18,16 +18,21 @@ ALPACA_SECRET_KEY ne sont pas configurés, ce script s'arrête proprement
 sans rien faire (même logique de dégradation que send_email.py et
 collect_grok_sentiment.py).
 
-Stratégie (volontairement simple, alignée sur ce que scripts/backtest.py
-mesure — top PAPER_TRADING_TOP_N par score, pondération égale, horizon 1
-jour) :
-1. Récupère le score calculé ce matin par le run de nuit
-2. Liquide toutes les positions actuelles du compte paper
-3. Répartit la totalité du buying power à parts égales sur les
-   PAPER_TRADING_TOP_N tickers les mieux classés
-4. Journalise la composition du jour + l'équité du compte dans
-   data/paper_trades/, pour suivre la performance simulée dans le temps
+Stratégie — trading intrajournalier, aucune position gardée la nuit :
+1. **À l'ouverture des marchés** (ce module, cf. .github/workflows/paper_trade.yml) :
+   récupère le score calculé la nuit précédente, liquide toute position
+   résiduelle (garde-fou, il ne devrait normalement plus y en avoir grâce
+   au (2) ci-dessous), puis répartit la totalité du buying power à parts
+   égales sur les PAPER_TRADING_TOP_N tickers les mieux classés.
+2. **À la clôture des marchés** (cf. scripts/close_paper_trades.py) : revend
+   tout, calcule la performance réelle de la journée, envoie un email
+   récapitulatif et journalise le résultat.
+
+Les deux scripts partagent le même fichier journalier dans
+data/paper_trades/ (écrit le matin, complété le soir) et la même fonction
+`rebuild_summary()` pour le résumé affiché sur le dashboard.
 """
+import glob
 import json
 import os
 import sys
@@ -44,8 +49,26 @@ PAPER_TRADES_DIR = os.path.join(ROOT, "data", "paper_trades")
 SUMMARY_PATH = os.path.join(ROOT, "data", "paper_trades_summary.json")
 
 
+def get_client():
+    """Renvoie un TradingClient Alpaca en mode paper, ou None si les clés
+    ne sont pas configurées / le paquet n'est pas installé. Point d'entrée
+    partagé par paper_trade.py et close_paper_trades.py — paper=True
+    câblé en dur ici aussi, voir l'avertissement de sécurité en tête de
+    fichier."""
+    api_key = os.environ.get("ALPACA_API_KEY")
+    secret_key = os.environ.get("ALPACA_SECRET_KEY")
+    if not api_key or not secret_key:
+        print("[paper_trade] ALPACA_API_KEY / ALPACA_SECRET_KEY absents — bot ignoré (rien à faire).")
+        return None
+    try:
+        from alpaca.trading.client import TradingClient
+    except ImportError:
+        print("[paper_trade] Le paquet 'alpaca-py' n'est pas installé (cf. requirements.txt) — bot ignoré.")
+        return None
+    return TradingClient(api_key, secret_key, paper=True)
+
+
 def _prune_paper_trades_log():
-    import glob
     cutoff = datetime.now(timezone.utc) - timedelta(days=PAPER_TRADING_RETENTION_DAYS)
     for path in glob.glob(os.path.join(PAPER_TRADES_DIR, "*.json")):
         stamp = os.path.basename(path).rsplit(".", 1)[0]  # "2026-08-21"
@@ -58,23 +81,53 @@ def _prune_paper_trades_log():
             print(f"[paper_trade] Journal expiré supprimé : {os.path.basename(path)}")
 
 
+def rebuild_summary(current_equity, current_holdings):
+    """Reconstruit data/paper_trades_summary.json à partir de tous les
+    journaux quotidiens accumulés (data/paper_trades/*.json) — appelé par
+    paper_trade.py (matin, après achat) ET close_paper_trades.py (soir,
+    après clôture), donc `current_equity`/`current_holdings` reflètent
+    l'état au moment de l'appel, pas forcément la fin de journée."""
+    os.makedirs(PAPER_TRADES_DIR, exist_ok=True)
+    summary_points = []
+    for path in sorted(glob.glob(os.path.join(PAPER_TRADES_DIR, "*.json"))):
+        try:
+            with open(path, encoding="utf-8") as f:
+                d = json.load(f)
+            summary_points.append({
+                "date": d["date"],
+                "equity_before": d.get("equity_before"),
+                "equity_after_open": d.get("equity_after"),
+                "equity_after_close": d.get("equity_after_close"),
+                "intraday_return_pct": d.get("intraday_return_pct"),
+            })
+        except (json.JSONDecodeError, OSError, KeyError):
+            continue
+
+    starting_equity = summary_points[0]["equity_before"] if summary_points else current_equity
+    summary = {
+        "computed_at": datetime.now(timezone.utc).isoformat(),
+        "starting_equity": starting_equity,
+        "current_equity": current_equity,
+        "total_return_pct": round(100 * (current_equity - starting_equity) / starting_equity, 2) if starting_equity else None,
+        "current_holdings": current_holdings,
+        "days_tracked": len(summary_points),
+        "history": summary_points,
+        "note": (
+            "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). "
+            "Trading intrajournalier : achat des PAPER_TRADING_TOP_N tickers par "
+            "score du matin à l'ouverture, revente complète à la clôture — aucune "
+            "position gardée la nuit."
+        ),
+    }
+    with open(SUMMARY_PATH, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+    return summary
+
+
 def run_paper_trading():
-    api_key = os.environ.get("ALPACA_API_KEY")
-    secret_key = os.environ.get("ALPACA_SECRET_KEY")
-    if not api_key or not secret_key:
-        print("[paper_trade] ALPACA_API_KEY / ALPACA_SECRET_KEY absents — bot ignoré (rien à faire).")
+    client = get_client()
+    if client is None:
         return
-
-    try:
-        from alpaca.trading.client import TradingClient
-        from alpaca.trading.requests import MarketOrderRequest
-        from alpaca.trading.enums import OrderSide, TimeInForce
-    except ImportError:
-        print("[paper_trade] Le paquet 'alpaca-py' n'est pas installé (cf. requirements.txt) — bot ignoré.")
-        return
-
-    # paper=True câblé en dur : voir l'avertissement de sécurité en tête de fichier.
-    client = TradingClient(api_key, secret_key, paper=True)
 
     clock = client.get_clock()
     if not clock.is_open:
@@ -93,16 +146,19 @@ def run_paper_trading():
 
     account_before = client.get_account()
     equity_before = float(account_before.equity)
-    print(f"[paper_trade] Équité du compte paper avant rebalancement : {equity_before:.2f} $")
+    print(f"[paper_trade] Équité du compte paper à l'ouverture : {equity_before:.2f} $")
 
+    # Garde-fou : il ne devrait normalement plus y avoir de position à ce
+    # stade (close_paper_trades.py a tout revendu la veille au soir), mais
+    # on liquide quand même par sécurité (ex: script du soir en échec).
     positions_before = [
         {"ticker": p.symbol, "qty": p.qty, "market_value": float(p.market_value)}
         for p in client.get_all_positions()
     ]
-
-    print("[paper_trade] Liquidation de toutes les positions existantes...")
-    client.close_all_positions(cancel_orders=True)
-    time.sleep(5)  # laisser les ordres de vente se remplir avant de recalculer le buying power
+    if positions_before:
+        print(f"[paper_trade] {len(positions_before)} position(s) résiduelle(s) trouvée(s) (inattendu) — liquidation...")
+        client.close_all_positions(cancel_orders=True)
+        time.sleep(5)
 
     account_after_close = client.get_account()
     buying_power = float(account_after_close.buying_power)
@@ -114,6 +170,8 @@ def run_paper_trading():
     orders = []
     for ticker in target_tickers:
         try:
+            from alpaca.trading.requests import MarketOrderRequest
+            from alpaca.trading.enums import OrderSide, TimeInForce
             order_req = MarketOrderRequest(
                 symbol=ticker,
                 notional=round(allocation_per_ticker, 2),
@@ -154,41 +212,7 @@ def run_paper_trading():
     print(f"[paper_trade] Journal du jour écrit : {day_path}")
 
     _prune_paper_trades_log()
-
-    # Résumé léger pour le dashboard (courbe d'équité + composition actuelle) :
-    # on ne garde pas tout l'historique dans ce fichier, juste de quoi
-    # tracer l'évolution — le détail complet reste dans data/paper_trades/.
-    import glob
-    summary_points = []
-    for path in sorted(glob.glob(os.path.join(PAPER_TRADES_DIR, "*.json"))):
-        try:
-            with open(path, encoding="utf-8") as f:
-                d = json.load(f)
-            summary_points.append({
-                "date": d["date"],
-                "equity_before": d["equity_before"],
-                "equity_after": d["equity_after"],
-            })
-        except (json.JSONDecodeError, OSError, KeyError):
-            continue
-
-    starting_equity = summary_points[0]["equity_before"] if summary_points else equity_before
-    summary = {
-        "computed_at": datetime.now(timezone.utc).isoformat(),
-        "starting_equity": starting_equity,
-        "current_equity": equity_after,
-        "total_return_pct": round(100 * (equity_after - starting_equity) / starting_equity, 2) if starting_equity else None,
-        "current_holdings": target_tickers,
-        "days_tracked": len(summary_points),
-        "history": summary_points,
-        "note": (
-            "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). "
-            "Rebalancement quotidien : top PAPER_TRADING_TOP_N tickers par score du "
-            "matin, pondération égale, tenu 1 jour de bourse."
-        ),
-    }
-    with open(SUMMARY_PATH, "w", encoding="utf-8") as f:
-        json.dump(summary, f, ensure_ascii=False, indent=2)
+    summary = rebuild_summary(current_equity=equity_after, current_holdings=target_tickers)
     print(f"[paper_trade] Équité : {equity_before:.2f} $ -> {equity_after:.2f} $ "
           f"(cumulé depuis le début : {summary['total_return_pct']}%)")
 

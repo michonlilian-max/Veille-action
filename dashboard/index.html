@@ -127,18 +127,34 @@ async function loadPaperTrade() {
     const returnClass = s.total_return_pct > 0 ? 'bt-pos' : (s.total_return_pct < 0 ? 'bt-neg' : '');
     const returnSign = s.total_return_pct > 0 ? '+' : '';
 
+    const today = s.history && s.history.length ? s.history[s.history.length - 1] : null;
+    const todayPct = today ? today.intraday_return_pct : null;
+    const todayClass = todayPct > 0 ? 'bt-pos' : (todayPct < 0 ? 'bt-neg' : '');
+    const todaySign = todayPct > 0 ? '+' : '';
+    const todayStat = todayPct !== null && todayPct !== undefined
+      ? `<div>
+          <div class="pt-stat-label">Performance du jour</div>
+          <div class="pt-stat-value ${todayClass}">${todaySign}${todayPct}%</div>
+        </div>`
+      : '';
+    const holdingsLabel = s.current_holdings && s.current_holdings.length
+      ? `Positions actuelles : ${s.current_holdings.join(', ')}`
+      : 'Aucune position ouverte actuellement (hors heures de marché, ou revendu à la clôture).';
+
     document.getElementById('papertrade').innerHTML = `
       <h2>🤖 Bot de trading <span class="pt-badge">PAPIER — AUCUN ARGENT RÉEL</span></h2>
       <div class="pt-note">
-        Portefeuille simulé (API Alpaca, mode paper trading) : rebalancé chaque jour de bourse sur
-        les tickers les mieux classés par le score du matin. Sert à voir si la stratégie aurait
-        été rentable, sans rien risquer — ce n'est PAS un historique de trading réel.
+        Portefeuille simulé (API Alpaca, mode paper trading) : achète à l'ouverture les tickers les
+        mieux classés par le score du matin, revend tout à la clôture — aucune position gardée la
+        nuit. Sert à voir si la stratégie aurait été rentable, sans rien risquer — ce n'est PAS un
+        historique de trading réel.
       </div>
       <div class="pt-stats">
         <div>
           <div class="pt-stat-label">Équité actuelle</div>
           <div class="pt-stat-value">${s.current_equity.toLocaleString('fr-FR', {maximumFractionDigits: 0})} $</div>
         </div>
+        ${todayStat}
         <div>
           <div class="pt-stat-label">Performance cumulée</div>
           <div class="pt-stat-value ${returnClass}">${returnSign}${s.total_return_pct}%</div>
@@ -148,7 +164,7 @@ async function loadPaperTrade() {
           <div class="pt-stat-value">${s.days_tracked}</div>
         </div>
       </div>
-      <div class="pt-holdings">Positions actuelles : ${s.current_holdings.join(', ')}</div>
+      <div class="pt-holdings">${holdingsLabel}</div>
     `;
     document.getElementById('papertrade').style.display = 'block';
   } catch (e) {

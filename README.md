@@ -21,9 +21,10 @@ les actions à surveiller :
    lequel a réellement précédé une hausse plutôt qu'une baisse (cf.
    section "Autocritique du score" plus bas)
 7. **(Optionnel, gratuit)** Bot de trading **paper trading uniquement**
-   (API Alpaca, argent fictif) : rejoue chaque jour les décisions que le
-   score suggérerait, avec un vrai mécanisme d'exécution d'ordres mais
-   zéro risque financier (cf. section 8 de l'installation)
+   (API Alpaca, argent fictif) : achète à l'ouverture, revend à la
+   clôture (aucune position gardée la nuit), et envoie un email
+   récapitulatif de la performance du jour — vrai mécanisme d'exécution
+   d'ordres, zéro risque financier (cf. section 8 de l'installation)
 
 **Univers suivi : le S&P 500 (~500 sociétés), récupéré automatiquement à
 chaque run** (cf. `scripts/fetch_sp500.py`) — plus une recomposition
@@ -227,14 +228,27 @@ indicateur d'attention, pas un signal d'achat/vente validé (cf.
 "Autocritique du score" ci-dessous) — y engager de l'argent réel sans
 des mois de recul serait irresponsable.
 
-**Ce que fait le bot** (`.github/workflows/paper_trade.yml`, chaque jour
-de bourse après l'ouverture des marchés US) :
+**Trading intrajournalier, aucune position gardée la nuit** — deux
+workflows séparés, un à l'ouverture et un à la clôture des marchés US :
+
+**Ouverture** (`.github/workflows/paper_trade.yml`, ~9h35 ET) :
 1. Récupère le score calculé par le run de nuit
-2. Liquide tout le portefeuille simulé existant
+2. Liquide toute position résiduelle (garde-fou, ne devrait normalement
+   pas arriver — cf. étape clôture ci-dessous)
 3. Répartit le capital simulé à parts égales sur les `PAPER_TRADING_TOP_N`
    tickers les mieux classés (10 par défaut, cf. `config.py`)
-4. Journalise la composition et l'équité du compte dans
-   `data/paper_trades/`, affichées sur le dashboard
+4. Journalise la composition et l'équité du compte dans `data/paper_trades/`
+
+**Clôture** (`.github/workflows/close_paper_trades.yml`, ~15h50 ET,
+juste avant la fermeture) :
+1. Revend l'intégralité des positions ouvertes le matin même
+2. Calcule la performance réelle de la journée (équité à l'ouverture vs
+   à la clôture)
+3. **Envoie un email récapitulatif** (même mécanisme SMTP que le rapport
+   principal, cf. section 6) avec la performance du jour, les positions
+   tenues, et la performance cumulée depuis le début
+4. Complète le journal du jour et met à jour le résumé affiché sur le
+   dashboard (équité actuelle, performance du jour, performance cumulée)
 
 **a) Crée un compte** sur https://alpaca.markets (gratuit) et génère des
 clés API en mode **Paper Trading** (pas "Live") depuis le tableau de bord.
@@ -247,8 +261,11 @@ de ton repo GitHub :
 | `ALPACA_API_KEY` | ta clé API **paper trading** Alpaca |
 | `ALPACA_SECRET_KEY` | ton secret **paper trading** Alpaca |
 
-Si ces secrets ne sont pas configurés, le bot est ignoré et le reste du
-pipeline continue normalement (même logique que l'email et Grok).
+Si ces secrets ne sont pas configurés, le bot est ignoré (les deux
+workflows) et le reste du pipeline continue normalement (même logique
+que l'email et Grok). L'email récapitulatif de clôture réutilise en plus
+les 5 secrets SMTP de la section 6 — si l'email principal fonctionne
+déjà, celui-ci fonctionne automatiquement aussi.
 
 **But réel de cette fonctionnalité** : simuler, avec un vrai mécanisme
 d'exécution d'ordres, ce qu'un bot ferait avec le score — pour voir dans
@@ -275,7 +292,8 @@ veille-actions/
 │   ├── scoring.py               # combine les signaux en un score composite
 │   ├── history_utils.py         # utilitaire partagé : retrouver le score calculé ce matin
 │   ├── backtest.py              # autocritique quotidienne : score du matin vs mouvement réel du jour
-│   ├── paper_trade.py           # bot de trading PAPER TRADING UNIQUEMENT (API Alpaca, optionnel)
+│   ├── paper_trade.py           # bot de trading, ACHAT à l'ouverture — PAPER TRADING UNIQUEMENT (API Alpaca, optionnel)
+│   ├── close_paper_trades.py    # bot de trading, REVENTE à la clôture + email récap
 │   └── run_all.py               # orchestrateur, point d'entrée
 ├── dashboard/
 │   └── index.html               # dashboard statique (filtre par ticker + panneaux backtest et paper trading)
@@ -285,11 +303,12 @@ veille-actions/
 │   ├── backtest/                # journal quotidien du backtest (purgé après BACKTEST_RETENTION_DAYS)
 │   ├── backtest_summary.json    # résumé par signal, une fois MIN_BACKTEST_SAMPLES atteint
 │   ├── paper_trades/            # journal quotidien du bot paper trading (purgé après PAPER_TRADING_RETENTION_DAYS)
-│   └── paper_trades_summary.json # équité + positions actuelles du portefeuille simulé
+│   └── paper_trades_summary.json # équité + performance actuelles du portefeuille simulé
 └── .github/workflows/
     ├── veille.yml                # collecte + score, planification + déploiement automatiques
     ├── backtest.yml              # autocritique quotidienne après clôture des marchés
-    └── paper_trade.yml           # bot de trading paper trading, après ouverture des marchés
+    ├── paper_trade.yml           # bot de trading : achat à l'ouverture des marchés
+    └── close_paper_trades.yml    # bot de trading : revente à la clôture + email récap
 ```
 
 ## Comment le score est calculé
