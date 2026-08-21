@@ -209,11 +209,20 @@ def run_paper_trading():
 
     print(f"[paper_trade] Nouveaux candidats à acheter ({len(new_tickers)}, score du matin) : {new_tickers}")
 
-    buying_power = float(account.buying_power)
+    # cash, PAS buying_power : buying_power inclut la marge Alpaca (compte
+    # paper marginable par défaut, typiquement ~4x l'équité) — un bug réel
+    # constaté en pratique le 21/08/2026, premier run réel : des ordres à
+    # ~39 200 $ chacun sur un compte à 100 000 $ (8 positions = ~313 600 $
+    # de notionnel, soit ~3.1x de levier non voulu). L'intention du projet
+    # a toujours été un portefeuille à parts égales SANS levier (cf.
+    # PAPER_TRADING_TAKE_PROFIT_PCT / STOP_LOSS_PCT, pensés comme des % sur
+    # capital réellement engagé, pas sur du notionnel emprunté). cash
+    # reflète le capital non engagé, sans marge.
+    cash = max(float(account.cash), 0.0)
     # Marge de sécurité : le prix peut légèrement bouger entre la lecture du
-    # buying power et l'exécution de l'ordre suivant, un ordre à 100% pile
-    # du buying power peut être rejeté pour quelques centimes.
-    allocation_per_ticker = (buying_power * 0.98) / len(new_tickers)
+    # cash disponible et l'exécution de l'ordre suivant, un ordre à 100%
+    # pile du cash peut être rejeté pour quelques centimes.
+    allocation_per_ticker = (cash * 0.98) / len(new_tickers)
 
     from alpaca.trading.requests import MarketOrderRequest
     from alpaca.trading.enums import OrderSide, TimeInForce
