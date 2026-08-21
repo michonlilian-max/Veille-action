@@ -1,48 +1,43 @@
 {
-  "computed_at": "2026-08-21T17:02:21.718669+00:00",
+  "computed_at": "2026-08-21T17:58:08.981893+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 103169.25,
-  "total_return_pct": 1.18,
+  "current_equity": 101297.22,
+  "total_return_pct": -0.65,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -0.67,
-      "market_value": 38937.4
+      "unrealized_plpc": -1.68,
+      "market_value": 38543.52
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -0.94,
-      "market_value": 38831.53
+      "unrealized_plpc": -0.6,
+      "market_value": 38964.54
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -2.23,
-      "market_value": 38324.23
+      "unrealized_plpc": -1.95,
+      "market_value": 38434.82
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": 5.12,
-      "market_value": 41206.68
+      "unrealized_plpc": 0.59,
+      "market_value": 39431.17
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -0.95,
-      "market_value": 38827.58
+      "unrealized_plpc": -0.71,
+      "market_value": 38922.26
     },
     {
       "ticker": "SMCI",
-      "unrealized_plpc": -0.51,
-      "market_value": 39000.2
-    },
-    {
-      "ticker": "TEM",
-      "unrealized_plpc": 8.8,
-      "market_value": 17691.29
+      "unrealized_plpc": -0.92,
+      "market_value": 38837.22
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.48,
-      "market_value": 39010.2
+      "unrealized_plpc": -0.12,
+      "market_value": 39151.49
     }
   ],
   "days_tracked": 1,
