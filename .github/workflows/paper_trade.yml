@@ -1,12 +1,11 @@
-name: Autocritique du score (backtest)
+name: Bot de trading (paper trading uniquement)
 
 on:
   schedule:
-    # Après la clôture des marchés US (16h00 ET), du lundi au vendredi.
-    # 21h30 UTC reste après la clôture aussi bien en heure d'été US
-    # (16h00 ET = 20h00 UTC) qu'en heure d'hiver (16h00 ET = 21h00 UTC),
-    # avec une marge de sécurité de 30 min à 1h30.
-    - cron: "30 21 * * 1-5"
+    # Après l'ouverture des marchés US (9h30 ET), du lundi au vendredi.
+    # 14h35 UTC reste après l'ouverture aussi bien en heure d'été US
+    # (9h30 ET = 13h30 UTC) qu'en heure d'hiver (9h30 ET = 14h30 UTC).
+    - cron: "35 14 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
@@ -19,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  backtest:
+  paper_trade:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,16 +32,24 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
-      - name: Comparer le score du matin au mouvement réel du jour
-        run: python scripts/backtest.py
+      # ⚠️ ALPACA_API_KEY / ALPACA_SECRET_KEY doivent être des clés PAPER
+      # TRADING (générées sur https://app.alpaca.markets en mode Paper).
+      # scripts/paper_trade.py force paper=True en dur de toute façon,
+      # mais utilise bien des clés paper ici par principe — jamais de clé
+      # de trading réel dans ce workflow.
+      - name: Rebalancer le portefeuille paper (si ALPACA_API_KEY configuré)
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: python scripts/paper_trade.py
 
-      - name: Committer le journal de backtest
+      - name: Committer le journal de paper trading
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/backtest/ 2>/dev/null || true
-          if [ -f data/backtest_summary.json ]; then git add data/backtest_summary.json; fi
-          git diff --staged --quiet || git commit -m "Journal de backtest quotidien [skip ci]"
+          git add data/paper_trades/ 2>/dev/null || true
+          if [ -f data/paper_trades_summary.json ]; then git add data/paper_trades_summary.json; fi
+          git diff --staged --quiet || git commit -m "Journal de paper trading quotidien [skip ci]"
           git push
 
       - name: Préparer le dossier à publier sur Pages
@@ -59,7 +66,7 @@ jobs:
           path: _site
 
   deploy:
-    needs: backtest
+    needs: paper_trade
     runs-on: ubuntu-latest
     environment:
       name: github-pages

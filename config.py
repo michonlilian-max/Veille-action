@@ -117,6 +117,17 @@ BACKTEST_RETENTION_DAYS = 180
 # veut rien dire (bruit de marché >> taille d'échantillon).
 MIN_BACKTEST_SAMPLES = 300
 
+# Nombre de tickers dans le portefeuille du bot de paper trading (cf.
+# scripts/paper_trade.py) — top N par score du matin, pondération égale.
+# Volontairement plus petit que GROK_TOP_N : un vrai portefeuille (même
+# simulé) avec 30 positions à parts égales donne des lignes minuscules et
+# peu lisibles ; 10 reste diversifié tout en restant interprétable.
+PAPER_TRADING_TOP_N = 10
+
+# Nombre de jours de conservation du journal de paper trading
+# (data/paper_trades/) avant suppression automatique.
+PAPER_TRADING_RETENTION_DAYS = 365
+
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.
 WEIGHTS = {

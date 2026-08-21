@@ -64,6 +64,7 @@ jobs:
           cp -r dashboard/. _site/
           cp data/output.json _site/data/output.json
           if [ -f data/backtest_summary.json ]; then cp data/backtest_summary.json _site/data/backtest_summary.json; fi
+          if [ -f data/paper_trades_summary.json ]; then cp data/paper_trades_summary.json _site/data/paper_trades_summary.json; fi
 
       - name: Uploader l'artefact Pages
         uses: actions/upload-pages-artifact@v3

@@ -69,12 +69,38 @@
   #backtest th, #backtest td { padding: 6px 10px; }
   .bt-pos { color: var(--accent); }
   .bt-neg { color: var(--accent-low); }
+  #papertrade {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+  }
+  #papertrade h2 { font-size: 0.9rem; margin: 0 0 4px; }
+  #papertrade .pt-note { color: var(--muted); font-size: 0.78rem; margin-bottom: 10px; }
+  #papertrade .pt-stats { display: flex; gap: 24px; margin-bottom: 10px; flex-wrap: wrap; }
+  #papertrade .pt-stat-label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  #papertrade .pt-stat-value { font-size: 1.1rem; font-weight: 600; }
+  #papertrade .pt-holdings { color: var(--muted); font-size: 0.8rem; }
+  .pt-badge {
+    display: inline-block;
+    background: #4a3324;
+    color: #f0c98a;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-left: 8px;
+  }
 </style>
 </head>
 <body>
   <h1>📊 Veille Actions</h1>
   <div class="meta" id="meta">Chargement...</div>
   <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits (+ un signal X optionnel payant, via Grok), à croiser avec ta propre analyse.</div>
+  <div id="papertrade" style="display:none;"></div>
   <div id="backtest" style="display:none;"></div>
   <div id="loading">Chargement des données...</div>
   <div id="error" style="display:none;"></div>
@@ -88,6 +114,48 @@
   </table>
 
 <script>
+async function loadPaperTrade() {
+  // Optionnel : n'existe qu'une fois que le bot de paper trading a tourné
+  // au moins une fois (cf. scripts/paper_trade.py). Absent = ALPACA_API_KEY
+  // pas configuré, ou pas encore de run — on n'affiche simplement rien.
+  try {
+    let res = await fetch('data/paper_trades_summary.json?_=' + Date.now());
+    if (!res.ok) res = await fetch('../data/paper_trades_summary.json?_=' + Date.now());
+    if (!res.ok) return;
+    const s = await res.json();
+
+    const returnClass = s.total_return_pct > 0 ? 'bt-pos' : (s.total_return_pct < 0 ? 'bt-neg' : '');
+    const returnSign = s.total_return_pct > 0 ? '+' : '';
+
+    document.getElementById('papertrade').innerHTML = `
+      <h2>🤖 Bot de trading <span class="pt-badge">PAPIER — AUCUN ARGENT RÉEL</span></h2>
+      <div class="pt-note">
+        Portefeuille simulé (API Alpaca, mode paper trading) : rebalancé chaque jour de bourse sur
+        les tickers les mieux classés par le score du matin. Sert à voir si la stratégie aurait
+        été rentable, sans rien risquer — ce n'est PAS un historique de trading réel.
+      </div>
+      <div class="pt-stats">
+        <div>
+          <div class="pt-stat-label">Équité actuelle</div>
+          <div class="pt-stat-value">${s.current_equity.toLocaleString('fr-FR', {maximumFractionDigits: 0})} $</div>
+        </div>
+        <div>
+          <div class="pt-stat-label">Performance cumulée</div>
+          <div class="pt-stat-value ${returnClass}">${returnSign}${s.total_return_pct}%</div>
+        </div>
+        <div>
+          <div class="pt-stat-label">Jours suivis</div>
+          <div class="pt-stat-value">${s.days_tracked}</div>
+        </div>
+      </div>
+      <div class="pt-holdings">Positions actuelles : ${s.current_holdings.join(', ')}</div>
+    `;
+    document.getElementById('papertrade').style.display = 'block';
+  } catch (e) {
+    // silencieux : ce panneau est un bonus, jamais bloquant pour le reste du dashboard
+  }
+}
+
 async function loadBacktest() {
   // Optionnel : n'existe qu'une fois assez d'observations accumulées
   // (cf. scripts/backtest.py, MIN_BACKTEST_SAMPLES). Absent = pas encore
@@ -210,6 +278,7 @@ async function load() {
 }
 load();
 loadBacktest();
+loadPaperTrade();
 </script>
 </body>
 </html>

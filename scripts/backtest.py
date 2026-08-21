@@ -36,6 +36,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import BACKTEST_RETENTION_DAYS, GROK_TOP_N, MIN_BACKTEST_SAMPLES, WEIGHTS
 from scripts.collect_price import collect_all_prices
+from scripts.history_utils import find_morning_snapshot
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HISTORY_DIR = os.path.join(ROOT, "data", "history")
@@ -45,23 +46,6 @@ SUMMARY_PATH = os.path.join(ROOT, "data", "backtest_summary.json")
 # Signaux normalisés (0-100) présents dans chaque row de "detail", + le
 # score composite lui-même — ce sont les colonnes qu'on met à l'épreuve.
 SIGNALS = list(WEIGHTS.keys()) + ["score"]
-
-
-def _find_morning_snapshot(today: str) -> dict | None:
-    """Retrouve l'instantané data/history/ généré ce matin (avant midi
-    UTC — le run de nuit tourne à 03h00 UTC, ~3h à l'échelle S&P 500, donc
-    termine largement avant midi). Renvoie None si aucun run n'a eu lieu
-    aujourd'hui avant midi (ex: jour férié US, run de nuit en échec)."""
-    candidates = sorted(glob.glob(os.path.join(HISTORY_DIR, f"{today}T*.json")))
-    for path in candidates:
-        hour = os.path.basename(path)[11:13]  # "2026-08-21T03.json" -> "03"
-        try:
-            if int(hour) < 12:
-                with open(path, encoding="utf-8") as f:
-                    return json.load(f)
-        except ValueError:
-            continue
-    return None
 
 
 def _prune_backtest_log():
@@ -168,7 +152,7 @@ def _compute_summary(days: list[dict]) -> dict | None:
 
 def run_backtest():
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    snapshot = _find_morning_snapshot(today)
+    snapshot = find_morning_snapshot(today)
     if snapshot is None:
         print(f"[backtest] Aucun run de nuit trouvé pour aujourd'hui ({today}) — backtest ignoré.")
         return
