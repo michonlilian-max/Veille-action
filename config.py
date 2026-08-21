@@ -104,6 +104,19 @@ GROK_TOP_N = 30
 # par an rien qu'avec ces archives.
 HISTORY_RETENTION_DAYS = 30
 
+# Nombre de jours de conservation du journal de backtest (data/backtest/,
+# cf. scripts/backtest.py) avant suppression automatique. Plus long que
+# HISTORY_RETENTION_DAYS : il faut des mois de recul pour qu'une
+# corrélation par signal soit autre chose que du bruit statistique.
+BACKTEST_RETENTION_DAYS = 180
+
+# Nombre minimum d'observations (tickers × jours) accumulées dans le
+# journal de backtest avant d'afficher/écrire une quelconque conclusion
+# sur la fiabilité directionnelle d'un signal. 300 ≈ 10 jours de bourse à
+# GROK_TOP_N=30 tickers/jour — en dessous, une corrélation observée ne
+# veut rien dire (bruit de marché >> taille d'échantillon).
+MIN_BACKTEST_SAMPLES = 300
+
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.
 WEIGHTS = {

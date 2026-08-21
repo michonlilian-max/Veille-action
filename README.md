@@ -15,6 +15,11 @@ les actions à surveiller :
    vraie donnée X que le point 1 ne peut pas se permettre gratuitement,
    activable si tu es prêt à payer l'API xAI (cf. section 7 de
    l'installation, avec estimation de coût)
+6. **Autocritique quotidienne (backtest)** : chaque jour de bourse, après
+   la clôture, le score calculé ce matin-là pour le top 30 est comparé au
+   mouvement réel survenu ce jour-là — ça mesure, signal par signal,
+   lequel a réellement précédé une hausse plutôt qu'une baisse (cf.
+   section "Autocritique du score" plus bas)
 
 **Univers suivi : le S&P 500 (~500 sociétés), récupéré automatiquement à
 chaque run** (cf. `scripts/fetch_sp500.py`) — plus une recomposition
@@ -224,13 +229,18 @@ veille-actions/
 │   ├── collect_grok_sentiment.py # sentiment X réel via Grok Live Search (PAYANT, optionnel, ciblé sur GROK_TOP_N tickers)
 │   ├── send_email.py            # rapport par email (SMTP, optionnel)
 │   ├── scoring.py               # combine les signaux en un score composite
+│   ├── backtest.py              # autocritique quotidienne : score du matin vs mouvement réel du jour
 │   └── run_all.py               # orchestrateur, point d'entrée
 ├── dashboard/
-│   └── index.html               # dashboard statique (avec filtre par ticker)
+│   └── index.html               # dashboard statique (avec filtre par ticker + panneau backtest)
 ├── data/
 │   ├── output.json              # dernier résultat (lu par le dashboard)
-│   └── history/                 # archive des runs précédents (purgée après HISTORY_RETENTION_DAYS)
-└── .github/workflows/veille.yml # planification + déploiement automatiques
+│   ├── history/                 # archive des runs précédents (purgée après HISTORY_RETENTION_DAYS)
+│   ├── backtest/                # journal quotidien du backtest (purgé après BACKTEST_RETENTION_DAYS)
+│   └── backtest_summary.json    # résumé par signal, une fois MIN_BACKTEST_SAMPLES atteint
+└── .github/workflows/
+    ├── veille.yml                # collecte + score, planification + déploiement automatiques
+    └── backtest.yml              # autocritique quotidienne après clôture des marchés
 ```
 
 ## Comment le score est calculé
@@ -256,6 +266,52 @@ sommer à 1.0). Si tu n'actives pas Grok (section 7), ses 25% ne rapportent
 jamais rien — pense à redistribuer ce poids vers les autres signaux dans
 `config.py` si tu ne comptes pas l'activer.
 
+## Autocritique du score (backtest)
+
+Le score ci-dessus est conçu comme un indicateur d'**attention** (ce ticker
+bouge/fait parler de lui plus que d'habitude), pas un signal directionnel
+achat/vente — c'est documenté depuis le début. Mais certains des 6 signaux
+sont plausiblement directionnels par construction (un achat d'initié en
+marché ouvert, `insider_buying`, est un vrai pari haussier ; le sentiment
+X/social est nominalement directionnel), et d'autres non (`volume_spike`
+et `news_volume` captent de l'attention dans n'importe quel sens — une
+mauvaise nouvelle fait aussi exploser le volume).
+
+`.github/workflows/backtest.yml` tourne chaque jour de bourse après la
+clôture des marchés US (21h30 UTC) et exécute `scripts/backtest.py` :
+- retrouve le score calculé **ce matin-là** (`data/history/`) pour le top
+  `GROK_TOP_N` (30 par défaut)
+- récupère le mouvement **réel** survenu ce jour-là pour ces tickers
+  (Yahoo Finance), plus un taux de base sur toute la watchlist (pour
+  savoir si le top 30 a fait mieux que le marché ce jour-là, pas juste
+  "combien ont monté" dans l'absolu)
+- journalise ça dans `data/backtest/` (un fichier par jour, conservé
+  `BACKTEST_RETENTION_DAYS` jours, 180 par défaut)
+
+Une fois `MIN_BACKTEST_SAMPLES` observations accumulées (300 par défaut,
+soit ~10 jours de bourse — en dessous, une corrélation observée n'est que
+du bruit de marché), un résumé est calculé par signal et écrit dans
+`data/backtest_summary.json` :
+- **corrélation** entre la valeur du signal et le mouvement réel signé du
+  lendemain
+- **taux de réussite directionnel** : parmi les tickers où ce signal
+  était au-dessus de la médiane du jour, quelle proportion a réellement
+  monté le lendemain — comparé au même taux quand le signal était en
+  dessous, et au taux de base du marché ce jour-là
+
+Ce résumé s'affiche automatiquement sur le dashboard (`dashboard/index.html`)
+une fois qu'il existe.
+
+**⚠️ Ce que ce backtest NE fait PAS** : il ne modifie jamais `WEIGHTS` dans
+`config.py` tout seul. C'est un rapport de mesure, pas un pilote
+automatique — même avec des mois de données, une corrélation historique
+sur un échantillon de marché n'est pas une garantie que la relation
+persiste, et un système qui réajuste ses propres poids sans supervision
+humaine sur un signal aussi bruité est un bon moyen de sur-ajuster du
+bruit statistique en le prenant pour un vrai signal. Si l'analyse
+accumulée te convainc qu'un signal mérite plus (ou moins) de poids,
+change `WEIGHTS` toi-même dans `config.py` en connaissance de cause.
+
 ## Prochaines améliorations possibles
 
 - Alertes Telegram en plus de l'email (gratuit avec un webhook)
@@ -269,6 +325,7 @@ jamais rien — pense à redistribuer ce poids vers les autres signaux dans
   `collect_edgar.py`, il suffirait d'ajouter un type de formulaire
 - Pondération temporelle (un Form 4 vieux de 29 jours pèse aujourd'hui
   pareil qu'un d'hier)
-- Backtester le score : croiser `data/history/` avec le cours réel des
-  jours suivants pour vérifier empiriquement que le score précède de vrais
-  mouvements, plutôt que de le supposer
+- Rendre le backtest actionnable sans casser la rigueur statistique : par
+  exemple un rapport mensuel qui propose un `WEIGHTS` recalculé à partir
+  des corrélations accumulées (toujours à valider et appliquer soi-même,
+  cf. "Autocritique du score" plus haut — jamais automatique)

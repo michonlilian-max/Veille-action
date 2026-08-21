@@ -5,10 +5,15 @@ on:
     # Un seul run par nuit, à 03h00 UTC (~4h/5h du matin en France selon
     # l'heure d'été/hiver — nuit toute l'année), largement après la clôture
     # des marchés US (16h00 ET = 20h00/21h00 UTC selon la saison).
-    # Mardi à samedi UTC pour capturer la clôture de chaque jour de bourse
-    # (lundi à vendredi) : le run du mardi 03h UTC reflète la clôture de
-    # lundi, celui du samedi 03h UTC reflète la clôture de vendredi.
-    - cron: "0 3 * * 2-6"
+    # Lundi à samedi UTC pour capturer la clôture de chaque jour de bourse
+    # (lundi à vendredi) : le run du lundi 03h UTC reflète la clôture de
+    # vendredi, celui du mardi reflète celle de lundi, etc. Le samedi
+    # (clôture de vendredi) est redondant pour le score mais garde le
+    # dashboard à jour le week-end. Sans le lundi, la séance de lundi
+    # n'aurait jamais de score "du matin" à comparer au réel — cf.
+    # backtest.yml, qui a justement besoin de ce point de comparaison
+    # chaque jour de bourse.
+    - cron: "0 3 * * 1-6"
   workflow_dispatch: {}
 
 permissions:
@@ -58,6 +63,7 @@ jobs:
           mkdir -p _site/data
           cp -r dashboard/. _site/
           cp data/output.json _site/data/output.json
+          if [ -f data/backtest_summary.json ]; then cp data/backtest_summary.json _site/data/backtest_summary.json; fi
 
       - name: Uploader l'artefact Pages
         uses: actions/upload-pages-artifact@v3

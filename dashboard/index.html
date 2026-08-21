@@ -55,12 +55,27 @@
   }
   #filter:focus { outline: none; border-color: var(--accent); }
   #count { color: var(--muted); font-size: 0.8rem; margin-bottom: 8px; }
+  #backtest {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+  }
+  #backtest h2 { font-size: 0.9rem; margin: 0 0 4px; }
+  #backtest .bt-note { color: var(--muted); font-size: 0.78rem; margin-bottom: 10px; }
+  #backtest table { font-size: 0.82rem; }
+  #backtest th, #backtest td { padding: 6px 10px; }
+  .bt-pos { color: var(--accent); }
+  .bt-neg { color: var(--accent-low); }
 </style>
 </head>
 <body>
   <h1>📊 Veille Actions</h1>
   <div class="meta" id="meta">Chargement...</div>
   <div class="disclaimer">⚠️ Ceci n'est pas un conseil en investissement — score d'attention relative basé sur des signaux publics gratuits (+ un signal X optionnel payant, via Grok), à croiser avec ta propre analyse.</div>
+  <div id="backtest" style="display:none;"></div>
   <div id="loading">Chargement des données...</div>
   <div id="error" style="display:none;"></div>
   <input id="filter" type="text" placeholder="🔍 Filtrer par ticker..." style="display:none;">
@@ -73,6 +88,49 @@
   </table>
 
 <script>
+async function loadBacktest() {
+  // Optionnel : n'existe qu'une fois assez d'observations accumulées
+  // (cf. scripts/backtest.py, MIN_BACKTEST_SAMPLES). Absent = pas encore
+  // assez de recul, on n'affiche simplement rien.
+  try {
+    let res = await fetch('data/backtest_summary.json?_=' + Date.now());
+    if (!res.ok) res = await fetch('../data/backtest_summary.json?_=' + Date.now());
+    if (!res.ok) return;
+    const s = await res.json();
+
+    const rows = Object.entries(s.signals || {}).map(([name, v]) => {
+      const r = v.correlation_with_next_day_return;
+      const rClass = r > 0.05 ? 'bt-pos' : (r < -0.05 ? 'bt-neg' : '');
+      return `<tr>
+        <td>${name}</td>
+        <td class="${rClass}">${r === null ? '—' : r}</td>
+        <td>${v.hit_rate_when_high_pct ?? '—'}%</td>
+        <td>${v.hit_rate_when_low_pct ?? '—'}%</td>
+        <td>${v.n}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('backtest').innerHTML = `
+      <h2>🔬 Autocritique du score (backtest)</h2>
+      <div class="bt-note">
+        Sur ${s.total_observations} observations (${s.days_covered} jours de bourse, top ${s.top_n_per_day}
+        tickers/jour) : taux de réussite directionnel par signal (proportion de tickers avec un
+        mouvement réel positif le lendemain), comparé au taux de base marché ce jour-là
+        (${s.market_base_rate_pct_positive}%). Un signal proche du taux de base n'apporte pas
+        d'avantage directionnel mesurable — ce n'est PAS un conseil d'achat, juste une mesure de
+        corrélation historique.
+      </div>
+      <table>
+        <thead><tr><th>Signal</th><th>Corrélation</th><th>Réussite si élevé</th><th>Réussite si faible</th><th>n</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+    document.getElementById('backtest').style.display = 'block';
+  } catch (e) {
+    // silencieux : ce panneau est un bonus, jamais bloquant pour le reste du dashboard
+  }
+}
+
 async function load() {
   try {
     // Essaie d'abord le chemin "déployé" (data/ à côté d'index.html sur Pages),
@@ -151,6 +209,7 @@ async function load() {
   }
 }
 load();
+loadBacktest();
 </script>
 </body>
 </html>

@@ -1,0 +1,69 @@
+name: Autocritique du score (backtest)
+
+on:
+  schedule:
+    # Après la clôture des marchés US (16h00 ET), du lundi au vendredi.
+    # 21h30 UTC reste après la clôture aussi bien en heure d'été US
+    # (16h00 ET = 20h00 UTC) qu'en heure d'hiver (16h00 ET = 21h00 UTC),
+    # avec une marge de sécurité de 30 min à 1h30.
+    - cron: "30 21 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Comparer le score du matin au mouvement réel du jour
+        run: python scripts/backtest.py
+
+      - name: Committer le journal de backtest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/backtest/ 2>/dev/null || true
+          if [ -f data/backtest_summary.json ]; then git add data/backtest_summary.json; fi
+          git diff --staged --quiet || git commit -m "Journal de backtest quotidien [skip ci]"
+          git push
+
+      - name: Préparer le dossier à publier sur Pages
+        run: |
+          mkdir -p _site/data
+          cp -r dashboard/. _site/
+          cp data/output.json _site/data/output.json
+          if [ -f data/backtest_summary.json ]; then cp data/backtest_summary.json _site/data/backtest_summary.json; fi
+
+      - name: Uploader l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: backtest
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
