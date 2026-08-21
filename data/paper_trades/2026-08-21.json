@@ -1,0 +1,66 @@
+{
+  "date": "2026-08-21",
+  "entries": [
+    {
+      "ticker": "MRNA",
+      "notional": 39200.0,
+      "order_id": "f1eb480b-7dfe-460d-99c1-8f5400736eaa",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "TSM",
+      "notional": 39200.0,
+      "order_id": "20d62418-2452-4730-9909-1da62c56732a",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "AMD",
+      "notional": 39200.0,
+      "order_id": "cc9ea956-0199-479c-b2d7-58f12ad492aa",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "TEM",
+      "notional": 39200.0,
+      "order_id": "9831f3d6-9a61-4db9-8032-1c9c42a2cb68",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "AI",
+      "notional": 39200.0,
+      "order_id": "8bce6412-1658-4a09-83a2-6d07ee6f2379",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "INTC",
+      "notional": 39200.0,
+      "order_id": "84d41c69-db2f-422d-addf-db4a414731ca",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "NVDA",
+      "notional": 39200.0,
+      "order_id": "7e6b49b4-8c7d-4181-962e-9a3b01b7db9c",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "SMCI",
+      "notional": 39200.0,
+      "order_id": "b77a24f0-2910-43d0-9178-a6fd04e6a248",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "MRVL",
+      "notional": 39200.0,
+      "error": "{\"buying_power\":\"934.63\",\"code\":40310000,\"cost_basis\":\"39200\",\"message\":\"insufficient buying power\"}"
+    },
+    {
+      "ticker": "CVX",
+      "notional": 39200.0,
+      "error": "{\"buying_power\":\"918.43\",\"code\":40310000,\"cost_basis\":\"39200\",\"message\":\"insufficient buying power\"}"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 100000.0,
+  "equity_at_close": null
+}

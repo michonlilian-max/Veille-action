@@ -1,0 +1,65 @@
+{
+  "computed_at": "2026-08-21T13:46:47.962750+00:00",
+  "starting_equity": 100000.0,
+  "current_equity": 99870.61,
+  "total_return_pct": -0.13,
+  "current_holdings": [
+    {
+      "ticker": "AI",
+      "unrealized_plpc": -0.05,
+      "market_value": 39181.22
+    },
+    {
+      "ticker": "AMD",
+      "unrealized_plpc": -0.01,
+      "market_value": 39194.21
+    },
+    {
+      "ticker": "INTC",
+      "unrealized_plpc": -0.02,
+      "market_value": 34922.99
+    },
+    {
+      "ticker": "MRNA",
+      "unrealized_plpc": -0.07,
+      "market_value": 38457.58
+    },
+    {
+      "ticker": "NVDA",
+      "unrealized_plpc": -0.01,
+      "market_value": 39196.38
+    },
+    {
+      "ticker": "TEM",
+      "unrealized_plpc": -0.15,
+      "market_value": 38838.15
+    },
+    {
+      "ticker": "TSM",
+      "unrealized_plpc": -0.03,
+      "market_value": 39189.26
+    }
+  ],
+  "days_tracked": 1,
+  "history": [
+    {
+      "date": "2026-08-21",
+      "equity_at_open": 100000.0,
+      "equity_at_close": null,
+      "entries": [
+        "MRNA",
+        "TSM",
+        "AMD",
+        "TEM",
+        "AI",
+        "INTC",
+        "NVDA",
+        "SMCI",
+        "MRVL",
+        "CVX"
+      ],
+      "exits": []
+    }
+  ],
+  "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
+}
