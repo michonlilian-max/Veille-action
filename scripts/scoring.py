@@ -7,9 +7,16 @@ pour repérer rapidement ce qui bouge plus que d'habitude.
 """
 import sys
 import os
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import WATCHLIST, WEIGHTS
+from config import (
+    INSIDER_DECAY_HALF_LIFE_HOURS,
+    NEWS_DECAY_HALF_LIFE_HOURS,
+    WATCHLIST,
+    WEIGHTS,
+)
+from scripts.decay import decay_weight, hours_since_date, hours_since_rfc822
 
 
 def _normalize(values: dict[str, float]) -> dict[str, float]:
@@ -53,6 +60,7 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
                   x_sentiment_data: dict[str, dict] | None = None) -> list[dict]:
     price_data = price_data or {}
     x_sentiment_data = x_sentiment_data or {}
+    now = datetime.now(timezone.utc)
 
     # --- signal 1 : sentiment social (ratio bullish, pondéré par le volume) ---
     sentiment_raw = {}
@@ -63,8 +71,20 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
         ratio = (bullish / total) if total else 0
         sentiment_raw[t] = ratio * (1 + min(total, 30) / 30)  # bonus léger si volume élevé
 
-    # --- signal 2 : volume de news récentes ---
-    news_raw = {t: len(articles) for t, articles in news_data.items()}
+    # --- signal 2 : volume de news récentes, pondéré par fraîcheur ---
+    # Un article publié il y a 2h ne compte plus pareil qu'un article en
+    # fin de fenêtre FRESHNESS_HOURS — son poids décroît avec son âge
+    # (cf. scripts/decay.py, config.NEWS_DECAY_HALF_LIFE_HOURS). Le
+    # compte brut (news_count, affiché tel quel sur le dashboard/email)
+    # reste séparé : la pondération ne sert qu'au score.
+    news_count_raw = {t: len(articles) for t, articles in news_data.items()}
+    news_raw = {}
+    for t, articles in news_data.items():
+        total_weight = 0.0
+        for article in articles:
+            age = hours_since_rfc822(article.get("published", ""), now)
+            total_weight += decay_weight(age, NEWS_DECAY_HALF_LIFE_HOURS) if age is not None else 1.0
+        news_raw[t] = total_weight
 
     # --- signal 3 : vrais achats d'initiés en marché ouvert (Form 4, code P) ---
     # collect_edgar.py résout le CIK de chaque société, attribue chaque
@@ -74,11 +94,16 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
     # exercices d'options, retenues fiscales) ne comptent plus comme un
     # signal positif, ce qui corrige le mislabeling de l'ancienne version
     # (qui comptait tout Form 4 confondu sous "insider_buying").
-    insider_raw = {t: 0 for t in WATCHLIST}
+    # Pondéré par fraîcheur comme les news ci-dessus : un achat d'hier
+    # pèse plus qu'un achat vieux de 29 jours (cf.
+    # config.INSIDER_DECAY_HALF_LIFE_HOURS) — avant, les deux comptaient
+    # exactement pareil tant qu'ils étaient dans INSIDER_LOOKBACK_DAYS.
+    insider_raw = {t: 0.0 for t in WATCHLIST}
     for filing in insider_filings:
         t = filing.get("ticker")
         if t in insider_raw and filing.get("transaction_type") == "buy":
-            insider_raw[t] += 1
+            age = hours_since_date(filing.get("filing_date", ""), now)
+            insider_raw[t] += decay_weight(age, INSIDER_DECAY_HALF_LIFE_HOURS) if age is not None else 1.0
 
     # --- signal 4 : 13F-HR récents mentionnant la société, par ticker ---
     inst_raw = {t: 0 for t in WATCHLIST}
@@ -125,7 +150,7 @@ def build_scores(sentiment_data: list[dict], news_data: dict[str, list[dict]],
                 "volume_spike": price_n.get(t, 0),
                 "sentiment_x": x_n.get(t, 0),
             },
-            "news_count": news_raw.get(t, 0),
+            "news_count": news_count_raw.get(t, 0),
             "price": p.get("price"),
             "change_pct": p.get("change_pct"),
             "volume_ratio": p.get("volume_ratio"),

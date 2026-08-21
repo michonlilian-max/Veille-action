@@ -356,6 +356,7 @@ veille-actions/
 │   ├── send_email.py            # rapport par email (SMTP, optionnel)
 │   ├── scoring.py               # combine les signaux en un score composite
 │   ├── history_utils.py         # utilitaire partagé : retrouver le score calculé ce matin
+│   ├── decay.py                 # pondération temporelle partagée (news, achats d'initiés)
 │   ├── backtest.py              # autocritique quotidienne : score du matin vs mouvement réel du jour
 │   ├── paper_trade.py           # bot de trading, ENTRÉE — PAPER TRADING UNIQUEMENT (API Alpaca, optionnel)
 │   ├── check_paper_trade_exits.py # bot de trading, SORTIE (take-profit/stop-loss) + email récap
@@ -403,6 +404,17 @@ Ajuste ces poids librement selon ce que tu veux privilégier (ils doivent
 sommer à 1.0). Si tu n'actives pas Grok (section 7), ses 25% ne rapportent
 jamais rien — pense à redistribuer ce poids vers les autres signaux dans
 `config.py` si tu ne comptes pas l'activer.
+
+**Pondération temporelle** (`scripts/decay.py`) : pour les news et les
+achats d'initiés, un événement récent pèse plus qu'un événement ancien
+dans le calcul du score — un article publié il y a 2h ne compte plus à
+égalité avec un article en fin de fenêtre de recherche juste parce que
+les deux tombent dans la même fenêtre. Le poids décroît par moitié à
+chaque demi-vie écoulée (`NEWS_DECAY_HALF_LIFE_HOURS` = 24h,
+`INSIDER_DECAY_HALF_LIFE_HOURS` = 10 jours) — jamais un filtre tout-ou-
+rien, jamais brutal. Le compte brut affiché sur le dashboard (ex: "12
+articles") reste, lui, un vrai compte non pondéré — la pondération ne
+sert qu'au calcul du score.
 
 ## Autocritique du score (backtest)
 
@@ -461,8 +473,6 @@ change `WEIGHTS` toi-même dans `config.py` en connaissance de cause.
   institutionnel supplémentaire
 - Form 8-K (événements matériels) — l'infra CIK est déjà en place dans
   `collect_edgar.py`, il suffirait d'ajouter un type de formulaire
-- Pondération temporelle (un Form 4 vieux de 29 jours pèse aujourd'hui
-  pareil qu'un d'hier)
 - Rendre le backtest actionnable sans casser la rigueur statistique : par
   exemple un rapport mensuel qui propose un `WEIGHTS` recalculé à partir
   des corrélations accumulées (toujours à valider et appliquer soi-même,

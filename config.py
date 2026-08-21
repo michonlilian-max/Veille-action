@@ -67,6 +67,21 @@ FILING_13F_LOOKBACK_DAYS = 90
 # rejette tout article plus vieux que ça). 72h = 3 jours.
 FRESHNESS_HOURS = 72
 
+# --- Pondération temporelle (cf. scripts/decay.py) ---
+# Un événement (achat d'initié, article) ne compte plus à égalité du
+# premier au dernier jour de sa fenêtre de recherche — son poids dans le
+# score décroît avec son âge, divisé par 2 à chaque demi-vie écoulée
+# ci-dessous. Corrige un angle mort réel : avant, un Form 4 vieux de 29
+# jours pesait exactement pareil qu'un d'hier dans "insider_buying".
+#
+# Demi-vie des news : plus courte, l'actualité tourne vite (fenêtre de
+# recherche FRESHNESS_HOURS = 72h ci-dessus).
+NEWS_DECAY_HALF_LIFE_HOURS = 24
+# Demi-vie des achats d'initiés : plus longue, un vrai achat reste un
+# signal pertinent plus longtemps qu'un article de presse (fenêtre de
+# recherche INSIDER_LOOKBACK_DAYS = 30 jours ci-dessus).
+INSIDER_DECAY_HALF_LIFE_HOURS = 10 * 24  # 10 jours
+
 # Nombre max d'articles Google News regardés par ticker (avant filtrage par
 # fraîcheur). ⚠️ Google News RSS ne renvoie quasiment jamais plus d'une
 # centaine de résultats par requête, quel que soit ce plafond — le monter à

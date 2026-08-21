@@ -38,11 +38,18 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config import MIDCAP_TOP_N, MIDCAP_WEIGHTS, SP500_FLOOR_SAMPLE_SIZE
+from config import (
+    INSIDER_DECAY_HALF_LIFE_HOURS,
+    MIDCAP_TOP_N,
+    MIDCAP_WEIGHTS,
+    NEWS_DECAY_HALF_LIFE_HOURS,
+    SP500_FLOOR_SAMPLE_SIZE,
+)
 from scripts.collect_edgar import collect_insider_trades
 from scripts.collect_market_cap import collect_market_cap_data
 from scripts.collect_news import collect_news_for_ticker
 from scripts.collect_price import collect_all_prices
+from scripts.decay import decay_weight, hours_since_date, hours_since_rfc822
 from scripts.fetch_midcap400 import fetch_midcap400_tickers
 from scripts.fetch_sp500 import fetch_sp500_tickers
 from scripts.scoring import _normalize
@@ -103,13 +110,30 @@ def run_midcap_candidates():
     insider_filings = collect_insider_trades(watchlist=prelim)
     price_data = collect_all_prices(watchlist=prelim)
 
-    news_raw = {t: len(news_data.get(t, [])) for t in prelim}
+    # Pondération temporelle (cf. scripts/decay.py, même principe que
+    # scoring.py) : un article/achat récent pèse plus qu'un vieux, plutôt
+    # que de compter à égalité tout ce qui tombe dans la fenêtre de
+    # recherche. Les comptes bruts (news_count, insider_buys) restent
+    # séparés pour l'affichage — la pondération ne sert qu'au score.
+    now = datetime.now(timezone.utc)
 
-    insider_raw = {t: 0 for t in prelim}
+    news_count_raw = {t: len(news_data.get(t, [])) for t in prelim}
+    news_raw = {}
+    for t in prelim:
+        total_weight = 0.0
+        for article in news_data.get(t, []):
+            age = hours_since_rfc822(article.get("published", ""), now)
+            total_weight += decay_weight(age, NEWS_DECAY_HALF_LIFE_HOURS) if age is not None else 1.0
+        news_raw[t] = total_weight
+
+    insider_count_raw = {t: 0 for t in prelim}
+    insider_raw = {t: 0.0 for t in prelim}
     for filing in insider_filings:
         t = filing.get("ticker")
         if t in insider_raw and filing.get("transaction_type") == "buy":
-            insider_raw[t] += 1
+            insider_count_raw[t] += 1
+            age = hours_since_date(filing.get("filing_date", ""), now)
+            insider_raw[t] += decay_weight(age, INSIDER_DECAY_HALF_LIFE_HOURS) if age is not None else 1.0
 
     volume_raw = {}
     for t in prelim:
@@ -139,8 +163,8 @@ def run_midcap_candidates():
             "market_cap": round(midcap_caps[t]["market_cap"], 0),
             "market_cap_vs_sp500_floor_pct": round(100 * proximity_raw[t], 1),
             "trailing_eps": midcap_caps[t]["trailing_eps"],
-            "news_count": news_raw.get(t, 0),
-            "insider_buys": insider_raw.get(t, 0),
+            "news_count": news_count_raw.get(t, 0),
+            "insider_buys": insider_count_raw.get(t, 0),
             "price": p.get("price"),
             "change_pct": p.get("change_pct"),
             "volume_ratio": p.get("volume_ratio"),
