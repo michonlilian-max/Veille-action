@@ -1,48 +1,48 @@
 {
-  "computed_at": "2026-08-21T16:00:18.979120+00:00",
+  "computed_at": "2026-08-21T17:02:21.718669+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 102539.93,
-  "total_return_pct": 0.57,
+  "current_equity": 103169.25,
+  "total_return_pct": 1.18,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -0.05,
-      "market_value": 39181.22
+      "unrealized_plpc": -0.67,
+      "market_value": 38937.4
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -1.1,
-      "market_value": 38770.4
+      "unrealized_plpc": -0.94,
+      "market_value": 38831.53
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -1.69,
-      "market_value": 38536.9
+      "unrealized_plpc": -2.23,
+      "market_value": 38324.23
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": 3.64,
-      "market_value": 40627.17
+      "unrealized_plpc": 5.12,
+      "market_value": 41206.68
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -0.53,
-      "market_value": 38990.79
+      "unrealized_plpc": -0.95,
+      "market_value": 38827.58
     },
     {
       "ticker": "SMCI",
-      "unrealized_plpc": -0.55,
-      "market_value": 38984.43
+      "unrealized_plpc": -0.51,
+      "market_value": 39000.2
     },
     {
       "ticker": "TEM",
-      "unrealized_plpc": 7.11,
-      "market_value": 41988.62
+      "unrealized_plpc": 8.8,
+      "market_value": 17691.29
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.35,
-      "market_value": 39062.42
+      "unrealized_plpc": -0.48,
+      "market_value": 39010.2
     }
   ],
   "days_tracked": 1,
@@ -65,7 +65,13 @@
         "MRVL",
         "CVX"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "TEM",
+          "reason": "take_profit",
+          "unrealized_plpc": 8.8
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

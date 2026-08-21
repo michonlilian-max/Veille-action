@@ -70,7 +70,15 @@
       "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "TEM",
+      "reason": "take_profit",
+      "unrealized_plpc": 8.8,
+      "market_value": 42648.1,
+      "order_id": "4caa24bb-ec72-4aec-ade1-c914376f773b"
+    }
+  ],
   "equity_at_open": 101963.48,
   "equity_at_close": null
 }
