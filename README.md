@@ -317,6 +317,10 @@ l'indice ne change pas d'un jour à l'autre.
    le pipeline (news récentes, achats d'initiés, volume anormal)
 5. Écrit le top `MIDCAP_TOP_N` (20 par défaut) dans
    `data/midcap_candidates.json`, affiché sur le dashboard
+6. **Envoie un email récapitulatif** (même mécanisme SMTP que le rapport
+   principal, cf. section 6 — réutilise automatiquement les 5 secrets
+   déjà configurés, rien à ajouter) avec le plancher S&P 500 du moment et
+   le détail de chaque candidat du top 20
 
 ⚠️ **Ce que ça n'est pas** : une prédiction fiable. L'inclusion au S&P
 500 est décidée par un comité (S&P Dow Jones Indices) qui regarde aussi

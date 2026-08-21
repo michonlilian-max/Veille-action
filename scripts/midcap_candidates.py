@@ -46,6 +46,7 @@ from scripts.collect_price import collect_all_prices
 from scripts.fetch_midcap400 import fetch_midcap400_tickers
 from scripts.fetch_sp500 import fetch_sp500_tickers
 from scripts.scoring import _normalize
+from scripts.send_email import send_midcap_report
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(ROOT, "data", "midcap_candidates.json")
@@ -181,6 +182,9 @@ def run_midcap_candidates():
     for r in top[:5]:
         print(f"  {r['ticker']}: score {r['score']}, cap {r['market_cap'] / 1e9:.1f} Md$ "
               f"({r['market_cap_vs_sp500_floor_pct']}% du plancher S&P 500)")
+
+    print("Envoi de l'email récapitulatif (si configuré)...")
+    send_midcap_report(output)
 
 
 if __name__ == "__main__":

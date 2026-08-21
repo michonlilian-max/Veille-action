@@ -193,6 +193,46 @@ def send_paper_trade_report(day_record, summary):
     _send_email(subject, body)
 
 
+def build_midcap_report_text(output):
+    """Construit le corps de l'email récapitulatif hebdomadaire des
+    candidats MidCap 400 (cf. scripts/midcap_candidates.py)."""
+    lines = [
+        "VEILLE ACTIONS — Candidats S&P MidCap 400 à l'inclusion S&P 500",
+        f"Généré le {output['generated_at']}",
+        "",
+        output["disclaimer"],
+        "",
+        f"Plancher S&P 500 actuel : {output['sp500_floor_market_cap'] / 1e9:.1f} Md$ "
+        f"(moyenne des {output['sp500_floor_sample_size']} plus petites capitalisations de l'indice)",
+        f"{output['eligible_count']}/{output['total_midcap_count']} candidats MidCap 400 éligibles "
+        "(BPA 12 mois glissants positif)",
+        "",
+        "=" * 60,
+    ]
+    for c in output.get("candidates", []):
+        lines.append(f"\n{c['ticker']} — score {c['score']}/100")
+        lines.append(
+            f"  Capitalisation : {c['market_cap'] / 1e9:.1f} Md$ "
+            f"({c['market_cap_vs_sp500_floor_pct']}% du plancher S&P 500)"
+        )
+        if c.get("price") is not None:
+            sign = "+" if (c.get("change_pct") or 0) >= 0 else ""
+            lines.append(
+                f"  Prix : {c['price']} $ ({sign}{c.get('change_pct', 0)}% sur 1j), "
+                f"volume x{c.get('volume_ratio', 1)} vs moyenne"
+            )
+        lines.append(
+            f"  {c['news_count']} article(s) récent(s), {c['insider_buys']} achat(s) d'initié(s) récent(s)"
+        )
+    return "\n".join(lines)
+
+
+def send_midcap_report(output):
+    body = build_midcap_report_text(output)
+    subject = f"Veille Actions — candidats MidCap 400 du {output['generated_at'][:10]}"
+    _send_email(subject, body)
+
+
 if __name__ == "__main__":
     import json
 
