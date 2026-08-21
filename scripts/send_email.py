@@ -117,13 +117,24 @@ def send_report(output):
 def build_paper_trade_report_text(day_record, summary):
     """Construit le corps de l'email récapitulatif quotidien du bot de
     paper trading, à partir du journal du jour (complété par
-    close_paper_trades.py) et du résumé cumulé."""
+    scripts/check_paper_trade_exits.py) et du résumé cumulé.
+
+    Le bot tient des positions flexibles (pas de "tout revendre chaque
+    soir") : ce rapport distingue les nouvelles entrées du jour, les
+    sorties réelles (take-profit/stop-loss déclenché) et les positions
+    toujours ouvertes (dont la performance n'est pas encore réalisée)."""
     date = day_record["date"]
-    equity_open = day_record.get("equity_after")
-    equity_close = day_record.get("equity_before_close")
-    equity_final = day_record.get("equity_after_close")
-    intraday_pct = day_record.get("intraday_return_pct")
-    sign = "+" if (intraday_pct or 0) >= 0 else ""
+    equity_open = day_record.get("equity_at_open")
+    equity_close = day_record.get("equity_at_close")
+    day_pct = (
+        round(100 * (equity_close - equity_open) / equity_open, 2)
+        if equity_open and equity_close is not None else None
+    )
+    sign = "+" if (day_pct or 0) >= 0 else ""
+
+    entries = day_record.get("entries", [])
+    exits = day_record.get("exits", [])
+    holdings = summary.get("current_holdings", [])
 
     lines = [
         "VEILLE ACTIONS — Bot de trading (PAPER TRADING — aucun argent réel)",
@@ -133,14 +144,38 @@ def build_paper_trade_report_text(day_record, summary):
         "",
         "=" * 60,
         "",
-        f"Performance du jour : {sign}{intraday_pct}%",
-        f"  Équité à l'ouverture (après achat) : {equity_open:.2f} $" if equity_open is not None else "  Équité à l'ouverture : n/a",
-        f"  Équité juste avant clôture (avant revente) : {equity_close:.2f} $" if equity_close is not None else "  Équité avant clôture : n/a",
-        f"  Équité après revente complète : {equity_final:.2f} $" if equity_final is not None else "  Équité après revente : n/a",
+        f"Performance du compte aujourd'hui : {sign}{day_pct}%" if day_pct is not None else "Performance du compte aujourd'hui : n/a",
+        f"  Équité à l'ouverture : {equity_open:.2f} $" if equity_open is not None else "  Équité à l'ouverture : n/a",
+        f"  Équité à la clôture : {equity_close:.2f} $" if equity_close is not None else "  Équité à la clôture : n/a",
         "",
-        f"Positions tenues aujourd'hui ({len(day_record.get('target_tickers', []))}) : "
-        + ", ".join(day_record.get("target_tickers", [])),
-        "",
+    ]
+
+    if entries:
+        lines.append(f"Nouvelles positions ouvertes aujourd'hui ({len(entries)}) :")
+        for e in entries:
+            lines.append(f"  {e['ticker']} — {e.get('notional', 0):.2f} $")
+        lines.append("")
+
+    if exits:
+        lines.append(f"Positions fermées aujourd'hui ({len(exits)}) :")
+        for x in exits:
+            label = "take-profit" if x.get("reason") == "take_profit" else "stop-loss"
+            xsign = "+" if (x.get("unrealized_plpc") or 0) >= 0 else ""
+            lines.append(f"  {x['ticker']} — {label} déclenché, {xsign}{x.get('unrealized_plpc')}%")
+        lines.append("")
+    else:
+        lines.append("Aucune position fermée aujourd'hui (rien n'a atteint le seuil de "
+                      "take-profit ou de stop-loss).")
+        lines.append("")
+
+    if holdings:
+        lines.append(f"Positions actuellement ouvertes ({len(holdings)}, performance non réalisée) :")
+        for h in holdings:
+            hsign = "+" if (h.get("unrealized_plpc") or 0) >= 0 else ""
+            lines.append(f"  {h['ticker']} — {hsign}{h.get('unrealized_plpc')}%")
+        lines.append("")
+
+    lines += [
         "-" * 60,
         "",
         f"Performance cumulée depuis le début : "

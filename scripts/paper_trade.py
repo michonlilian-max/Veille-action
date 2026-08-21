@@ -18,19 +18,25 @@ ALPACA_SECRET_KEY ne sont pas configurés, ce script s'arrête proprement
 sans rien faire (même logique de dégradation que send_email.py et
 collect_grok_sentiment.py).
 
-Stratégie — trading intrajournalier, aucune position gardée la nuit :
-1. **À l'ouverture des marchés** (ce module, cf. .github/workflows/paper_trade.yml) :
-   récupère le score calculé la nuit précédente, liquide toute position
-   résiduelle (garde-fou, il ne devrait normalement plus y en avoir grâce
-   au (2) ci-dessous), puis répartit la totalité du buying power à parts
-   égales sur les PAPER_TRADING_TOP_N tickers les mieux classés.
-2. **À la clôture des marchés** (cf. scripts/close_paper_trades.py) : revend
-   tout, calcule la performance réelle de la journée, envoie un email
-   récapitulatif et journalise le résultat.
+Stratégie — positions flexibles, sorties bornées (pas de "tenir 1 jour"
+ni de "tout revendre chaque soir") :
+
+1. **Entrée** (ce module, une fois par jour à l'ouverture, cf.
+   .github/workflows/paper_trade.yml) : les positions déjà ouvertes (d'un
+   jour précédent, pas encore sorties) sont laissées telles quelles —
+   on n'achète QUE les tickers du top PAPER_TRADING_TOP_N du score du
+   matin qui ne sont pas déjà en portefeuille, dans la limite des places
+   libres (PAPER_TRADING_TOP_N - nombre de positions déjà tenues).
+2. **Sortie** (cf. scripts/check_paper_trade_exits.py, plusieurs fois par
+   jour) : chaque position est vendue dès qu'elle dépasse
+   PAPER_TRADING_TAKE_PROFIT_PCT de gain OU PAPER_TRADING_STOP_LOSS_PCT
+   de perte — jamais gardée indéfiniment en espérant un rebond (cf.
+   config.py pour le raisonnement). Entre ces deux seuils, une position
+   peut être tenue plusieurs jours.
 
 Les deux scripts partagent le même fichier journalier dans
-data/paper_trades/ (écrit le matin, complété le soir) et la même fonction
-`rebuild_summary()` pour le résumé affiché sur le dashboard.
+data/paper_trades/ et la même fonction `rebuild_summary()` pour le résumé
+affiché sur le dashboard.
 """
 import glob
 import json
@@ -52,9 +58,8 @@ SUMMARY_PATH = os.path.join(ROOT, "data", "paper_trades_summary.json")
 def get_client():
     """Renvoie un TradingClient Alpaca en mode paper, ou None si les clés
     ne sont pas configurées / le paquet n'est pas installé. Point d'entrée
-    partagé par paper_trade.py et close_paper_trades.py — paper=True
-    câblé en dur ici aussi, voir l'avertissement de sécurité en tête de
-    fichier."""
+    partagé par tous les scripts du bot — paper=True câblé en dur ici
+    aussi, voir l'avertissement de sécurité en tête de fichier."""
     api_key = os.environ.get("ALPACA_API_KEY")
     secret_key = os.environ.get("ALPACA_SECRET_KEY")
     if not api_key or not secret_key:
@@ -66,6 +71,29 @@ def get_client():
         print("[paper_trade] Le paquet 'alpaca-py' n'est pas installé (cf. requirements.txt) — bot ignoré.")
         return None
     return TradingClient(api_key, secret_key, paper=True)
+
+
+def today_str():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
+def load_day_record(date_str):
+    """Charge (ou initialise) le journal du jour — partagé entre
+    paper_trade.py (entrées) et check_paper_trade_exits.py (sorties +
+    éventuel email), potentiellement appelés plusieurs fois le même jour."""
+    path = os.path.join(PAPER_TRADES_DIR, f"{date_str}.json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    return {"date": date_str, "entries": [], "exits": [], "equity_at_open": None, "equity_at_close": None}
+
+
+def save_day_record(record):
+    os.makedirs(PAPER_TRADES_DIR, exist_ok=True)
+    path = os.path.join(PAPER_TRADES_DIR, f"{record['date']}.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(record, f, ensure_ascii=False, indent=2)
+    return path
 
 
 def _prune_paper_trades_log():
@@ -81,42 +109,54 @@ def _prune_paper_trades_log():
             print(f"[paper_trade] Journal expiré supprimé : {os.path.basename(path)}")
 
 
-def rebuild_summary(current_equity, current_holdings):
-    """Reconstruit data/paper_trades_summary.json à partir de tous les
-    journaux quotidiens accumulés (data/paper_trades/*.json) — appelé par
-    paper_trade.py (matin, après achat) ET close_paper_trades.py (soir,
-    après clôture), donc `current_equity`/`current_holdings` reflètent
-    l'état au moment de l'appel, pas forcément la fin de journée."""
+def rebuild_summary(client):
+    """Reconstruit data/paper_trades_summary.json à partir de l'état
+    actuel du compte (équité, positions tenues) — appelé après chaque
+    action (entrée ou sortie) pour garder le dashboard à jour."""
+    account = client.get_account()
+    equity = float(account.equity)
+    positions = client.get_all_positions()
+    holdings = [
+        {
+            "ticker": p.symbol,
+            "unrealized_plpc": round(float(p.unrealized_plpc) * 100, 2),
+            "market_value": round(float(p.market_value), 2),
+        }
+        for p in positions
+    ]
+
     os.makedirs(PAPER_TRADES_DIR, exist_ok=True)
-    summary_points = []
+    daily_points = []
     for path in sorted(glob.glob(os.path.join(PAPER_TRADES_DIR, "*.json"))):
         try:
             with open(path, encoding="utf-8") as f:
                 d = json.load(f)
-            summary_points.append({
+            daily_points.append({
                 "date": d["date"],
-                "equity_before": d.get("equity_before"),
-                "equity_after_open": d.get("equity_after"),
-                "equity_after_close": d.get("equity_after_close"),
-                "intraday_return_pct": d.get("intraday_return_pct"),
+                "equity_at_open": d.get("equity_at_open"),
+                "equity_at_close": d.get("equity_at_close"),
+                "entries": [e["ticker"] for e in d.get("entries", [])],
+                "exits": [{"ticker": e["ticker"], "reason": e.get("reason"), "unrealized_plpc": e.get("unrealized_plpc")}
+                          for e in d.get("exits", [])],
             })
         except (json.JSONDecodeError, OSError, KeyError):
             continue
 
-    starting_equity = summary_points[0]["equity_before"] if summary_points else current_equity
+    starting_equity = daily_points[0]["equity_at_open"] if daily_points and daily_points[0].get("equity_at_open") else equity
     summary = {
         "computed_at": datetime.now(timezone.utc).isoformat(),
         "starting_equity": starting_equity,
-        "current_equity": current_equity,
-        "total_return_pct": round(100 * (current_equity - starting_equity) / starting_equity, 2) if starting_equity else None,
-        "current_holdings": current_holdings,
-        "days_tracked": len(summary_points),
-        "history": summary_points,
+        "current_equity": equity,
+        "total_return_pct": round(100 * (equity - starting_equity) / starting_equity, 2) if starting_equity else None,
+        "current_holdings": holdings,
+        "days_tracked": len(daily_points),
+        "history": daily_points,
         "note": (
             "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). "
-            "Trading intrajournalier : achat des PAPER_TRADING_TOP_N tickers par "
-            "score du matin à l'ouverture, revente complète à la clôture — aucune "
-            "position gardée la nuit."
+            "Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score "
+            "du matin, revendues automatiquement au-delà de "
+            "PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de "
+            "perte — peuvent être tenues plusieurs jours entre ces deux seuils."
         ),
     }
     with open(SUMMARY_PATH, "w", encoding="utf-8") as f:
@@ -134,44 +174,53 @@ def run_paper_trading():
         print(f"[paper_trade] Marché fermé actuellement (prochain jour de bourse : {clock.next_open}) — bot ignoré.")
         return
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = today_str()
     snapshot = find_morning_snapshot(today)
     if snapshot is None:
         print(f"[paper_trade] Aucun run de nuit trouvé pour aujourd'hui ({today}) — bot ignoré.")
         return
 
-    target_rows = snapshot["watchlist"][:PAPER_TRADING_TOP_N]
-    target_tickers = [row["ticker"] for row in target_rows]
-    print(f"[paper_trade] Cible du jour ({len(target_tickers)} tickers, score du matin) : {target_tickers}")
+    account = client.get_account()
+    equity_at_open = float(account.equity)
+    print(f"[paper_trade] Équité du compte paper à l'ouverture : {equity_at_open:.2f} $")
 
-    account_before = client.get_account()
-    equity_before = float(account_before.equity)
-    print(f"[paper_trade] Équité du compte paper à l'ouverture : {equity_before:.2f} $")
+    held_tickers = {p.symbol for p in client.get_all_positions()}
+    free_slots = PAPER_TRADING_TOP_N - len(held_tickers)
+    print(f"[paper_trade] {len(held_tickers)} position(s) déjà tenue(s) (report des jours précédents), "
+          f"{max(free_slots, 0)} place(s) libre(s) sur {PAPER_TRADING_TOP_N}.")
 
-    # Garde-fou : il ne devrait normalement plus y avoir de position à ce
-    # stade (close_paper_trades.py a tout revendu la veille au soir), mais
-    # on liquide quand même par sécurité (ex: script du soir en échec).
-    positions_before = [
-        {"ticker": p.symbol, "qty": p.qty, "market_value": float(p.market_value)}
-        for p in client.get_all_positions()
-    ]
-    if positions_before:
-        print(f"[paper_trade] {len(positions_before)} position(s) résiduelle(s) trouvée(s) (inattendu) — liquidation...")
-        client.close_all_positions(cancel_orders=True)
-        time.sleep(5)
+    day_record = load_day_record(today)
+    day_record["equity_at_open"] = equity_at_open
 
-    account_after_close = client.get_account()
-    buying_power = float(account_after_close.buying_power)
+    if free_slots <= 0:
+        print("[paper_trade] Aucune place libre — pas de nouvel achat aujourd'hui.")
+        save_day_record(day_record)
+        rebuild_summary(client)
+        return
+
+    candidates = [row["ticker"] for row in snapshot["watchlist"] if row["ticker"] not in held_tickers]
+    new_tickers = candidates[:free_slots]
+
+    if not new_tickers:
+        print("[paper_trade] Aucun nouveau candidat (tous les tickers du top sont déjà tenus) — rien à acheter.")
+        save_day_record(day_record)
+        rebuild_summary(client)
+        return
+
+    print(f"[paper_trade] Nouveaux candidats à acheter ({len(new_tickers)}, score du matin) : {new_tickers}")
+
+    buying_power = float(account.buying_power)
     # Marge de sécurité : le prix peut légèrement bouger entre la lecture du
     # buying power et l'exécution de l'ordre suivant, un ordre à 100% pile
     # du buying power peut être rejeté pour quelques centimes.
-    allocation_per_ticker = (buying_power * 0.98) / len(target_tickers) if target_tickers else 0
+    allocation_per_ticker = (buying_power * 0.98) / len(new_tickers)
 
-    orders = []
-    for ticker in target_tickers:
+    from alpaca.trading.requests import MarketOrderRequest
+    from alpaca.trading.enums import OrderSide, TimeInForce
+
+    for ticker in new_tickers:
+        entry = {"ticker": ticker, "notional": round(allocation_per_ticker, 2)}
         try:
-            from alpaca.trading.requests import MarketOrderRequest
-            from alpaca.trading.enums import OrderSide, TimeInForce
             order_req = MarketOrderRequest(
                 symbol=ticker,
                 notional=round(allocation_per_ticker, 2),
@@ -179,41 +228,21 @@ def run_paper_trading():
                 time_in_force=TimeInForce.DAY,
             )
             order = client.submit_order(order_req)
-            orders.append({
-                "ticker": ticker,
-                "notional": round(allocation_per_ticker, 2),
-                "order_id": str(order.id),
-                "status": str(order.status),
-            })
+            entry["order_id"] = str(order.id)
+            entry["status"] = str(order.status)
             print(f"[paper_trade] Ordre soumis : {ticker} pour {allocation_per_ticker:.2f} $")
         except Exception as e:
+            entry["error"] = str(e)
             print(f"[paper_trade] {ticker} : échec de l'ordre ({e})")
-            orders.append({"ticker": ticker, "notional": round(allocation_per_ticker, 2), "error": str(e)})
+        day_record["entries"].append(entry)
         time.sleep(0.3)
 
-    account_final = client.get_account()
-    equity_after = float(account_final.equity)
-
-    day_record = {
-        "date": today,
-        "reference_run": snapshot["generated_at"],
-        "equity_before": equity_before,
-        "equity_after": equity_after,
-        "buying_power_used": buying_power,
-        "positions_liquidated": positions_before,
-        "target_tickers": target_tickers,
-        "orders": orders,
-    }
-
-    os.makedirs(PAPER_TRADES_DIR, exist_ok=True)
-    day_path = os.path.join(PAPER_TRADES_DIR, f"{today}.json")
-    with open(day_path, "w", encoding="utf-8") as f:
-        json.dump(day_record, f, ensure_ascii=False, indent=2)
-    print(f"[paper_trade] Journal du jour écrit : {day_path}")
+    save_day_record(day_record)
+    print(f"[paper_trade] Journal du jour mis à jour : {os.path.join(PAPER_TRADES_DIR, today + '.json')}")
 
     _prune_paper_trades_log()
-    summary = rebuild_summary(current_equity=equity_after, current_holdings=target_tickers)
-    print(f"[paper_trade] Équité : {equity_before:.2f} $ -> {equity_after:.2f} $ "
+    summary = rebuild_summary(client)
+    print(f"[paper_trade] Équité : {equity_at_open:.2f} $ -> {summary['current_equity']:.2f} $ "
           f"(cumulé depuis le début : {summary['total_return_pct']}%)")
 
 

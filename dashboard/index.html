@@ -128,26 +128,32 @@ async function loadPaperTrade() {
     const returnSign = s.total_return_pct > 0 ? '+' : '';
 
     const today = s.history && s.history.length ? s.history[s.history.length - 1] : null;
-    const todayPct = today ? today.intraday_return_pct : null;
+    const todayPct = (today && today.equity_at_open && today.equity_at_close !== null && today.equity_at_close !== undefined)
+      ? Math.round(10000 * (today.equity_at_close - today.equity_at_open) / today.equity_at_open) / 100
+      : null;
     const todayClass = todayPct > 0 ? 'bt-pos' : (todayPct < 0 ? 'bt-neg' : '');
     const todaySign = todayPct > 0 ? '+' : '';
-    const todayStat = todayPct !== null && todayPct !== undefined
+    const todayStat = todayPct !== null
       ? `<div>
           <div class="pt-stat-label">Performance du jour</div>
           <div class="pt-stat-value ${todayClass}">${todaySign}${todayPct}%</div>
         </div>`
       : '';
     const holdingsLabel = s.current_holdings && s.current_holdings.length
-      ? `Positions actuelles : ${s.current_holdings.join(', ')}`
-      : 'Aucune position ouverte actuellement (hors heures de marché, ou revendu à la clôture).';
+      ? 'Positions actuelles : ' + s.current_holdings.map(h => {
+          const hSign = h.unrealized_plpc > 0 ? '+' : '';
+          return `${h.ticker} (${hSign}${h.unrealized_plpc}%)`;
+        }).join(', ')
+      : 'Aucune position ouverte actuellement.';
 
     document.getElementById('papertrade').innerHTML = `
       <h2>🤖 Bot de trading <span class="pt-badge">PAPIER — AUCUN ARGENT RÉEL</span></h2>
       <div class="pt-note">
-        Portefeuille simulé (API Alpaca, mode paper trading) : achète à l'ouverture les tickers les
-        mieux classés par le score du matin, revend tout à la clôture — aucune position gardée la
-        nuit. Sert à voir si la stratégie aurait été rentable, sans rien risquer — ce n'est PAS un
-        historique de trading réel.
+        Portefeuille simulé (API Alpaca, mode paper trading) : achète les tickers les mieux classés
+        par le score du matin dans les places libres, revend automatiquement une position au-delà
+        d'un seuil de gain ou de perte (jamais gardée indéfiniment) — une position peut rester
+        ouverte plusieurs jours. Sert à voir si la stratégie aurait été rentable, sans rien risquer —
+        ce n'est PAS un historique de trading réel.
       </div>
       <div class="pt-stats">
         <div>

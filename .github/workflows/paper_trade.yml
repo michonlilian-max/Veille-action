@@ -5,8 +5,9 @@ on:
     # Après l'ouverture des marchés US (9h30 ET), du lundi au vendredi.
     # 14h35 UTC reste après l'ouverture aussi bien en heure d'été US
     # (9h30 ET = 13h30 UTC) qu'en heure d'hiver (9h30 ET = 14h30 UTC).
-    # Pendant de la clôture, cf. close_paper_trades.yml — aucune position
-    # n'est jamais gardée d'un jour de bourse à l'autre.
+    # N'achète QUE les places libres (les positions déjà tenues sont
+    # laissées telles quelles) — cf. check_paper_trade_exits.yml pour les
+    # sorties (take-profit/stop-loss), vérifiées plusieurs fois par jour.
     - cron: "35 14 * * 1-5"
   workflow_dispatch: {}
 

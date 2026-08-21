@@ -128,6 +128,19 @@ PAPER_TRADING_TOP_N = 10
 # (data/paper_trades/) avant suppression automatique.
 PAPER_TRADING_RETENTION_DAYS = 365
 
+# Seuils de sortie du bot de paper trading (cf. scripts/check_paper_trade_exits.py) :
+# une position est vendue automatiquement dès que son gain latent dépasse
+# PAPER_TRADING_TAKE_PROFIT_PCT, OU dès que sa perte latente dépasse
+# PAPER_TRADING_STOP_LOSS_PCT. Dans les deux cas la perte reste bornée —
+# jamais "on garde indéfiniment en attendant que ça remonte" (l'effet de
+# disposition : garder les perdants et vendre les gagnants trop tôt est un
+# biais comportemental documenté qui dégrade la performance, pas
+# l'inverse). Stop-loss plus serré que le take-profit : couper vite les
+# pertes, laisser courir les gains — principe de gestion du risque
+# standard, l'opposé de l'effet de disposition.
+PAPER_TRADING_TAKE_PROFIT_PCT = 8.0
+PAPER_TRADING_STOP_LOSS_PCT = 5.0
+
 # Pondération du score composite (score final = somme pondérée, voir
 # scoring.py). Doit sommer à 1.0.
 WEIGHTS = {

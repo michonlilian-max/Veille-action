@@ -1,15 +1,18 @@
-name: Bot de trading — clôture + email récap (paper trading uniquement)
+name: Bot de trading — vérification des sorties (paper trading uniquement)
 
 on:
   schedule:
-    # Juste avant la clôture des marchés US (16h00 ET), du lundi au
-    # vendredi. 19h50 UTC reste avant la clôture aussi bien en heure d'été
-    # US (16h00 ET = 20h00 UTC, marge ~10 min) qu'en heure d'hiver (16h00
-    # ET = 21h00 UTC, marge ~1h10) — mieux vaut clôturer un peu tôt que
-    # tenter un ordre après la fermeture du marché (qui ne s'exécuterait
-    # pas avant la prochaine ouverture, contraire au but "aucune position
-    # gardée la nuit").
-    - cron: "50 19 * * 1-5"
+    # Plusieurs vérifications par jour de bourse pendant les heures de
+    # marché US, pour réagir aux seuils de take-profit/stop-loss dans la
+    # journée plutôt qu'une seule fois. Ces 5 horaires (35 min après
+    # chaque heure, 15h-19h UTC) tombent tous dans les heures de marché US
+    # aussi bien en heure d'été (9h30-16h00 ET = 13h30-20h00 UTC) qu'en
+    # heure d'hiver (9h30-16h00 ET = 14h30-21h00 UTC) — c'est
+    # l'intersection des deux fenêtres. Le dernier passage (19h35 UTC)
+    # envoie en plus l'email récapitulatif du jour (cf. le step
+    # "Déterminer..." ci-dessous) ; il n'est pas exactement à la clôture
+    # (marge DST oblige) mais reste dans les dernières heures de la séance.
+    - cron: "35 15,16,17,18,19 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
@@ -22,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  close_paper_trade:
+  check_exits:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,10 +39,20 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
+      - name: Déterminer si c'est le dernier passage du jour
+        id: last_check
+        run: |
+          hour=$(date -u +%H)
+          if [ "$hour" -ge 19 ]; then
+            echo "send_report=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "send_report=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # ⚠️ Mêmes clés PAPER TRADING que le workflow d'ouverture — jamais
-      # de clé de trading réel ici. scripts/close_paper_trades.py force
-      # paper=True en dur de toute façon (via scripts/paper_trade.py).
-      - name: Revendre le portefeuille paper et envoyer le récap (si ALPACA_API_KEY configuré)
+      # de clé de trading réel ici. scripts/check_paper_trade_exits.py
+      # force paper=True en dur de toute façon (via scripts/paper_trade.py).
+      - name: Vérifier les seuils de sortie (et envoyer le récap si dernier passage du jour)
         env:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
@@ -48,7 +61,8 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-        run: python scripts/close_paper_trades.py
+          SEND_DAILY_REPORT: ${{ steps.last_check.outputs.send_report }}
+        run: python scripts/check_paper_trade_exits.py
 
       - name: Committer le journal de paper trading
         run: |
@@ -60,7 +74,7 @@ jobs:
             echo "Rien à committer."
             exit 0
           fi
-          git commit -m "Clôture + récap du bot de paper trading [skip ci]"
+          git commit -m "Vérification des sorties du bot de paper trading [skip ci]"
           # cf. veille.yml : la branche peut avoir bougé pendant ce run
           # (autre workflow, push manuel) — on rebase et on réessaie plutôt
           # que de perdre le journal du jour sur un simple rejet.
@@ -90,7 +104,7 @@ jobs:
           path: _site
 
   deploy:
-    needs: close_paper_trade
+    needs: check_exits
     runs-on: ubuntu-latest
     environment:
       name: github-pages
