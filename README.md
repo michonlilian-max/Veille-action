@@ -297,11 +297,17 @@ recommandation d'y aller.
 ### 9. Candidats S&P MidCap 400 à l'inclusion S&P 500
 
 Fonctionnalité gratuite, activée par défaut (pas de secret à configurer).
-Tourne une fois par semaine (`.github/workflows/midcap_candidates.yml`,
-dimanche 08h00 UTC) — le run est lourd (~900 appels individuels
-`yfinance` pour récupérer capitalisation + bénéfices, plusieurs minutes),
-pas la peine de le faire tourner chaque nuit vu que la composition de
-l'indice ne change pas d'un jour à l'autre.
+Tourne chaque nuit (`.github/workflows/midcap_candidates.yml`,
+lundi-samedi 03h00 UTC, même horaire que `veille.yml`).
+
+⚠️ **Coût réel de ce rythme** : ~900 appels individuels `yfinance` (pas
+le téléchargement groupé du reste du pipeline) **chaque nuit** pour
+récupérer capitalisation + bénéfices — sur une API non officielle qui
+peut casser sans préavis (même limite que `collect_price.py`, cf.
+"Limites à connaître"). Si ce module se met à échouer souvent, le
+premier réflexe est de repasser à un rythme hebdomadaire (dimanche
+uniquement) plutôt que quotidien — la composition de l'indice ne change
+de toute façon pas d'un jour à l'autre.
 
 **Ce que fait `scripts/midcap_candidates.py`** :
 1. Récupère la capitalisation boursière actuelle du S&P 500 **et** du

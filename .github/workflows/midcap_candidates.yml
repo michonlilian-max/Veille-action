@@ -2,14 +2,18 @@ name: Candidats S&P MidCap 400 à l'inclusion S&P 500
 
 on:
   schedule:
-    # Une fois par semaine (dimanche 08h00 UTC) — l'éligibilité à
-    # l'inclusion au S&P 500 ne change pas d'un jour à l'autre, et le run
-    # est lourd (~900 appels individuels yfinance pour la capitalisation
-    # + BPA, plusieurs minutes) : pas la peine de le faire tourner chaque
-    # nuit comme veille.yml. Horaire choisi pour ne pas chevaucher les
-    # autres crons (veille.yml lun-sam 03h UTC, backtest.yml et le bot de
-    # trading en semaine seulement).
-    - cron: "0 8 * * 0"
+    # Même horaire que veille.yml (lundi-samedi 03h00 UTC) — sur demande
+    # explicite, pour tourner chaque nuit comme le run principal plutôt
+    # qu'une fois par semaine.
+    # ⚠️ Coût réel de ce choix : ~900 appels yfinance individuels (pas le
+    # téléchargement groupé) CHAQUE NUIT au lieu d'une fois par semaine,
+    # soit x7 le volume hebdomadaire sur une API non officielle qui peut
+    # déjà casser sans préavis (même limite que collect_price.py). À
+    # surveiller si ce module se met à échouer plus souvent qu'avant — le
+    # premier réflexe sera de revenir à un rythme hebdomadaire.
+    # Les deux workflows peuvent tourner en même temps sans se bloquer
+    # (cf. le fix de concurrency appliqué aux 5 workflows).
+    - cron: "0 3 * * 1-6"
   workflow_dispatch: {}
 
 permissions:
