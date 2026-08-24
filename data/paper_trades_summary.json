@@ -1,46 +1,46 @@
 {
-  "computed_at": "2026-08-21T19:49:22.922672+00:00",
+  "computed_at": "2026-08-24T15:20:21.698555+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 102269.08,
-  "total_return_pct": 0.3,
+  "current_equity": 91432.93,
+  "total_return_pct": -10.33,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -0.96,
-      "market_value": 38824.86
+      "unrealized_plpc": -1.44,
+      "market_value": 38637.3
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -0.7,
-      "market_value": 38924.89
+      "unrealized_plpc": -3.81,
+      "market_value": 37707.17
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -2.31,
-      "market_value": 38296.58
+      "unrealized_plpc": -6.44,
+      "market_value": 36675.99
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": 2.23,
-      "market_value": 40072.33
+      "unrealized_plpc": -4.49,
+      "market_value": 37441.94
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -0.92,
-      "market_value": 38841.1
+      "unrealized_plpc": -3.8,
+      "market_value": 37709.43
     },
     {
       "ticker": "SMCI",
-      "unrealized_plpc": 0.04,
-      "market_value": 39215.76
+      "unrealized_plpc": -7.26,
+      "market_value": 36355.68
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.27,
-      "market_value": 39095.06
+      "unrealized_plpc": -3.33,
+      "market_value": 37894.26
     }
   ],
-  "days_tracked": 1,
+  "days_tracked": 2,
   "history": [
     {
       "date": "2026-08-21",
@@ -67,6 +67,17 @@
           "unrealized_plpc": 8.8
         }
       ]
+    },
+    {
+      "date": "2026-08-24",
+      "equity_at_open": 91412.94,
+      "equity_at_close": null,
+      "entries": [
+        "TPL",
+        "COIN",
+        "BSX"
+      ],
+      "exits": []
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

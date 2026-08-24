@@ -1,0 +1,23 @@
+{
+  "date": "2026-08-24",
+  "entries": [
+    {
+      "ticker": "TPL",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "COIN",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "BSX",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 91412.94,
+  "equity_at_close": null
+}
