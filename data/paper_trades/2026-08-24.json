@@ -24,6 +24,13 @@
       "unrealized_plpc": -5.27,
       "market_value": 37135.37,
       "order_id": "eb5b0779-c55a-4a55-abb8-b6492b960b1c"
+    },
+    {
+      "ticker": "SMCI",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.83,
+      "market_value": 36912.97,
+      "order_id": "79252ae5-4e02-4a51-ab2d-e3dd45119acb"
     }
   ],
   "equity_at_open": 91412.94,
