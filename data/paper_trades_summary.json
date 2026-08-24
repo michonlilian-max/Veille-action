@@ -1,38 +1,33 @@
 {
-  "computed_at": "2026-08-24T17:59:41.633839+00:00",
+  "computed_at": "2026-08-24T19:10:43.586805+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 92692.68,
-  "total_return_pct": -9.09,
+  "current_equity": 93168.62,
+  "total_return_pct": -8.63,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -3.4,
-      "market_value": 37868.31
+      "unrealized_plpc": -3.16,
+      "market_value": 37962.09
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -3.6,
-      "market_value": 37790.61
+      "unrealized_plpc": -3.62,
+      "market_value": 37781.53
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": -2.74,
-      "market_value": 38126.93
+      "unrealized_plpc": -2.19,
+      "market_value": 38343.39
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -3.58,
-      "market_value": 37796.9
-    },
-    {
-      "ticker": "SMCI",
-      "unrealized_plpc": -5.81,
-      "market_value": 36923.49
+      "unrealized_plpc": -3.74,
+      "market_value": 37733.6
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -2.94,
-      "market_value": 38046.28
+      "unrealized_plpc": -2.31,
+      "market_value": 38292.51
     }
   ],
   "days_tracked": 2,
@@ -66,7 +61,7 @@
     {
       "date": "2026-08-24",
       "equity_at_open": 91412.94,
-      "equity_at_close": null,
+      "equity_at_close": 93168.62,
       "entries": [
         "TPL",
         "COIN",
