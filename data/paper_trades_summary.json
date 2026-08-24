@@ -1,43 +1,43 @@
 {
-  "computed_at": "2026-08-24T15:20:21.698555+00:00",
+  "computed_at": "2026-08-24T16:05:18.286106+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 91432.93,
-  "total_return_pct": -10.33,
+  "current_equity": 95099.11,
+  "total_return_pct": -6.73,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -1.44,
-      "market_value": 38637.3
+      "unrealized_plpc": -1.15,
+      "market_value": 38750.21
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": -3.81,
-      "market_value": 37707.17
+      "unrealized_plpc": -3.31,
+      "market_value": 37900.48
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -6.44,
-      "market_value": 36675.99
+      "unrealized_plpc": -5.27,
+      "market_value": 37133.24
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": -4.49,
-      "market_value": 37441.94
+      "unrealized_plpc": -0.7,
+      "market_value": 38925.64
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -3.8,
-      "market_value": 37709.43
+      "unrealized_plpc": -3.26,
+      "market_value": 37923.14
     },
     {
       "ticker": "SMCI",
-      "unrealized_plpc": -7.26,
-      "market_value": 36355.68
+      "unrealized_plpc": -4.98,
+      "market_value": 37249.45
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -3.33,
-      "market_value": 37894.26
+      "unrealized_plpc": -2.54,
+      "market_value": 38205.77
     }
   ],
   "days_tracked": 2,
@@ -77,7 +77,13 @@
         "COIN",
         "BSX"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "INTC",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.27
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
