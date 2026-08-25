@@ -1,33 +1,28 @@
 {
-  "computed_at": "2026-08-25T16:09:44.374437+00:00",
+  "computed_at": "2026-08-25T17:07:01.905171+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 99762.46,
-  "total_return_pct": -2.16,
+  "current_equity": 99390.14,
+  "total_return_pct": -2.52,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -4.4,
-      "market_value": 37474.43
+      "unrealized_plpc": -5.02,
+      "market_value": 37230.6
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": 0.74,
-      "market_value": 39489.14
-    },
-    {
-      "ticker": "MRNA",
-      "unrealized_plpc": 8.98,
-      "market_value": 9666.62
+      "unrealized_plpc": 0.47,
+      "market_value": 39385.81
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -2.61,
-      "market_value": 38176.53
+      "unrealized_plpc": -2.41,
+      "market_value": 38254.98
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.9,
-      "market_value": 38848.37
+      "unrealized_plpc": -1.16,
+      "market_value": 38745.78
     }
   ],
   "days_tracked": 3,
@@ -96,6 +91,11 @@
           "ticker": "MRNA",
           "reason": "take_profit",
           "unrealized_plpc": 8.98
+        },
+        {
+          "ticker": "AI",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.02
         }
       ]
     }

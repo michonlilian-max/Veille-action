@@ -34,6 +34,13 @@
       "unrealized_plpc": 8.98,
       "market_value": 42720.85,
       "order_id": "e83a973a-0f94-472e-818c-6ebff271ebca"
+    },
+    {
+      "ticker": "AI",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.02,
+      "market_value": 37230.6,
+      "order_id": "228db4f7-f81e-40e8-b0b6-a66327adfcf0"
     }
   ],
   "equity_at_open": 99654.53,
