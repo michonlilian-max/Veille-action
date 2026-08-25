@@ -1,33 +1,33 @@
 {
-  "computed_at": "2026-08-25T15:25:30.198887+00:00",
+  "computed_at": "2026-08-25T16:09:44.374437+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 99643.44,
-  "total_return_pct": -2.28,
+  "current_equity": 99762.46,
+  "total_return_pct": -2.16,
   "current_holdings": [
     {
       "ticker": "AI",
-      "unrealized_plpc": -4.31,
-      "market_value": 37511.94
+      "unrealized_plpc": -4.4,
+      "market_value": 37474.43
     },
     {
       "ticker": "AMD",
-      "unrealized_plpc": 1.1,
-      "market_value": 39629.58
+      "unrealized_plpc": 0.74,
+      "market_value": 39489.14
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": 9.04,
-      "market_value": 42743.84
+      "unrealized_plpc": 8.98,
+      "market_value": 9666.62
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -3.12,
-      "market_value": 37979.05
+      "unrealized_plpc": -2.61,
+      "market_value": 38176.53
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -1.22,
-      "market_value": 38722.46
+      "unrealized_plpc": -0.9,
+      "market_value": 38848.37
     }
   ],
   "days_tracked": 3,
@@ -91,7 +91,13 @@
         "CMG",
         "DOW"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "MRNA",
+          "reason": "take_profit",
+          "unrealized_plpc": 8.98
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

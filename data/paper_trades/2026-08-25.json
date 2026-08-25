@@ -27,7 +27,15 @@
       "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "MRNA",
+      "reason": "take_profit",
+      "unrealized_plpc": 8.98,
+      "market_value": 42720.85,
+      "order_id": "e83a973a-0f94-472e-818c-6ebff271ebca"
+    }
+  ],
   "equity_at_open": 99654.53,
   "equity_at_close": null
 }
