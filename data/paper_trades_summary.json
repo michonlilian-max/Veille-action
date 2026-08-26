@@ -1,23 +1,23 @@
 {
-  "computed_at": "2026-08-26T16:04:07.640690+00:00",
+  "computed_at": "2026-08-26T16:36:54.220706+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 99654.95,
-  "total_return_pct": -2.26,
+  "current_equity": 99523.14,
+  "total_return_pct": -2.39,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 1.94,
-      "market_value": 39960.03
+      "unrealized_plpc": 1.62,
+      "market_value": 39836.94
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -3.24,
-      "market_value": 37928.53
+      "unrealized_plpc": -3.39,
+      "market_value": 37871.33
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -1.06,
-      "market_value": 38784.02
+      "unrealized_plpc": -0.94,
+      "market_value": 38832.52
     }
   ],
   "days_tracked": 4,
