@@ -1,23 +1,23 @@
 {
-  "computed_at": "2026-08-26T16:36:54.220706+00:00",
+  "computed_at": "2026-08-26T19:24:55.357382+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 99523.14,
-  "total_return_pct": -2.39,
+  "current_equity": 100013.13,
+  "total_return_pct": -1.91,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 1.62,
-      "market_value": 39836.94
+      "unrealized_plpc": 2.0,
+      "market_value": 39984.4
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -3.39,
-      "market_value": 37871.33
+      "unrealized_plpc": -2.92,
+      "market_value": 38053.89
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.94,
-      "market_value": 38832.52
+      "unrealized_plpc": -0.53,
+      "market_value": 38992.47
     }
   ],
   "days_tracked": 4,
@@ -97,7 +97,7 @@
     {
       "date": "2026-08-26",
       "equity_at_open": 99615.42,
-      "equity_at_close": null,
+      "equity_at_close": 100013.13,
       "entries": [
         "MRNA",
         "TPL",
