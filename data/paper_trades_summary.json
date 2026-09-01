@@ -1,26 +1,26 @@
 {
-  "computed_at": "2026-08-26T19:24:55.357382+00:00",
+  "computed_at": "2026-09-01T17:56:04.364389+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 100013.13,
-  "total_return_pct": -1.91,
+  "current_equity": 98402.88,
+  "total_return_pct": -3.49,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 2.0,
-      "market_value": 39984.4
+      "unrealized_plpc": -4.08,
+      "market_value": 37602.26
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -2.92,
-      "market_value": 38053.89
+      "unrealized_plpc": 0.26,
+      "market_value": 39301.89
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.53,
-      "market_value": 38992.47
+      "unrealized_plpc": -1.74,
+      "market_value": 38517.28
     }
   ],
-  "days_tracked": 4,
+  "days_tracked": 5,
   "history": [
     {
       "date": "2026-08-21",
@@ -106,6 +106,21 @@
         "COIN",
         "SMCI",
         "INTC"
+      ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-01",
+      "equity_at_open": 98406.94,
+      "equity_at_close": null,
+      "entries": [
+        "EIX",
+        "TPL",
+        "DOW",
+        "MU",
+        "TSLA",
+        "A",
+        "CVS"
       ],
       "exits": []
     }
