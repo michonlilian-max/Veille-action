@@ -1,26 +1,26 @@
 {
-  "computed_at": "2026-09-03T18:50:38.729817+00:00",
+  "computed_at": "2026-09-04T17:46:20.183190+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 101036.02,
-  "total_return_pct": -0.91,
+  "current_equity": 103355.93,
+  "total_return_pct": 1.37,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": -3.57,
-      "market_value": 37799.91
+      "unrealized_plpc": -0.42,
+      "market_value": 39036.42
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 5.71,
-      "market_value": 41439.89
+      "unrealized_plpc": 5.95,
+      "market_value": 41531.86
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.98,
-      "market_value": 38813.87
+      "unrealized_plpc": 1.54,
+      "market_value": 39805.29
     }
   ],
-  "days_tracked": 7,
+  "days_tracked": 8,
   "history": [
     {
       "date": "2026-08-21",
@@ -151,6 +151,21 @@
         "AVGO",
         "CVS",
         "DOW"
+      ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-04",
+      "equity_at_open": 103354.57,
+      "equity_at_close": null,
+      "entries": [
+        "HPE",
+        "AVGO",
+        "CIEN",
+        "LULU",
+        "HOOD",
+        "DELL",
+        "TPL"
       ],
       "exits": []
     }

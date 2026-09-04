@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-04",
+  "entries": [
+    {
+      "ticker": "HPE",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "AVGO",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "CIEN",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "LULU",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "HOOD",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "DELL",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    },
+    {
+      "ticker": "TPL",
+      "notional": 0.0,
+      "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 103354.57,
+  "equity_at_close": null
+}
