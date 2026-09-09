@@ -37,7 +37,15 @@
       "error": "{\"code\":40010001,\"message\":\"notional must be \\u003e 0\"}"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "AMD",
+      "reason": "take_profit",
+      "unrealized_plpc": 10.13,
+      "market_value": 43171.21,
+      "order_id": "4f9bcba4-0234-4506-b9c1-462732d76acd"
+    }
+  ],
   "equity_at_open": 107149.47,
   "equity_at_close": null
 }

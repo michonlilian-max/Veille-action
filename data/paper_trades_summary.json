@@ -1,23 +1,23 @@
 {
-  "computed_at": "2026-09-09T17:57:27.112349+00:00",
+  "computed_at": "2026-09-09T18:48:24.812939+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 107147.48,
-  "total_return_pct": 5.08,
+  "current_equity": 107000.29,
+  "total_return_pct": 4.94,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 10.33,
-      "market_value": 43250.52
+      "unrealized_plpc": 10.13,
+      "market_value": 43171.21
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 3.16,
-      "market_value": 40437.79
+      "unrealized_plpc": 3.09,
+      "market_value": 40412.82
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 3.26,
-      "market_value": 40476.81
+      "unrealized_plpc": 3.16,
+      "market_value": 40436.71
     }
   ],
   "days_tracked": 10,
@@ -197,7 +197,13 @@
         "DOW",
         "SYK"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "AMD",
+          "reason": "take_profit",
+          "unrealized_plpc": 10.13
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
