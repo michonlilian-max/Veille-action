@@ -1,26 +1,26 @@
 {
-  "computed_at": "2026-09-08T18:55:47.053789+00:00",
+  "computed_at": "2026-09-09T17:57:27.112349+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 106594.73,
-  "total_return_pct": 4.54,
+  "current_equity": 107147.48,
+  "total_return_pct": 5.08,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 6.76,
-      "market_value": 41851.05
+      "unrealized_plpc": 10.33,
+      "market_value": 43250.52
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 3.88,
-      "market_value": 40722.11
+      "unrealized_plpc": 3.16,
+      "market_value": 40437.79
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 4.69,
-      "market_value": 41039.21
+      "unrealized_plpc": 3.26,
+      "market_value": 40476.81
     }
   ],
-  "days_tracked": 9,
+  "days_tracked": 10,
   "history": [
     {
       "date": "2026-08-21",
@@ -181,6 +181,21 @@
         "ORCL",
         "MU",
         "DOW"
+      ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-09",
+      "equity_at_open": 107149.47,
+      "equity_at_close": null,
+      "entries": [
+        "TPL",
+        "HAS",
+        "HWM",
+        "INTC",
+        "AMGN",
+        "DOW",
+        "SYK"
       ],
       "exits": []
     }
