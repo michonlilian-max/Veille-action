@@ -1,48 +1,58 @@
 {
-  "computed_at": "2026-09-10T17:50:07.081360+00:00",
+  "computed_at": "2026-09-10T18:38:26.113871+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 105700.45,
-  "total_return_pct": 3.67,
+  "current_equity": 105498.3,
+  "total_return_pct": 3.47,
   "current_holdings": [
     {
+      "ticker": "A",
+      "unrealized_plpc": -0.17,
+      "market_value": 3197.5
+    },
+    {
       "ticker": "CASY",
-      "unrealized_plpc": -0.05,
-      "market_value": 3201.36
+      "unrealized_plpc": -0.19,
+      "market_value": 3196.8
+    },
+    {
+      "ticker": "DOW",
+      "unrealized_plpc": 0.24,
+      "market_value": 3210.45
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -0.03,
-      "market_value": 2243.75
+      "unrealized_plpc": -0.21,
+      "market_value": 3196.11
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -0.01,
-      "market_value": 3202.73
+      "unrealized_plpc": 0.14,
+      "market_value": 3207.32
     },
     {
       "ticker": "META",
-      "unrealized_plpc": -0.08,
-      "market_value": 3200.37
+      "unrealized_plpc": -0.42,
+      "market_value": 3189.47
     },
     {
       "ticker": "NOW",
-      "unrealized_plpc": -0.02,
-      "market_value": 2364.75
+      "unrealized_plpc": -0.08,
+      "market_value": 3200.21
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 0.47,
-      "market_value": 39383.1
+      "unrealized_plpc": 0.28,
+      "market_value": 39311.3
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -0.02,
-      "market_value": 3202.11
+      "unrealized_plpc": -0.22,
+      "market_value": 3195.97
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.49,
-      "market_value": 40177.42
+      "unrealized_plpc": 2.22,
+      "market_value": 40070.17
     }
   ],
   "days_tracked": 11,
