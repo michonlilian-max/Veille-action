@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-10",
+  "entries": [
+    {
+      "ticker": "CASY",
+      "notional": 3202.9,
+      "order_id": "3c579295-53b2-4f41-9e50-f0fbe370bd08",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "TPL",
+      "notional": 3202.9,
+      "order_id": "9674a4bd-77d5-4841-a64e-fbd3edd35d50",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "INTC",
+      "notional": 3202.9,
+      "order_id": "4c5d89f1-5de7-4954-b75a-a6a536004f40",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "NOW",
+      "notional": 3202.9,
+      "order_id": "2797824e-32c9-428f-909d-d0ddebe35055",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "META",
+      "notional": 3202.9,
+      "order_id": "d17191b1-35fe-4c2e-ab65-89e15b84fa90",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "HAS",
+      "notional": 3202.9,
+      "order_id": "f061c4a7-481d-4908-8992-00f9f6bf00c4",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "DOW",
+      "notional": 3202.9,
+      "order_id": "97f5d6cc-1a13-46e2-b28f-6525c29af9d0",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "A",
+      "notional": 3202.9,
+      "order_id": "e24dc992-0266-4507-99fa-b2b93130ccdf",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 105701.95,
+  "equity_at_close": null
+}
