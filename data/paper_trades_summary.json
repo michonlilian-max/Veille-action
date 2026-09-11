@@ -1,61 +1,61 @@
 {
-  "computed_at": "2026-09-10T18:38:26.113871+00:00",
+  "computed_at": "2026-09-11T17:52:42.004034+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 105498.3,
-  "total_return_pct": 3.47,
+  "current_equity": 106177.04,
+  "total_return_pct": 4.13,
   "current_holdings": [
     {
       "ticker": "A",
-      "unrealized_plpc": -0.17,
-      "market_value": 3197.5
+      "unrealized_plpc": 2.71,
+      "market_value": 3289.69
     },
     {
       "ticker": "CASY",
-      "unrealized_plpc": -0.19,
-      "market_value": 3196.8
+      "unrealized_plpc": -3.57,
+      "market_value": 3088.51
     },
     {
       "ticker": "DOW",
-      "unrealized_plpc": 0.24,
-      "market_value": 3210.45
+      "unrealized_plpc": -1.92,
+      "market_value": 3141.36
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -0.21,
-      "market_value": 3196.11
+      "unrealized_plpc": 2.38,
+      "market_value": 3279.06
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": 0.14,
-      "market_value": 3207.32
+      "unrealized_plpc": 2.46,
+      "market_value": 3281.59
     },
     {
       "ticker": "META",
-      "unrealized_plpc": -0.42,
-      "market_value": 3189.47
+      "unrealized_plpc": -0.04,
+      "market_value": 3201.63
     },
     {
       "ticker": "NOW",
-      "unrealized_plpc": -0.08,
-      "market_value": 3200.21
+      "unrealized_plpc": 0.95,
+      "market_value": 3233.36
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 0.28,
-      "market_value": 39311.3
+      "unrealized_plpc": 0.9,
+      "market_value": 39553.47
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -0.22,
-      "market_value": 3195.97
+      "unrealized_plpc": -0.57,
+      "market_value": 3184.59
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.22,
-      "market_value": 40070.17
+      "unrealized_plpc": 3.06,
+      "market_value": 40400.8
     }
   ],
-  "days_tracked": 11,
+  "days_tracked": 12,
   "history": [
     {
       "date": "2026-08-21",
@@ -254,6 +254,13 @@
         "DOW",
         "A"
       ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-11",
+      "equity_at_open": 106177.04,
+      "equity_at_close": null,
+      "entries": [],
       "exits": []
     }
   ],
