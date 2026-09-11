@@ -1,51 +1,51 @@
 {
-  "computed_at": "2026-09-10T23:21:40.165991+00:00",
-  "total_observations": 330,
-  "days_covered": 11,
+  "computed_at": "2026-09-11T23:29:56.583061+00:00",
+  "total_observations": 360,
+  "days_covered": 12,
   "top_n_per_day": 30,
-  "market_base_rate_pct_positive": 43.5,
+  "market_base_rate_pct_positive": 45.5,
   "signals": {
     "sentiment_x": {
-      "n": 330,
+      "n": 359,
       "correlation_with_next_day_return": null,
-      "hit_rate_when_high_pct": 44.5,
+      "hit_rate_when_high_pct": 46.5,
       "hit_rate_when_low_pct": null
     },
     "volume_spike": {
-      "n": 330,
-      "correlation_with_next_day_return": -0.055,
-      "hit_rate_when_high_pct": 52.1,
-      "hit_rate_when_low_pct": 37.0
+      "n": 359,
+      "correlation_with_next_day_return": -0.075,
+      "hit_rate_when_high_pct": 53.0,
+      "hit_rate_when_low_pct": 39.9
     },
     "sentiment_social": {
-      "n": 330,
-      "correlation_with_next_day_return": 0.097,
-      "hit_rate_when_high_pct": 46.1,
-      "hit_rate_when_low_pct": 42.7
+      "n": 359,
+      "correlation_with_next_day_return": 0.085,
+      "hit_rate_when_high_pct": 47.7,
+      "hit_rate_when_low_pct": 45.1
     },
     "news_volume": {
-      "n": 330,
-      "correlation_with_next_day_return": -0.032,
-      "hit_rate_when_high_pct": 44.8,
-      "hit_rate_when_low_pct": 44.3
+      "n": 359,
+      "correlation_with_next_day_return": -0.02,
+      "hit_rate_when_high_pct": 46.4,
+      "hit_rate_when_low_pct": 46.6
     },
     "insider_buying": {
-      "n": 330,
-      "correlation_with_next_day_return": -0.023,
-      "hit_rate_when_high_pct": 44.5,
+      "n": 359,
+      "correlation_with_next_day_return": -0.026,
+      "hit_rate_when_high_pct": 46.5,
       "hit_rate_when_low_pct": null
     },
     "institutional_13f": {
-      "n": 330,
-      "correlation_with_next_day_return": -0.049,
-      "hit_rate_when_high_pct": 45.3,
-      "hit_rate_when_low_pct": 34.8
+      "n": 359,
+      "correlation_with_next_day_return": -0.035,
+      "hit_rate_when_high_pct": 47.3,
+      "hit_rate_when_low_pct": 36.0
     },
     "score": {
-      "n": 330,
-      "correlation_with_next_day_return": -0.04,
-      "hit_rate_when_high_pct": 42.4,
-      "hit_rate_when_low_pct": 46.7
+      "n": 359,
+      "correlation_with_next_day_return": -0.057,
+      "hit_rate_when_high_pct": 43.3,
+      "hit_rate_when_low_pct": 49.7
     }
   },
   "note": "hit_rate_when_high_pct / _low_pct : proportion de tickers avec un mouvement réel positif le jour suivant, parmi ceux où ce signal était au-dessus / en-dessous de la médiane du jour (top GROK_TOP_N). À comparer à market_base_rate_pct_positive (taux de base sur toute la watchlist ce jour-là) — un hit_rate proche du taux de base veut dire que le signal n'apporte pas d'avantage directionnel mesurable."
