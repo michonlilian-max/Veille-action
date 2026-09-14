@@ -1,13 +1,13 @@
 {
-  "computed_at": "2026-09-14T19:34:35.475717+00:00",
+  "computed_at": "2026-09-14T19:54:55.218173+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 103785.2,
-  "total_return_pct": 1.79,
+  "current_equity": 103689.2,
+  "total_return_pct": 1.69,
   "current_holdings": [
     {
       "ticker": "A",
-      "unrealized_plpc": 2.59,
-      "market_value": 3285.98
+      "unrealized_plpc": 2.85,
+      "market_value": 3294.18
     },
     {
       "ticker": "CASY",
@@ -16,43 +16,43 @@
     },
     {
       "ticker": "DOW",
-      "unrealized_plpc": -2.92,
-      "market_value": 3109.51
+      "unrealized_plpc": -2.49,
+      "market_value": 3123.01
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": 1.47,
-      "market_value": 3249.98
+      "unrealized_plpc": 1.29,
+      "market_value": 3244.27
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": -3.46,
-      "market_value": 3092.04
+      "unrealized_plpc": -3.77,
+      "market_value": 3082.07
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 2.77,
-      "market_value": 3291.71
+      "unrealized_plpc": 2.8,
+      "market_value": 3292.6
     },
     {
       "ticker": "NOW",
-      "unrealized_plpc": 8.43,
-      "market_value": 3472.84
+      "unrealized_plpc": 8.59,
+      "market_value": 2621.89
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -2.57,
-      "market_value": 38192.94
+      "unrealized_plpc": -2.59,
+      "market_value": 38184.64
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -1.15,
-      "market_value": 3165.93
+      "unrealized_plpc": -1.45,
+      "market_value": 3156.4
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 0.18,
-      "market_value": 39270.41
+      "unrealized_plpc": -0.05,
+      "market_value": 39180.4
     }
   ],
   "days_tracked": 13,
@@ -266,9 +266,15 @@
     {
       "date": "2026-09-14",
       "equity_at_open": 103785.02,
-      "equity_at_close": null,
+      "equity_at_close": 103689.2,
       "entries": [],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "NOW",
+          "reason": "take_profit",
+          "unrealized_plpc": 8.59
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

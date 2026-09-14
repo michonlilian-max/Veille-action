@@ -1,7 +1,15 @@
 {
   "date": "2026-09-14",
   "entries": [],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "NOW",
+      "reason": "take_profit",
+      "unrealized_plpc": 8.59,
+      "market_value": 3478.01,
+      "order_id": "e26e1e4f-f662-4c5e-aa82-b942c7cccae5"
+    }
+  ],
   "equity_at_open": 103785.02,
-  "equity_at_close": null
+  "equity_at_close": 103689.2
 }
