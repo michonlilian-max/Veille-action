@@ -8,7 +8,15 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "CASY",
+      "reason": "stop_loss",
+      "unrealized_plpc": -6.23,
+      "market_value": 3003.35,
+      "order_id": "405c33ac-06c3-4270-a6bf-2bf50499deea"
+    }
+  ],
   "equity_at_open": 103328.3,
-  "equity_at_close": null
+  "equity_at_close": 103324.8
 }
