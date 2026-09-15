@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "entries": [
+    {
+      "ticker": "KHC",
+      "notional": 3920.81,
+      "order_id": "84600578-7ae2-44b0-a8c1-b2890a4eb94f",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 103328.3,
+  "equity_at_close": null
+}
