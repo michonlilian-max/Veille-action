@@ -8,7 +8,15 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "A",
+      "reason": "take_profit",
+      "unrealized_plpc": 8.21,
+      "market_value": 3465.87,
+      "order_id": "276aeb06-7504-4f13-85e2-39a6ec04e4c5"
+    }
+  ],
   "equity_at_open": 104611.51,
-  "equity_at_close": null
+  "equity_at_close": 104040.89
 }
