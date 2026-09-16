@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-16",
+  "entries": [
+    {
+      "ticker": "AXON",
+      "notional": 3018.9,
+      "order_id": "4edd5486-5b38-4ce4-9d35-4f97c6bd9369",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 104611.51,
+  "equity_at_close": null
+}
