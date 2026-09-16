@@ -1,0 +1,431 @@
+{
+  "date": "2026-09-16",
+  "reference_run": "2026-09-16T11:44:34.434161+00:00",
+  "base_rate": {
+    "positive_count": 158,
+    "total_count": 501,
+    "pct_positive": 31.5
+  },
+  "entries": [
+    {
+      "ticker": "AXON",
+      "predicted_score": 38.1,
+      "predicted_detail": {
+        "sentiment_social": 10.7,
+        "news_volume": 66.8,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 82.5,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 5.96,
+      "actual_volume_ratio": 2.75
+    },
+    {
+      "ticker": "SYY",
+      "predicted_score": 34.1,
+      "predicted_detail": {
+        "sentiment_social": 10.7,
+        "news_volume": 16.7,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 100.0,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -1.12,
+      "actual_volume_ratio": 1.98
+    },
+    {
+      "ticker": "TPL",
+      "predicted_score": 34.0,
+      "predicted_detail": {
+        "sentiment_social": 42.9,
+        "news_volume": 7.6,
+        "insider_buying": 100.0,
+        "institutional_13f": 85.0,
+        "volume_spike": 14.7,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -6.21,
+      "actual_volume_ratio": 1.24
+    },
+    {
+      "ticker": "DOW",
+      "predicted_score": 32.9,
+      "predicted_detail": {
+        "sentiment_social": 50.0,
+        "news_volume": 74.2,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 21.5,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 0.77,
+      "actual_volume_ratio": 1.47
+    },
+    {
+      "ticker": "ORCL",
+      "predicted_score": 32.8,
+      "predicted_detail": {
+        "sentiment_social": 60.7,
+        "news_volume": 60.9,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 22.9,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 2.0,
+      "actual_volume_ratio": 1.24
+    },
+    {
+      "ticker": "COIN",
+      "predicted_score": 31.1,
+      "predicted_detail": {
+        "sentiment_social": 28.6,
+        "news_volume": 39.1,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 54.5,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -4.42,
+      "actual_volume_ratio": 1.44
+    },
+    {
+      "ticker": "NVDA",
+      "predicted_score": 30.6,
+      "predicted_detail": {
+        "sentiment_social": 50.0,
+        "news_volume": 70.3,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 12.8,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 0.82,
+      "actual_volume_ratio": 0.78
+    },
+    {
+      "ticker": "A",
+      "predicted_score": 30.4,
+      "predicted_detail": {
+        "sentiment_social": 14.3,
+        "news_volume": 100.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 16.1,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 2.28,
+      "actual_volume_ratio": 1.21
+    },
+    {
+      "ticker": "PSKY",
+      "predicted_score": 29.7,
+      "predicted_detail": {
+        "sentiment_social": 96.4,
+        "news_volume": 6.2,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 21.6,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 1.14,
+      "actual_volume_ratio": 1.58
+    },
+    {
+      "ticker": "SWKS",
+      "predicted_score": 29.3,
+      "predicted_detail": {
+        "sentiment_social": 21.4,
+        "news_volume": 21.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 64.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -4.9,
+      "actual_volume_ratio": 1.31
+    },
+    {
+      "ticker": "MU",
+      "predicted_score": 28.9,
+      "predicted_detail": {
+        "sentiment_social": 57.1,
+        "news_volume": 51.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 13.0,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.11,
+      "actual_volume_ratio": 0.72
+    },
+    {
+      "ticker": "AMZN",
+      "predicted_score": 28.5,
+      "predicted_detail": {
+        "sentiment_social": 32.1,
+        "news_volume": 63.4,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 20.9,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.99,
+      "actual_volume_ratio": 1.02
+    },
+    {
+      "ticker": "UBER",
+      "predicted_score": 28.5,
+      "predicted_detail": {
+        "sentiment_social": 53.6,
+        "news_volume": 33.9,
+        "insider_buying": 15.4,
+        "institutional_13f": 100.0,
+        "volume_spike": 15.2,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.64,
+      "actual_volume_ratio": 0.92
+    },
+    {
+      "ticker": "ON",
+      "predicted_score": 28.4,
+      "predicted_detail": {
+        "sentiment_social": 60.7,
+        "news_volume": 24.6,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 27.9,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -9.02,
+      "actual_volume_ratio": 2.23
+    },
+    {
+      "ticker": "GE",
+      "predicted_score": 28.0,
+      "predicted_detail": {
+        "sentiment_social": 39.3,
+        "news_volume": 24.4,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 42.4,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 1.91,
+      "actual_volume_ratio": 1.24
+    },
+    {
+      "ticker": "HAS",
+      "predicted_score": 28.0,
+      "predicted_detail": {
+        "sentiment_social": 25.0,
+        "news_volume": 69.0,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 19.4,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -1.01,
+      "actual_volume_ratio": 0.98
+    },
+    {
+      "ticker": "DLTR",
+      "predicted_score": 27.6,
+      "predicted_detail": {
+        "sentiment_social": 53.6,
+        "news_volume": 10.6,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 39.8,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.35,
+      "actual_volume_ratio": 1.49
+    },
+    {
+      "ticker": "IRM",
+      "predicted_score": 26.8,
+      "predicted_detail": {
+        "sentiment_social": 82.1,
+        "news_volume": 2.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 20.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 0.1,
+      "actual_volume_ratio": 1.15
+    },
+    {
+      "ticker": "HONA",
+      "predicted_score": 26.2,
+      "predicted_detail": {
+        "sentiment_social": 60.7,
+        "news_volume": 8.6,
+        "insider_buying": 5.1,
+        "institutional_13f": 100.0,
+        "volume_spike": 25.1,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 3.58,
+      "actual_volume_ratio": 1.04
+    },
+    {
+      "ticker": "LOW",
+      "predicted_score": 26.2,
+      "predicted_detail": {
+        "sentiment_social": 21.4,
+        "news_volume": 50.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 27.1,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.26,
+      "actual_volume_ratio": 1.01
+    },
+    {
+      "ticker": "VTRS",
+      "predicted_score": 26.2,
+      "predicted_detail": {
+        "sentiment_social": 89.3,
+        "news_volume": 0.7,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 13.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 2.22,
+      "actual_volume_ratio": 0.95
+    },
+    {
+      "ticker": "INTC",
+      "predicted_score": 26.1,
+      "predicted_detail": {
+        "sentiment_social": 32.1,
+        "news_volume": 54.6,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 15.5,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 4.03,
+      "actual_volume_ratio": 1.23
+    },
+    {
+      "ticker": "CVS",
+      "predicted_score": 26.0,
+      "predicted_detail": {
+        "sentiment_social": 71.4,
+        "news_volume": 17.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 13.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -2.93,
+      "actual_volume_ratio": 1.03
+    },
+    {
+      "ticker": "DELL",
+      "predicted_score": 26.0,
+      "predicted_detail": {
+        "sentiment_social": 25.0,
+        "news_volume": 50.9,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 23.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 3.64,
+      "actual_volume_ratio": 1.59
+    },
+    {
+      "ticker": "TECH",
+      "predicted_score": 25.9,
+      "predicted_detail": {
+        "sentiment_social": 17.9,
+        "news_volume": 61.1,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 20.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -0.01,
+      "actual_volume_ratio": 1.43
+    },
+    {
+      "ticker": "META",
+      "predicted_score": 25.9,
+      "predicted_detail": {
+        "sentiment_social": 25.0,
+        "news_volume": 52.5,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 21.3,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 0.46,
+      "actual_volume_ratio": 1.02
+    },
+    {
+      "ticker": "ADBE",
+      "predicted_score": 25.8,
+      "predicted_detail": {
+        "sentiment_social": 50.0,
+        "news_volume": 27.9,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 20.6,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -2.82,
+      "actual_volume_ratio": 0.92
+    },
+    {
+      "ticker": "AMD",
+      "predicted_score": 25.8,
+      "predicted_detail": {
+        "sentiment_social": 35.7,
+        "news_volume": 48.4,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 15.9,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": 1.65,
+      "actual_volume_ratio": 1.11
+    },
+    {
+      "ticker": "RSG",
+      "predicted_score": 25.8,
+      "predicted_detail": {
+        "sentiment_social": 17.9,
+        "news_volume": 12.3,
+        "insider_buying": 48.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 20.5,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -1.45,
+      "actual_volume_ratio": 1.17
+    },
+    {
+      "ticker": "TROW",
+      "predicted_score": 25.8,
+      "predicted_detail": {
+        "sentiment_social": 60.7,
+        "news_volume": 7.1,
+        "insider_buying": 0.0,
+        "institutional_13f": 100.0,
+        "volume_spike": 27.9,
+        "sentiment_x": 0.0
+      },
+      "actual_change_pct": -1.76,
+      "actual_volume_ratio": 1.1
+    }
+  ]
+}
