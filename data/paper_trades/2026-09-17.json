@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-17",
+  "entries": [
+    {
+      "ticker": "FANG",
+      "notional": 3454.96,
+      "order_id": "1d2e6447-15b8-4161-904f-54c5f88fea29",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 106406.61,
+  "equity_at_close": null
+}
