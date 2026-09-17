@@ -8,7 +8,22 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "INTC",
+      "reason": "take_profit",
+      "unrealized_plpc": 8.96,
+      "market_value": 3489.88,
+      "order_id": "29ee14f8-001b-448c-83d9-f4d1d8f0f31c"
+    },
+    {
+      "ticker": "TPL",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.91,
+      "market_value": 3013.63,
+      "order_id": "6dab27b4-d389-4133-97f1-5756835fbfe9"
+    }
+  ],
   "equity_at_open": 106406.61,
-  "equity_at_close": null
+  "equity_at_close": 106249.01
 }

@@ -1,53 +1,58 @@
 {
-  "computed_at": "2026-09-17T18:30:34.049462+00:00",
+  "computed_at": "2026-09-17T19:11:40.013300+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 106404.94,
-  "total_return_pct": 4.36,
+  "current_equity": 106249.01,
+  "total_return_pct": 4.2,
   "current_holdings": [
     {
       "ticker": "AXON",
-      "unrealized_plpc": -3.04,
-      "market_value": 2927.11
+      "unrealized_plpc": -3.43,
+      "market_value": 2915.23
     },
     {
       "ticker": "DOW",
-      "unrealized_plpc": 0.08,
-      "market_value": 3205.59
+      "unrealized_plpc": -0.12,
+      "market_value": 3199.11
+    },
+    {
+      "ticker": "FANG",
+      "unrealized_plpc": -0.09,
+      "market_value": 3451.74
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -0.1,
-      "market_value": 3199.68
+      "unrealized_plpc": -0.51,
+      "market_value": 3186.48
     },
     {
       "ticker": "INTC",
-      "unrealized_plpc": 9.35,
-      "market_value": 3502.5
+      "unrealized_plpc": 8.96,
+      "market_value": 3489.88
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": 0.77,
-      "market_value": 3951.01
+      "unrealized_plpc": 0.79,
+      "market_value": 3951.8
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 4.42,
-      "market_value": 3344.47
+      "unrealized_plpc": 4.21,
+      "market_value": 3337.58
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 1.04,
-      "market_value": 39607.86
+      "unrealized_plpc": 1.01,
+      "market_value": 39596.75
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -5.54,
-      "market_value": 3025.38
+      "unrealized_plpc": -5.84,
+      "market_value": 2318.87
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.34,
-      "market_value": 40118.67
+      "unrealized_plpc": 2.13,
+      "market_value": 40034.73
     }
   ],
   "days_tracked": 16,
@@ -304,11 +309,22 @@
     {
       "date": "2026-09-17",
       "equity_at_open": 106406.61,
-      "equity_at_close": null,
+      "equity_at_close": 106249.01,
       "entries": [
         "FANG"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "INTC",
+          "reason": "take_profit",
+          "unrealized_plpc": 8.96
+        },
+        {
+          "ticker": "TPL",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.91
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
