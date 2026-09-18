@@ -1,61 +1,56 @@
 {
-  "computed_at": "2026-09-17T19:11:40.013300+00:00",
+  "computed_at": "2026-09-18T17:51:02.410757+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 106249.01,
-  "total_return_pct": 4.2,
+  "current_equity": 106055.28,
+  "total_return_pct": 4.01,
   "current_holdings": [
     {
       "ticker": "AXON",
-      "unrealized_plpc": -3.43,
-      "market_value": 2915.23
+      "unrealized_plpc": -3.71,
+      "market_value": 2906.84
     },
     {
       "ticker": "DOW",
-      "unrealized_plpc": -0.12,
-      "market_value": 3199.11
+      "unrealized_plpc": -3.59,
+      "market_value": 3087.92
     },
     {
       "ticker": "FANG",
-      "unrealized_plpc": -0.09,
-      "market_value": 3451.74
+      "unrealized_plpc": -1.7,
+      "market_value": 3396.18
+    },
+    {
+      "ticker": "GNRC",
+      "unrealized_plpc": -0.1,
+      "market_value": 3217.94
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -0.51,
-      "market_value": 3186.48
-    },
-    {
-      "ticker": "INTC",
-      "unrealized_plpc": 8.96,
-      "market_value": 3489.88
+      "unrealized_plpc": -2.97,
+      "market_value": 3107.82
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": 0.79,
-      "market_value": 3951.8
+      "unrealized_plpc": -0.16,
+      "market_value": 3914.44
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 4.21,
-      "market_value": 3337.58
+      "unrealized_plpc": 3.3,
+      "market_value": 3308.56
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 1.01,
-      "market_value": 39596.75
-    },
-    {
-      "ticker": "TPL",
-      "unrealized_plpc": -5.84,
-      "market_value": 2318.87
+      "unrealized_plpc": 1.08,
+      "market_value": 39622.9
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.13,
-      "market_value": 40034.73
+      "unrealized_plpc": 2.4,
+      "market_value": 40140.12
     }
   ],
-  "days_tracked": 16,
+  "days_tracked": 17,
   "history": [
     {
       "date": "2026-08-21",
@@ -325,6 +320,16 @@
           "unrealized_plpc": -5.91
         }
       ]
+    },
+    {
+      "date": "2026-09-18",
+      "equity_at_open": 106060.12,
+      "equity_at_close": null,
+      "entries": [
+        "GNRC",
+        "AMD"
+      ],
+      "exits": []
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

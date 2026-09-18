@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-18",
+  "entries": [
+    {
+      "ticker": "GNRC",
+      "notional": 3221.08,
+      "order_id": "72ffd315-e538-4191-a859-34df8e085897",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "AMD",
+      "notional": 3221.08,
+      "order_id": "88afcebe-5718-41f7-b53e-55b61f61e10b",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 106060.12,
+  "equity_at_close": null
+}
