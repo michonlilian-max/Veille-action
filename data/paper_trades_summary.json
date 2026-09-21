@@ -1,61 +1,61 @@
 {
-  "computed_at": "2026-09-18T18:36:52.453264+00:00",
+  "computed_at": "2026-09-21T19:42:54.985904+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 105942.65,
-  "total_return_pct": 3.9,
+  "current_equity": 109480.96,
+  "total_return_pct": 7.37,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": -0.41,
-      "market_value": 3207.87
+      "unrealized_plpc": 12.57,
+      "market_value": 3625.85
     },
     {
       "ticker": "AXON",
-      "unrealized_plpc": -3.34,
-      "market_value": 2918.07
+      "unrealized_plpc": -3.22,
+      "market_value": 2921.82
     },
     {
       "ticker": "DOW",
-      "unrealized_plpc": -3.15,
-      "market_value": 3101.96
+      "unrealized_plpc": -4.43,
+      "market_value": 3060.94
     },
     {
       "ticker": "FANG",
-      "unrealized_plpc": -1.54,
-      "market_value": 3401.63
+      "unrealized_plpc": -4.07,
+      "market_value": 3314.24
     },
     {
       "ticker": "GNRC",
-      "unrealized_plpc": -0.52,
-      "market_value": 3204.22
+      "unrealized_plpc": 0.03,
+      "market_value": 3222.01
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -2.17,
-      "market_value": 3133.32
+      "unrealized_plpc": -2.47,
+      "market_value": 3123.87
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": -0.59,
-      "market_value": 3897.75
+      "unrealized_plpc": -1.24,
+      "market_value": 3872.31
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 3.5,
-      "market_value": 3314.84
+      "unrealized_plpc": 15.2,
+      "market_value": 3689.56
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 0.94,
-      "market_value": 39568.8
+      "unrealized_plpc": 4.63,
+      "market_value": 41014.27
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.2,
-      "market_value": 40062.71
+      "unrealized_plpc": 5.88,
+      "market_value": 41504.61
     }
   ],
-  "days_tracked": 17,
+  "days_tracked": 18,
   "history": [
     {
       "date": "2026-08-21",
@@ -334,6 +334,13 @@
         "GNRC",
         "AMD"
       ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-21",
+      "equity_at_open": 109480.96,
+      "equity_at_close": null,
+      "entries": [],
       "exits": []
     }
   ],
