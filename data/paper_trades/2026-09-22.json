@@ -1,7 +1,36 @@
 {
   "date": "2026-09-22",
   "entries": [],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "AMD",
+      "reason": "take_profit",
+      "unrealized_plpc": 13.21,
+      "market_value": 3646.42,
+      "order_id": "99eb048f-9d0a-45ee-b853-dcceb82b5616"
+    },
+    {
+      "ticker": "DOW",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.12,
+      "market_value": 3038.82,
+      "order_id": "efa1c1d6-4369-4ad9-a244-47c50b038d5d"
+    },
+    {
+      "ticker": "FANG",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.59,
+      "market_value": 3261.85,
+      "order_id": "76113894-7cee-4a77-b461-4017757214f7"
+    },
+    {
+      "ticker": "META",
+      "reason": "take_profit",
+      "unrealized_plpc": 13.85,
+      "market_value": 3646.36,
+      "order_id": "3ad772d1-99c6-469a-8ded-d81107a49d84"
+    }
+  ],
   "equity_at_open": 110227.56,
-  "equity_at_close": null
+  "equity_at_close": 110324.51
 }
