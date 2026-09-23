@@ -1,53 +1,58 @@
 {
-  "computed_at": "2026-09-23T18:36:01.360129+00:00",
+  "computed_at": "2026-09-23T19:10:02.163203+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 108906.85,
-  "total_return_pct": 6.81,
+  "current_equity": 108935.5,
+  "total_return_pct": 6.84,
   "current_holdings": [
     {
+      "ticker": "AMD",
+      "unrealized_plpc": -0.03,
+      "market_value": 3361.07
+    },
+    {
       "ticker": "AXON",
-      "unrealized_plpc": -3.6,
-      "market_value": 2910.23
+      "unrealized_plpc": -3.26,
+      "market_value": 2920.46
     },
     {
       "ticker": "GNRC",
-      "unrealized_plpc": -1.52,
-      "market_value": 3172.1
+      "unrealized_plpc": -1.93,
+      "market_value": 3159.01
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -4.13,
-      "market_value": 3070.54
+      "unrealized_plpc": -4.08,
+      "market_value": 3072.14
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": -3.91,
-      "market_value": 3767.37
+      "unrealized_plpc": -3.83,
+      "market_value": 3770.55
     },
     {
       "ticker": "META",
       "unrealized_plpc": -0.01,
-      "market_value": 3361.8
+      "market_value": 3361.9
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 3.72,
-      "market_value": 40656.1
+      "unrealized_plpc": 3.66,
+      "market_value": 40633.72
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -0.1,
-      "market_value": 1023.9
+      "unrealized_plpc": -1.06,
+      "market_value": 3326.58
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 6.15,
-      "market_value": 41609.07
+      "unrealized_plpc": 6.37,
+      "market_value": 41697.67
     },
     {
       "ticker": "WBD",
-      "unrealized_plpc": -0.02,
-      "market_value": 3361.7
+      "unrealized_plpc": -0.13,
+      "market_value": 3357.87
     }
   ],
   "days_tracked": 20,
@@ -369,7 +374,7 @@
     {
       "date": "2026-09-23",
       "equity_at_open": 108912.89,
-      "equity_at_close": null,
+      "equity_at_close": 108935.5,
       "entries": [
         "WBD",
         "TPL",
