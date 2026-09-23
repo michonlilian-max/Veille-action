@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-23",
+  "entries": [
+    {
+      "ticker": "WBD",
+      "notional": 3362.26,
+      "order_id": "2ef8e75e-e6d9-4cf0-b780-59a13c7e2fd1",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "TPL",
+      "notional": 3362.26,
+      "order_id": "ec5fe6d0-67c6-4289-a481-b0da9cd58fb4",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "META",
+      "notional": 3362.26,
+      "order_id": "fce8aaac-3c0e-49b0-8607-9593ef9766b4",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "AMD",
+      "notional": 3362.26,
+      "order_id": "e342de3e-33e8-4347-8b56-f6c0f9aebaac",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 108912.89,
+  "equity_at_close": null
+}
