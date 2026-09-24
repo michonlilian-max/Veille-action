@@ -1,58 +1,58 @@
 {
-  "computed_at": "2026-09-24T18:38:24.066026+00:00",
+  "computed_at": "2026-09-24T19:26:34.687595+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 108914.54,
-  "total_return_pct": 6.82,
+  "current_equity": 109097.77,
+  "total_return_pct": 7.0,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 1.23,
-      "market_value": 3403.78
+      "unrealized_plpc": 2.22,
+      "market_value": 3436.78
     },
     {
       "ticker": "AXON",
-      "unrealized_plpc": -4.35,
-      "market_value": 2887.67
+      "unrealized_plpc": -5.19,
+      "market_value": 2862.21
     },
     {
       "ticker": "GNRC",
-      "unrealized_plpc": -4.07,
-      "market_value": 3089.91
+      "unrealized_plpc": -3.76,
+      "market_value": 3100.09
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -3.24,
-      "market_value": 3099.25
+      "unrealized_plpc": -3.2,
+      "market_value": 3100.5
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": -3.14,
-      "market_value": 3797.58
+      "unrealized_plpc": -3.43,
+      "market_value": 3786.45
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 3.55,
-      "market_value": 3481.56
+      "unrealized_plpc": 4.07,
+      "market_value": 3499.07
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 2.99,
-      "market_value": 40373.14
+      "unrealized_plpc": 2.98,
+      "market_value": 40368.63
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -1.35,
-      "market_value": 3316.88
+      "unrealized_plpc": -0.88,
+      "market_value": 3332.73
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 6.68,
-      "market_value": 41817.05
+      "unrealized_plpc": 7.05,
+      "market_value": 41962.55
     },
     {
       "ticker": "WBD",
-      "unrealized_plpc": 0.33,
-      "market_value": 3373.19
+      "unrealized_plpc": 0.36,
+      "market_value": 3374.23
     }
   ],
   "days_tracked": 21,
@@ -386,9 +386,15 @@
     {
       "date": "2026-09-24",
       "equity_at_open": 108914.54,
-      "equity_at_close": null,
+      "equity_at_close": 109097.77,
       "entries": [],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "AXON",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.19
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

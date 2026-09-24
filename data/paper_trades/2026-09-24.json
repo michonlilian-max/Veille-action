@@ -1,7 +1,15 @@
 {
   "date": "2026-09-24",
   "entries": [],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "AXON",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.19,
+      "market_value": 2862.21,
+      "order_id": "41576e68-3cca-441a-9740-e751133b8b9e"
+    }
+  ],
   "equity_at_open": 108914.54,
-  "equity_at_close": null
+  "equity_at_close": 109097.77
 }
