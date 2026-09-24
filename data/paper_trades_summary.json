@@ -1,61 +1,61 @@
 {
-  "computed_at": "2026-09-23T19:10:02.163203+00:00",
+  "computed_at": "2026-09-24T18:38:24.066026+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 108935.5,
-  "total_return_pct": 6.84,
+  "current_equity": 108914.54,
+  "total_return_pct": 6.82,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": -0.03,
-      "market_value": 3361.07
+      "unrealized_plpc": 1.23,
+      "market_value": 3403.78
     },
     {
       "ticker": "AXON",
-      "unrealized_plpc": -3.26,
-      "market_value": 2920.46
+      "unrealized_plpc": -4.35,
+      "market_value": 2887.67
     },
     {
       "ticker": "GNRC",
-      "unrealized_plpc": -1.93,
-      "market_value": 3159.01
+      "unrealized_plpc": -4.07,
+      "market_value": 3089.91
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -4.08,
-      "market_value": 3072.14
+      "unrealized_plpc": -3.24,
+      "market_value": 3099.25
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": -3.83,
-      "market_value": 3770.55
+      "unrealized_plpc": -3.14,
+      "market_value": 3797.58
     },
     {
       "ticker": "META",
-      "unrealized_plpc": -0.01,
-      "market_value": 3361.9
+      "unrealized_plpc": 3.55,
+      "market_value": 3481.56
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 3.66,
-      "market_value": 40633.72
+      "unrealized_plpc": 2.99,
+      "market_value": 40373.14
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -1.06,
-      "market_value": 3326.58
+      "unrealized_plpc": -1.35,
+      "market_value": 3316.88
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 6.37,
-      "market_value": 41697.67
+      "unrealized_plpc": 6.68,
+      "market_value": 41817.05
     },
     {
       "ticker": "WBD",
-      "unrealized_plpc": -0.13,
-      "market_value": 3357.87
+      "unrealized_plpc": 0.33,
+      "market_value": 3373.19
     }
   ],
-  "days_tracked": 20,
+  "days_tracked": 21,
   "history": [
     {
       "date": "2026-08-21",
@@ -381,6 +381,13 @@
         "META",
         "AMD"
       ],
+      "exits": []
+    },
+    {
+      "date": "2026-09-24",
+      "equity_at_open": 108914.54,
+      "equity_at_close": null,
+      "entries": [],
       "exits": []
     }
   ],
