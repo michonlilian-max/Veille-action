@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-25",
+  "entries": [
+    {
+      "ticker": "MGM",
+      "notional": 3072.01,
+      "order_id": "b9b0e494-a644-4f8c-a3dd-3aa2e36464ba",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 109339.57,
+  "equity_at_close": null
+}
