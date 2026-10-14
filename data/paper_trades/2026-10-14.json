@@ -8,7 +8,29 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "AMD",
+      "reason": "stop_loss",
+      "unrealized_plpc": -6.89,
+      "market_value": 3130.5,
+      "order_id": "7d8e7f0f-bb82-4ccc-9cb8-b2a923f35328"
+    },
+    {
+      "ticker": "KHC",
+      "reason": "stop_loss",
+      "unrealized_plpc": -8.37,
+      "market_value": 3592.48,
+      "order_id": "7011958a-1c27-47cf-b454-bde4cad7cc72"
+    },
+    {
+      "ticker": "MGM",
+      "reason": "stop_loss",
+      "unrealized_plpc": -11.14,
+      "market_value": 2729.72,
+      "order_id": "2d7fcaa8-2426-4e4b-9978-4f5f137b1235"
+    }
+  ],
   "equity_at_open": 105999.38,
-  "equity_at_close": null
+  "equity_at_close": 106369.33
 }
