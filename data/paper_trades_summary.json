@@ -1,61 +1,61 @@
 {
-  "computed_at": "2026-09-25T19:27:30.170033+00:00",
+  "computed_at": "2026-10-14T18:51:05.558708+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 109223.33,
-  "total_return_pct": 7.12,
+  "current_equity": 106004.32,
+  "total_return_pct": 3.96,
   "current_holdings": [
     {
       "ticker": "AMD",
-      "unrealized_plpc": 2.58,
-      "market_value": 3449.12
+      "unrealized_plpc": -7.08,
+      "market_value": 3124.2
+    },
+    {
+      "ticker": "C",
+      "unrealized_plpc": -0.01,
+      "market_value": 3386.89
     },
     {
       "ticker": "GNRC",
-      "unrealized_plpc": 1.0,
-      "market_value": 3253.19
+      "unrealized_plpc": -3.35,
+      "market_value": 3113.18
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -2.45,
-      "market_value": 3124.41
+      "unrealized_plpc": 5.72,
+      "market_value": 3386.08
     },
     {
       "ticker": "KHC",
-      "unrealized_plpc": -4.48,
-      "market_value": 3745.11
+      "unrealized_plpc": -7.89,
+      "market_value": 3611.56
     },
     {
       "ticker": "META",
-      "unrealized_plpc": 0.34,
-      "market_value": 3373.7
+      "unrealized_plpc": -1.54,
+      "market_value": 3310.5
     },
     {
       "ticker": "MGM",
-      "unrealized_plpc": -0.32,
-      "market_value": 3062.14
+      "unrealized_plpc": -11.31,
+      "market_value": 2724.52
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 2.93,
-      "market_value": 40348.79
+      "unrealized_plpc": 1.43,
+      "market_value": 39759.06
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": 0.2,
-      "market_value": 3368.84
+      "unrealized_plpc": 3.97,
+      "market_value": 3495.64
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 7.3,
-      "market_value": 42060.48
-    },
-    {
-      "ticker": "WBD",
-      "unrealized_plpc": 0.37,
-      "market_value": 3374.83
+      "unrealized_plpc": 2.1,
+      "market_value": 40023.53
     }
   ],
-  "days_tracked": 22,
+  "days_tracked": 23,
   "history": [
     {
       "date": "2026-08-21",
@@ -402,6 +402,15 @@
       "equity_at_close": 109223.33,
       "entries": [
         "MGM"
+      ],
+      "exits": []
+    },
+    {
+      "date": "2026-10-14",
+      "equity_at_open": 105999.38,
+      "equity_at_close": null,
+      "entries": [
+        "C"
       ],
       "exits": []
     }
