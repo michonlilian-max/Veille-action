@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-15",
+  "entries": [
+    {
+      "ticker": "SKYD",
+      "notional": 3109.93,
+      "order_id": "7bf10cb0-9192-46d6-9277-e6cf56b57800",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "SPG",
+      "notional": 3109.93,
+      "order_id": "c59a3d72-9ad7-43e0-8d01-cde071151abf",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "BAC",
+      "notional": 3109.93,
+      "order_id": "bfc3e401-10cb-41b0-b1c7-3f1ec6e7db3c",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 104447.76,
+  "equity_at_close": null
+}
