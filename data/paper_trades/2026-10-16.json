@@ -8,7 +8,22 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "GNRC",
+      "reason": "stop_loss",
+      "unrealized_plpc": -6.91,
+      "market_value": 2998.55,
+      "order_id": "d49e45dd-1ef9-4baa-baa0-536a639be2fd"
+    },
+    {
+      "ticker": "META",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.78,
+      "market_value": 3168.04,
+      "order_id": "6222925e-973c-4960-ac4d-3291ab858165"
+    }
+  ],
   "equity_at_open": 103088.52,
   "equity_at_close": null
 }
