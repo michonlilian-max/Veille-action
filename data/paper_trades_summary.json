@@ -1,33 +1,38 @@
 {
-  "computed_at": "2026-10-20T18:41:21.145431+00:00",
+  "computed_at": "2026-10-20T19:31:26.050958+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 104725.51,
-  "total_return_pct": 2.71,
+  "current_equity": 104583.95,
+  "total_return_pct": 2.57,
   "current_holdings": [
     {
+      "ticker": "AMZN",
+      "unrealized_plpc": -0.03,
+      "market_value": 3055.03
+    },
+    {
       "ticker": "BAC",
-      "unrealized_plpc": -2.26,
-      "market_value": 3039.6
+      "unrealized_plpc": -2.19,
+      "market_value": 3041.7
     },
     {
       "ticker": "C",
-      "unrealized_plpc": -0.2,
-      "market_value": 3380.53
+      "unrealized_plpc": 0.04,
+      "market_value": 3388.55
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": -0.07,
-      "market_value": 2395.47
+      "unrealized_plpc": -0.22,
+      "market_value": 3048.98
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -0.33,
-      "market_value": 39072.0
+      "unrealized_plpc": -0.35,
+      "market_value": 39061.12
     },
     {
       "ticker": "SCHW",
-      "unrealized_plpc": -1.25,
-      "market_value": 3582.34
+      "unrealized_plpc": -1.31,
+      "market_value": 3580.36
     },
     {
       "ticker": "SKYD",
@@ -36,18 +41,18 @@
     },
     {
       "ticker": "SPG",
-      "unrealized_plpc": 1.25,
-      "market_value": 3148.74
+      "unrealized_plpc": 1.58,
+      "market_value": 3158.98
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -1.18,
-      "market_value": 3322.69
+      "unrealized_plpc": -0.6,
+      "market_value": 3341.93
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 1.75,
-      "market_value": 39884.57
+      "unrealized_plpc": 1.33,
+      "market_value": 39722.28
     }
   ],
   "days_tracked": 26,
@@ -465,7 +470,7 @@
     {
       "date": "2026-10-20",
       "equity_at_open": 104733.01,
-      "equity_at_close": null,
+      "equity_at_close": 104583.95,
       "entries": [
         "HAS",
         "AMZN"
