@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-20",
+  "entries": [
+    {
+      "ticker": "HAS",
+      "notional": 3055.86,
+      "order_id": "2ce912a0-aaa8-4066-866e-0ba00828caa7",
+      "status": "OrderStatus.PENDING_NEW"
+    },
+    {
+      "ticker": "AMZN",
+      "notional": 3055.86,
+      "order_id": "b9cacf95-29a0-46fe-91c4-64ec5f0c0e19",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 104733.01,
+  "equity_at_close": null
+}
