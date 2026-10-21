@@ -1,58 +1,58 @@
 {
-  "computed_at": "2026-10-21T18:52:29.894477+00:00",
+  "computed_at": "2026-10-21T19:30:25.162219+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 106468.1,
-  "total_return_pct": 4.42,
+  "current_equity": 106448.45,
+  "total_return_pct": 4.4,
   "current_holdings": [
     {
       "ticker": "AMZN",
-      "unrealized_plpc": 0.01,
-      "market_value": 3056.2
+      "unrealized_plpc": 0.09,
+      "market_value": 3058.53
     },
     {
       "ticker": "BAC",
-      "unrealized_plpc": -1.57,
-      "market_value": 3060.93
+      "unrealized_plpc": -1.64,
+      "market_value": 3058.84
     },
     {
       "ticker": "C",
-      "unrealized_plpc": 1.09,
-      "market_value": 3424.27
+      "unrealized_plpc": 1.15,
+      "market_value": 3426.2
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": 3.33,
-      "market_value": 3157.66
+      "unrealized_plpc": 3.64,
+      "market_value": 3167.05
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 1.78,
-      "market_value": 39896.13
+      "unrealized_plpc": 1.7,
+      "market_value": 39865.47
     },
     {
       "ticker": "SCHW",
-      "unrealized_plpc": -0.25,
-      "market_value": 3618.7
+      "unrealized_plpc": -0.23,
+      "market_value": 3619.28
     },
     {
       "ticker": "SKYD",
-      "unrealized_plpc": 8.26,
-      "market_value": 3366.92
+      "unrealized_plpc": 9.24,
+      "market_value": 3397.16
     },
     {
       "ticker": "SPG",
-      "unrealized_plpc": 1.25,
-      "market_value": 3148.9
+      "unrealized_plpc": 1.17,
+      "market_value": 3146.37
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": 1.31,
-      "market_value": 3406.39
+      "unrealized_plpc": 1.01,
+      "market_value": 3396.2
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.57,
-      "market_value": 40207.27
+      "unrealized_plpc": 2.52,
+      "market_value": 40188.62
     }
   ],
   "days_tracked": 27,
@@ -480,9 +480,15 @@
     {
       "date": "2026-10-21",
       "equity_at_open": 106466.29,
-      "equity_at_close": null,
+      "equity_at_close": 106448.45,
       "entries": [],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "SKYD",
+          "reason": "take_profit",
+          "unrealized_plpc": 9.24
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
