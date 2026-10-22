@@ -1,61 +1,56 @@
 {
-  "computed_at": "2026-10-21T19:30:25.162219+00:00",
+  "computed_at": "2026-10-22T18:45:49.242667+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 106448.45,
-  "total_return_pct": 4.4,
+  "current_equity": 102955.27,
+  "total_return_pct": 0.97,
   "current_holdings": [
     {
       "ticker": "AMZN",
-      "unrealized_plpc": 0.09,
-      "market_value": 3058.53
+      "unrealized_plpc": -4.9,
+      "market_value": 2905.98
     },
     {
       "ticker": "BAC",
-      "unrealized_plpc": -1.64,
-      "market_value": 3058.84
+      "unrealized_plpc": -1.39,
+      "market_value": 3066.62
     },
     {
       "ticker": "C",
-      "unrealized_plpc": 1.15,
-      "market_value": 3426.2
+      "unrealized_plpc": -0.14,
+      "market_value": 3382.6
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": 3.64,
-      "market_value": 3167.05
+      "unrealized_plpc": 6.36,
+      "market_value": 3250.21
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": 1.7,
-      "market_value": 39865.47
+      "unrealized_plpc": -2.31,
+      "market_value": 38294.65
     },
     {
       "ticker": "SCHW",
-      "unrealized_plpc": -0.23,
-      "market_value": 3619.28
-    },
-    {
-      "ticker": "SKYD",
-      "unrealized_plpc": 9.24,
-      "market_value": 3397.16
+      "unrealized_plpc": 0.3,
+      "market_value": 3638.83
     },
     {
       "ticker": "SPG",
-      "unrealized_plpc": 1.17,
-      "market_value": 3146.37
+      "unrealized_plpc": 3.76,
+      "market_value": 3226.92
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": 1.01,
-      "market_value": 3396.2
+      "unrealized_plpc": -2.27,
+      "market_value": 3285.88
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": 2.52,
-      "market_value": 40188.62
+      "unrealized_plpc": -2.08,
+      "market_value": 38383.91
     }
   ],
-  "days_tracked": 27,
+  "days_tracked": 28,
   "history": [
     {
       "date": "2026-08-21",
@@ -489,6 +484,15 @@
           "unrealized_plpc": 9.24
         }
       ]
+    },
+    {
+      "date": "2026-10-22",
+      "equity_at_open": 102955.27,
+      "equity_at_close": null,
+      "entries": [
+        "NFLX"
+      ],
+      "exits": []
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."
