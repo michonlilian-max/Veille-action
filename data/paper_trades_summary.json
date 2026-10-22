@@ -1,53 +1,58 @@
 {
-  "computed_at": "2026-10-22T18:45:49.242667+00:00",
+  "computed_at": "2026-10-22T19:22:19.504235+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 102955.27,
-  "total_return_pct": 0.97,
+  "current_equity": 102937.44,
+  "total_return_pct": 0.96,
   "current_holdings": [
     {
       "ticker": "AMZN",
-      "unrealized_plpc": -4.9,
-      "market_value": 2905.98
+      "unrealized_plpc": -5.34,
+      "market_value": 2147.5
     },
     {
       "ticker": "BAC",
-      "unrealized_plpc": -1.39,
-      "market_value": 3066.62
+      "unrealized_plpc": -1.63,
+      "market_value": 3059.13
     },
     {
       "ticker": "C",
-      "unrealized_plpc": -0.14,
-      "market_value": 3382.6
+      "unrealized_plpc": -0.06,
+      "market_value": 3385.23
     },
     {
       "ticker": "HAS",
-      "unrealized_plpc": 6.36,
-      "market_value": 3250.21
+      "unrealized_plpc": 6.34,
+      "market_value": 3249.65
+    },
+    {
+      "ticker": "NFLX",
+      "unrealized_plpc": -0.13,
+      "market_value": 3444.89
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -2.31,
-      "market_value": 38294.65
+      "unrealized_plpc": -2.36,
+      "market_value": 38276.62
     },
     {
       "ticker": "SCHW",
-      "unrealized_plpc": 0.3,
-      "market_value": 3638.83
+      "unrealized_plpc": -0.12,
+      "market_value": 3623.42
     },
     {
       "ticker": "SPG",
-      "unrealized_plpc": 3.76,
-      "market_value": 3226.92
+      "unrealized_plpc": 4.29,
+      "market_value": 3243.28
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -2.27,
-      "market_value": 3285.88
+      "unrealized_plpc": -2.25,
+      "market_value": 3286.77
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -2.08,
-      "market_value": 38383.91
+      "unrealized_plpc": -2.03,
+      "market_value": 38405.36
     }
   ],
   "days_tracked": 28,
@@ -488,11 +493,17 @@
     {
       "date": "2026-10-22",
       "equity_at_open": 102955.27,
-      "equity_at_close": null,
+      "equity_at_close": 102937.44,
       "entries": [
         "NFLX"
       ],
-      "exits": []
+      "exits": [
+        {
+          "ticker": "AMZN",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.34
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

@@ -8,7 +8,15 @@
       "status": "OrderStatus.PENDING_NEW"
     }
   ],
-  "exits": [],
+  "exits": [
+    {
+      "ticker": "AMZN",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.34,
+      "market_value": 2892.74,
+      "order_id": "98138d26-5e30-4a1e-8cb1-c16157de9ae6"
+    }
+  ],
   "equity_at_open": 102955.27,
-  "equity_at_close": null
+  "equity_at_close": 102937.44
 }
