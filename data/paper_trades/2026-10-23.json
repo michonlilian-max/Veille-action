@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-23",
+  "entries": [
+    {
+      "ticker": "MRNA",
+      "notional": 2903.66,
+      "order_id": "da6ee4f9-065c-4978-939e-b64b9dfbba3b",
+      "status": "OrderStatus.PENDING_NEW"
+    }
+  ],
+  "exits": [],
+  "equity_at_open": 103225.3,
+  "equity_at_close": null
+}
