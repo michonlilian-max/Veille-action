@@ -1,368 +1,368 @@
 {
-  "generated_at": "2026-11-04T10:26:44.136263+00:00",
-  "sp500_floor_market_cap": 9670364621.0,
+  "generated_at": "2026-11-05T10:22:43.154094+00:00",
+  "sp500_floor_market_cap": 10183890048.0,
   "sp500_floor_sample_size": 20,
-  "eligible_count": 361,
+  "eligible_count": 360,
   "total_midcap_count": 399,
   "candidates": [
     {
-      "ticker": "OKTA",
-      "score": 69.3,
-      "market_cap": 33160032256.0,
-      "market_cap_vs_sp500_floor_pct": 342.9,
-      "trailing_eps": 1.7,
-      "news_count": 32,
+      "ticker": "SN",
+      "score": 61.4,
+      "market_cap": 31028344832.0,
+      "market_cap_vs_sp500_floor_pct": 304.7,
+      "trailing_eps": 5.96,
+      "news_count": 17,
       "insider_buys": 0,
-      "price": 189.68,
-      "change_pct": 2.6,
-      "volume_ratio": 9.7,
+      "price": 219.25,
+      "change_pct": 4.11,
+      "volume_ratio": 1.97,
       "detail": {
         "cap_proximity": 100.0,
-        "news_volume": 46.4,
+        "news_volume": 41.2,
+        "insider_buying": 0.0,
+        "volume_spike": 31.3
+      }
+    },
+    {
+      "ticker": "ROKU",
+      "score": 57.9,
+      "market_cap": 24269223936.0,
+      "market_cap_vs_sp500_floor_pct": 238.3,
+      "trailing_eps": 3.47,
+      "news_count": 56,
+      "insider_buys": 0,
+      "price": 162.77,
+      "change_pct": 1.5,
+      "volume_ratio": 1.29,
+      "detail": {
+        "cap_proximity": 78.2,
+        "news_volume": 84.7,
+        "insider_buying": 0.0,
+        "volume_spike": 18.3
+      }
+    },
+    {
+      "ticker": "CRBG",
+      "score": 56.0,
+      "market_cap": 15956472832.0,
+      "market_cap_vs_sp500_floor_pct": 156.7,
+      "trailing_eps": 4.46,
+      "news_count": 26,
+      "insider_buys": 20,
+      "price": 36.24,
+      "change_pct": 1.4,
+      "volume_ratio": 1.09,
+      "detail": {
+        "cap_proximity": 51.4,
+        "news_volume": 43.6,
+        "insider_buying": 100.0,
+        "volume_spike": 15.4
+      }
+    },
+    {
+      "ticker": "UTHR",
+      "score": 53.8,
+      "market_cap": 26098556928.0,
+      "market_cap_vs_sp500_floor_pct": 256.3,
+      "trailing_eps": 26.49,
+      "news_count": 20,
+      "insider_buys": 0,
+      "price": 608.49,
+      "change_pct": 1.19,
+      "volume_ratio": 1.17,
+      "detail": {
+        "cap_proximity": 84.1,
+        "news_volume": 50.7,
+        "insider_buying": 0.0,
+        "volume_spike": 16.4
+      }
+    },
+    {
+      "ticker": "USFD",
+      "score": 50.9,
+      "market_cap": 23781236736.0,
+      "market_cap_vs_sp500_floor_pct": 233.5,
+      "trailing_eps": 3.25,
+      "news_count": 17,
+      "insider_buys": 0,
+      "price": 109.93,
+      "change_pct": 8.46,
+      "volume_ratio": 2.36,
+      "detail": {
+        "cap_proximity": 76.6,
+        "news_volume": 40.7,
+        "insider_buying": 0.0,
+        "volume_spike": 44.3
+      }
+    },
+    {
+      "ticker": "TOST",
+      "score": 50.7,
+      "market_cap": 20443858944.0,
+      "market_cap_vs_sp500_floor_pct": 200.7,
+      "trailing_eps": 0.91,
+      "news_count": 34,
+      "insider_buys": 0,
+      "price": 35.37,
+      "change_pct": 5.49,
+      "volume_ratio": 2.45,
+      "detail": {
+        "cap_proximity": 65.9,
+        "news_volume": 68.2,
+        "insider_buying": 0.0,
+        "volume_spike": 41.2
+      }
+    },
+    {
+      "ticker": "PFGC",
+      "score": 48.8,
+      "market_cap": 17260894208.0,
+      "market_cap_vs_sp500_floor_pct": 169.5,
+      "trailing_eps": 2.51,
+      "news_count": 19,
+      "insider_buys": 0,
+      "price": 109.57,
+      "change_pct": 13.53,
+      "volume_ratio": 4.52,
+      "detail": {
+        "cap_proximity": 55.6,
+        "news_volume": 54.8,
         "insider_buying": 0.0,
         "volume_spike": 100.0
       }
     },
     {
-      "ticker": "CRBG",
-      "score": 58.6,
-      "market_cap": 15931770880.0,
-      "market_cap_vs_sp500_floor_pct": 164.7,
-      "trailing_eps": 1.59,
-      "news_count": 33,
-      "insider_buys": 20,
-      "price": 35.74,
-      "change_pct": 2.0,
-      "volume_ratio": 1.69,
-      "detail": {
-        "cap_proximity": 48.0,
-        "news_volume": 64.6,
-        "insider_buying": 100.0,
-        "volume_spike": 17.0
-      }
-    },
-    {
-      "ticker": "ROKU",
-      "score": 57.8,
-      "market_cap": 23815165952.0,
-      "market_cap_vs_sp500_floor_pct": 246.3,
-      "trailing_eps": 3.47,
-      "news_count": 54,
+      "ticker": "RBC",
+      "score": 47.3,
+      "market_cap": 15104304128.0,
+      "market_cap_vs_sp500_floor_pct": 148.3,
+      "trailing_eps": 11.18,
+      "news_count": 47,
       "insider_buys": 0,
-      "price": 160.36,
-      "change_pct": 3.11,
-      "volume_ratio": 1.84,
+      "price": 477.05,
+      "change_pct": -3.83,
+      "volume_ratio": 1.89,
       "detail": {
-        "cap_proximity": 71.8,
+        "cap_proximity": 48.7,
         "news_volume": 100.0,
         "insider_buying": 0.0,
-        "volume_spike": 19.4
+        "volume_spike": 29.7
       }
     },
     {
-      "ticker": "SN",
-      "score": 50.5,
-      "market_cap": 29802776576.0,
-      "market_cap_vs_sp500_floor_pct": 308.2,
-      "trailing_eps": 4.9,
-      "news_count": 7,
+      "ticker": "THC",
+      "score": 45.5,
+      "market_cap": 23259592704.0,
+      "market_cap_vs_sp500_floor_pct": 228.4,
+      "trailing_eps": 34.29,
+      "news_count": 4,
       "insider_buys": 0,
-      "price": 210.59,
-      "change_pct": -1.23,
-      "volume_ratio": 2.75,
+      "price": 292.25,
+      "change_pct": 9.58,
+      "volume_ratio": 2.96,
       "detail": {
-        "cap_proximity": 89.9,
-        "news_volume": 14.5,
+        "cap_proximity": 75.0,
+        "news_volume": 11.2,
         "insider_buying": 0.0,
-        "volume_spike": 26.6
-      }
-    },
-    {
-      "ticker": "NBIX",
-      "score": 46.8,
-      "market_cap": 16756868096.0,
-      "market_cap_vs_sp500_floor_pct": 173.3,
-      "trailing_eps": 6.74,
-      "news_count": 39,
-      "insider_buys": 0,
-      "price": 164.85,
-      "change_pct": 13.42,
-      "volume_ratio": 3.02,
-      "detail": {
-        "cap_proximity": 50.5,
-        "news_volume": 84.8,
-        "insider_buying": 0.0,
-        "volume_spike": 46.0
-      }
-    },
-    {
-      "ticker": "LSCC",
-      "score": 45.9,
-      "market_cap": 15043846144.0,
-      "market_cap_vs_sp500_floor_pct": 155.6,
-      "trailing_eps": 0.31,
-      "news_count": 46,
-      "insider_buys": 0,
-      "price": 105.92,
-      "change_pct": 10.98,
-      "volume_ratio": 3.88,
-      "detail": {
-        "cap_proximity": 45.4,
-        "news_volume": 88.7,
-        "insider_buying": 0.0,
-        "volume_spike": 54.8
-      }
-    },
-    {
-      "ticker": "TOST",
-      "score": 44.7,
-      "market_cap": 19380338688.0,
-      "market_cap_vs_sp500_floor_pct": 200.4,
-      "trailing_eps": 0.91,
-      "news_count": 27,
-      "insider_buys": 0,
-      "price": 33.53,
-      "change_pct": 0.33,
-      "volume_ratio": 2.14,
-      "detail": {
-        "cap_proximity": 58.4,
-        "news_volume": 67.6,
-        "insider_buying": 0.0,
-        "volume_spike": 19.8
+        "volume_spike": 57.8
       }
     },
     {
       "ticker": "FTI",
-      "score": 44.4,
-      "market_cap": 25950736384.0,
-      "market_cap_vs_sp500_floor_pct": 268.4,
+      "score": 45.2,
+      "market_cap": 25079750656.0,
+      "market_cap_vs_sp500_floor_pct": 246.3,
       "trailing_eps": 3.18,
-      "news_count": 14,
+      "news_count": 5,
       "insider_buys": 0,
-      "price": 66.74,
-      "change_pct": -0.19,
-      "volume_ratio": 1.41,
+      "price": 64.5,
+      "change_pct": -3.36,
+      "volume_ratio": 1.49,
       "detail": {
-        "cap_proximity": 78.3,
-        "news_volume": 19.8,
+        "cap_proximity": 80.8,
+        "news_volume": 12.5,
         "insider_buying": 0.0,
-        "volume_spike": 13.0
+        "volume_spike": 23.0
       }
     },
     {
-      "ticker": "UTHR",
-      "score": 43.2,
-      "market_cap": 25791031296.0,
-      "market_cap_vs_sp500_floor_pct": 266.7,
-      "trailing_eps": 28.21,
-      "news_count": 12,
+      "ticker": "NXT",
+      "score": 44.8,
+      "market_cap": 16393211904.0,
+      "market_cap_vs_sp500_floor_pct": 161.0,
+      "trailing_eps": 3.97,
+      "news_count": 22,
       "insider_buys": 0,
-      "price": 601.32,
-      "change_pct": 0.87,
-      "volume_ratio": 0.75,
+      "price": 106.7,
+      "change_pct": 11.12,
+      "volume_ratio": 4.31,
       "detail": {
-        "cap_proximity": 77.8,
-        "news_volume": 18.2,
+        "cap_proximity": 52.8,
+        "news_volume": 47.6,
         "insider_buying": 0.0,
-        "volume_spike": 7.1
-      }
-    },
-    {
-      "ticker": "ATI",
-      "score": 42.3,
-      "market_cap": 24492908544.0,
-      "market_cap_vs_sp500_floor_pct": 253.3,
-      "trailing_eps": 4.0,
-      "news_count": 17,
-      "insider_buys": 0,
-      "price": 180.33,
-      "change_pct": 3.41,
-      "volume_ratio": 0.92,
-      "detail": {
-        "cap_proximity": 73.9,
-        "news_volume": 21.9,
-        "insider_buying": 0.0,
-        "volume_spike": 9.8
-      }
-    },
-    {
-      "ticker": "OVV",
-      "score": 41.7,
-      "market_cap": 18374537216.0,
-      "market_cap_vs_sp500_floor_pct": 190.0,
-      "trailing_eps": 3.59,
-      "news_count": 37,
-      "insider_buys": 0,
-      "price": 66.43,
-      "change_pct": -1.99,
-      "volume_ratio": 1.48,
-      "detail": {
-        "cap_proximity": 55.4,
-        "news_volume": 62.4,
-        "insider_buying": 0.0,
-        "volume_spike": 14.8
+        "volume_spike": 88.5
       }
     },
     {
       "ticker": "RS",
-      "score": 39.1,
-      "market_cap": 22610057216.0,
-      "market_cap_vs_sp500_floor_pct": 233.8,
+      "score": 44.1,
+      "market_cap": 22513778688.0,
+      "market_cap_vs_sp500_floor_pct": 221.1,
       "trailing_eps": 21.45,
-      "news_count": 6,
+      "news_count": 10,
       "insider_buys": 0,
-      "price": 443.84,
-      "change_pct": -0.95,
-      "volume_ratio": 1.16,
+      "price": 441.95,
+      "change_pct": -0.43,
+      "volume_ratio": 1.41,
       "detail": {
-        "cap_proximity": 68.2,
-        "news_volume": 19.4,
+        "cap_proximity": 72.6,
+        "news_volume": 29.4,
         "insider_buying": 0.0,
-        "volume_spike": 11.1
+        "volume_spike": 19.0
       }
     },
     {
-      "ticker": "USFD",
-      "score": 39.1,
-      "market_cap": 21927282688.0,
-      "market_cap_vs_sp500_floor_pct": 226.7,
-      "trailing_eps": 3.25,
-      "news_count": 9,
-      "insider_buys": 0,
-      "price": 101.36,
-      "change_pct": -4.2,
-      "volume_ratio": 1.54,
-      "detail": {
-        "cap_proximity": 66.1,
-        "news_volume": 21.7,
-        "insider_buying": 0.0,
-        "volume_spike": 17.0
-      }
-    },
-    {
-      "ticker": "JAZZ",
-      "score": 38.4,
-      "market_cap": 14913474560.0,
-      "market_cap_vs_sp500_floor_pct": 154.2,
-      "trailing_eps": 3.38,
-      "news_count": 37,
-      "insider_buys": 0,
-      "price": 229.74,
-      "change_pct": 7.13,
-      "volume_ratio": 2.03,
-      "detail": {
-        "cap_proximity": 45.0,
-        "news_volume": 67.1,
-        "insider_buying": 0.0,
-        "volume_spike": 25.1
-      }
-    },
-    {
-      "ticker": "NVT",
-      "score": 37.5,
-      "market_cap": 20888164352.0,
-      "market_cap_vs_sp500_floor_pct": 216.0,
-      "trailing_eps": 4.12,
-      "news_count": 17,
-      "insider_buys": 0,
-      "price": 129.26,
-      "change_pct": 4.49,
-      "volume_ratio": 1.25,
-      "detail": {
-        "cap_proximity": 63.0,
-        "news_volume": 23.2,
-        "insider_buying": 0.0,
-        "volume_spike": 14.0
-      }
-    },
-    {
-      "ticker": "ENTG",
-      "score": 37.0,
-      "market_cap": 23341727744.0,
-      "market_cap_vs_sp500_floor_pct": 241.4,
-      "trailing_eps": 2.57,
-      "news_count": 2,
-      "insider_buys": 0,
-      "price": 152.76,
-      "change_pct": 0.79,
-      "volume_ratio": 1.18,
-      "detail": {
-        "cap_proximity": 70.4,
-        "news_volume": 3.3,
-        "insider_buying": 0.0,
-        "volume_spike": 11.2
-      }
-    },
-    {
-      "ticker": "XPO",
-      "score": 36.7,
-      "market_cap": 22270674944.0,
-      "market_cap_vs_sp500_floor_pct": 230.3,
-      "trailing_eps": 4.25,
+      "ticker": "ATI",
+      "score": 42.6,
+      "market_cap": 24324487168.0,
+      "market_cap_vs_sp500_floor_pct": 238.9,
+      "trailing_eps": 4.0,
       "news_count": 4,
       "insider_buys": 0,
-      "price": 191.15,
-      "change_pct": -0.3,
-      "volume_ratio": 0.89,
+      "price": 179.09,
+      "change_pct": -0.69,
+      "volume_ratio": 1.31,
       "detail": {
-        "cap_proximity": 67.2,
-        "news_volume": 11.4,
+        "cap_proximity": 78.4,
+        "news_volume": 7.9,
         "insider_buying": 0.0,
-        "volume_spike": 8.2
+        "volume_spike": 17.9
       }
     },
     {
-      "ticker": "DINO",
-      "score": 36.4,
-      "market_cap": 19426635776.0,
-      "market_cap_vs_sp500_floor_pct": 200.9,
-      "trailing_eps": 19.62,
-      "news_count": 10,
-      "insider_buys": 1,
-      "price": 113.36,
-      "change_pct": 1.52,
-      "volume_ratio": 1.14,
+      "ticker": "NBIX",
+      "score": 41.5,
+      "market_cap": 16807355392.0,
+      "market_cap_vs_sp500_floor_pct": 165.0,
+      "trailing_eps": 6.74,
+      "news_count": 33,
+      "insider_buys": 0,
+      "price": 166.05,
+      "change_pct": 0.73,
+      "volume_ratio": 1.59,
       "detail": {
-        "cap_proximity": 58.6,
-        "news_volume": 21.9,
-        "insider_buying": 7.9,
-        "volume_spike": 11.2
+        "cap_proximity": 54.2,
+        "news_volume": 61.0,
+        "insider_buying": 0.0,
+        "volume_spike": 21.7
+      }
+    },
+    {
+      "ticker": "RGLD",
+      "score": 40.4,
+      "market_cap": 20849831936.0,
+      "market_cap_vs_sp500_floor_pct": 204.7,
+      "trailing_eps": 9.03,
+      "news_count": 8,
+      "insider_buys": 0,
+      "price": 246.08,
+      "change_pct": 6.57,
+      "volume_ratio": 1.27,
+      "detail": {
+        "cap_proximity": 67.2,
+        "news_volume": 22.6,
+        "insider_buying": 0.0,
+        "volume_spike": 22.3
       }
     },
     {
       "ticker": "PR",
-      "score": 35.5,
-      "market_cap": 20101369856.0,
-      "market_cap_vs_sp500_floor_pct": 207.9,
-      "trailing_eps": 1.52,
-      "news_count": 11,
+      "score": 40.2,
+      "market_cap": 18786404352.0,
+      "market_cap_vs_sp500_floor_pct": 184.5,
+      "trailing_eps": 1.93,
+      "news_count": 13,
       "insider_buys": 0,
-      "price": 24.0,
-      "change_pct": -2.28,
-      "volume_ratio": 1.32,
+      "price": 22.43,
+      "change_pct": -6.54,
+      "volume_ratio": 2.11,
       "detail": {
-        "cap_proximity": 60.6,
-        "news_volume": 19.5,
+        "cap_proximity": 60.5,
+        "news_volume": 31.4,
         "insider_buying": 0.0,
-        "volume_spike": 13.4
+        "volume_spike": 36.9
       }
     },
     {
-      "ticker": "RBC",
-      "score": 35.2,
-      "market_cap": 15705564160.0,
-      "market_cap_vs_sp500_floor_pct": 162.4,
-      "trailing_eps": 11.18,
-      "news_count": 30,
-      "insider_buys": 0,
-      "price": 496.04,
-      "change_pct": 4.86,
-      "volume_ratio": 1.78,
+      "ticker": "LSCC",
+      "score": 39.3,
+      "market_cap": 15232746496.0,
+      "market_cap_vs_sp500_floor_pct": 149.6,
+      "trailing_eps": 0.31,
+      "news_count": 34,
+      "insider_buys": 1,
+      "price": 107.25,
+      "change_pct": 1.26,
+      "volume_ratio": 1.91,
       "detail": {
-        "cap_proximity": 47.4,
-        "news_volume": 47.4,
+        "cap_proximity": 49.1,
+        "news_volume": 49.4,
+        "insider_buying": 10.8,
+        "volume_spike": 26.8
+      }
+    },
+    {
+      "ticker": "XPO",
+      "score": 39.0,
+      "market_cap": 21910663168.0,
+      "market_cap_vs_sp500_floor_pct": 215.2,
+      "trailing_eps": 4.25,
+      "news_count": 3,
+      "insider_buys": 0,
+      "price": 188.06,
+      "change_pct": -1.62,
+      "volume_ratio": 1.29,
+      "detail": {
+        "cap_proximity": 70.6,
+        "news_volume": 9.5,
         "insider_buying": 0.0,
-        "volume_spike": 20.2
+        "volume_spike": 18.4
+      }
+    },
+    {
+      "ticker": "DINO",
+      "score": 38.9,
+      "market_cap": 17920282624.0,
+      "market_cap_vs_sp500_floor_pct": 176.0,
+      "trailing_eps": 19.62,
+      "news_count": 16,
+      "insider_buys": 1,
+      "price": 104.57,
+      "change_pct": -7.75,
+      "volume_ratio": 1.74,
+      "detail": {
+        "cap_proximity": 57.8,
+        "news_volume": 27.0,
+        "insider_buying": 7.1,
+        "volume_spike": 31.9
+      }
+    },
+    {
+      "ticker": "ENTG",
+      "score": 38.8,
+      "market_cap": 21830535168.0,
+      "market_cap_vs_sp500_floor_pct": 214.4,
+      "trailing_eps": 2.57,
+      "news_count": 4,
+      "insider_buys": 0,
+      "price": 142.87,
+      "change_pct": -6.47,
+      "volume_ratio": 1.02,
+      "detail": {
+        "cap_proximity": 70.4,
+        "news_volume": 9.0,
+        "insider_buying": 0.0,
+        "volume_spike": 17.8
       }
     }
   ],
