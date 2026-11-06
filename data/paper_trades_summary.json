@@ -1,61 +1,51 @@
 {
-  "computed_at": "2026-10-23T19:29:17.090216+00:00",
+  "computed_at": "2026-11-06T20:59:55.765441+00:00",
   "starting_equity": 101963.48,
-  "current_equity": 103274.67,
-  "total_return_pct": 1.29,
+  "current_equity": 95052.95,
+  "total_return_pct": -6.78,
   "current_holdings": [
     {
       "ticker": "BAC",
-      "unrealized_plpc": -1.86,
-      "market_value": 3051.92
+      "unrealized_plpc": -4.49,
+      "market_value": 2970.17
     },
     {
       "ticker": "C",
-      "unrealized_plpc": -1.08,
-      "market_value": 3350.63
-    },
-    {
-      "ticker": "HAS",
-      "unrealized_plpc": 7.59,
-      "market_value": 3287.79
+      "unrealized_plpc": -2.68,
+      "market_value": 3296.37
     },
     {
       "ticker": "MRNA",
-      "unrealized_plpc": -0.93,
-      "market_value": 2876.73
-    },
-    {
-      "ticker": "NFLX",
-      "unrealized_plpc": -1.52,
-      "market_value": 3396.97
+      "unrealized_plpc": 27.35,
+      "market_value": 899.63
     },
     {
       "ticker": "NVDA",
-      "unrealized_plpc": -2.61,
-      "market_value": 38178.33
+      "unrealized_plpc": -14.14,
+      "market_value": 33657.96
     },
     {
       "ticker": "SCHW",
-      "unrealized_plpc": -1.15,
-      "market_value": 3585.89
+      "unrealized_plpc": -0.38,
+      "market_value": 3613.94
     },
     {
       "ticker": "SPG",
-      "unrealized_plpc": 3.88,
-      "market_value": 3230.51
+      "unrealized_plpc": 12.28,
+      "market_value": 1435.74
     },
     {
       "ticker": "TPL",
-      "unrealized_plpc": -0.52,
-      "market_value": 3344.83
+      "unrealized_plpc": -20.32,
+      "market_value": 2679.19
     },
     {
       "ticker": "TSM",
-      "unrealized_plpc": -0.73,
-      "market_value": 38911.8
+      "unrealized_plpc": -10.74,
+      "market_value": 34989.93
     }
   ],
-  "days_tracked": 29,
+  "days_tracked": 30,
   "history": [
     {
       "date": "2026-08-21",
@@ -513,6 +503,49 @@
         "MRNA"
       ],
       "exits": []
+    },
+    {
+      "date": "2026-11-06",
+      "equity_at_open": null,
+      "equity_at_close": 95065.08,
+      "entries": [],
+      "exits": [
+        {
+          "ticker": "HAS",
+          "reason": "take_profit",
+          "unrealized_plpc": 9.16
+        },
+        {
+          "ticker": "MRNA",
+          "reason": "take_profit",
+          "unrealized_plpc": 27.47
+        },
+        {
+          "ticker": "NFLX",
+          "reason": "stop_loss",
+          "unrealized_plpc": -5.41
+        },
+        {
+          "ticker": "NVDA",
+          "reason": "stop_loss",
+          "unrealized_plpc": -14.11
+        },
+        {
+          "ticker": "SPG",
+          "reason": "take_profit",
+          "unrealized_plpc": 12.28
+        },
+        {
+          "ticker": "TPL",
+          "reason": "stop_loss",
+          "unrealized_plpc": -20.31
+        },
+        {
+          "ticker": "TSM",
+          "reason": "stop_loss",
+          "unrealized_plpc": -10.73
+        }
+      ]
     }
   ],
   "note": "Portefeuille SIMULÉ (paper trading Alpaca, aucun argent réel). Positions flexibles : achetées dans le top PAPER_TRADING_TOP_N du score du matin, revendues automatiquement au-delà de PAPER_TRADING_TAKE_PROFIT_PCT de gain ou PAPER_TRADING_STOP_LOSS_PCT de perte — peuvent être tenues plusieurs jours entre ces deux seuils."

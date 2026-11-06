@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-06",
+  "entries": [],
+  "exits": [
+    {
+      "ticker": "HAS",
+      "reason": "take_profit",
+      "unrealized_plpc": 9.16,
+      "market_value": 3335.75,
+      "order_id": "71c01463-2d9b-47e2-a241-1834f5141bca"
+    },
+    {
+      "ticker": "MRNA",
+      "reason": "take_profit",
+      "unrealized_plpc": 27.47,
+      "market_value": 3701.41,
+      "order_id": "3b0c0f5c-78a4-4c4d-9c9f-91ce7a7ed0d4"
+    },
+    {
+      "ticker": "NFLX",
+      "reason": "stop_loss",
+      "unrealized_plpc": -5.41,
+      "market_value": 3262.75,
+      "order_id": "91251e88-4094-4019-8526-cbadc1884aa8"
+    },
+    {
+      "ticker": "NVDA",
+      "reason": "stop_loss",
+      "unrealized_plpc": -14.11,
+      "market_value": 33670.58,
+      "order_id": "85a4aeab-64da-4ef7-bd89-3c010203c10b"
+    },
+    {
+      "ticker": "SPG",
+      "reason": "take_profit",
+      "unrealized_plpc": 12.28,
+      "market_value": 3491.88,
+      "order_id": "4208872d-2965-4774-afb9-47bce382e4bf"
+    },
+    {
+      "ticker": "TPL",
+      "reason": "stop_loss",
+      "unrealized_plpc": -20.31,
+      "market_value": 2679.49,
+      "order_id": "65327a57-1004-4523-9f43-fbb7de5e63a6"
+    },
+    {
+      "ticker": "TSM",
+      "reason": "stop_loss",
+      "unrealized_plpc": -10.73,
+      "market_value": 34991.8,
+      "order_id": "52c1bf04-dce1-4a43-ba20-da9e49374618"
+    }
+  ],
+  "equity_at_open": null,
+  "equity_at_close": 95065.08
+}
